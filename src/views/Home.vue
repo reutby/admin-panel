@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <input placeholder="bla bla" v-model.number="message">
     <HelloWorld msg="Welcome again!"/>
   </div>
 </template>
@@ -14,11 +13,6 @@ export default {
   name: 'home',
   components: {
     HelloWorld
-  },
-  data() {
-    return {
-      message: ''
-    }
   }
 }
 </script>
