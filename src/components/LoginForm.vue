@@ -14,14 +14,24 @@
 
 <script>
   import {Vue, Component} from 'vue-property-decorator';
+  import {createNamespacedHelpers} from 'vuex'
+  import {AUTH_MODULE_NAME, AUTH_ACTIONS} from '../store/auth/consts';
 
-  @Component()
+  const {mapActions} = createNamespacedHelpers(AUTH_MODULE_NAME)
+
+  @Component({
+    methods: mapActions({loginAction: AUTH_ACTIONS.LOGIN})
+  })
   export default class LoginForm extends Vue {
     email = '';
     password = '';
 
     login() {
-      console.log('it\'s about time!')
+
+      this.loginAction({
+        email: this.email,
+        password: this.password
+      })
     }
   }
 </script>
