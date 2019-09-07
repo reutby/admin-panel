@@ -1,31 +1,37 @@
 <template>
-  <div>
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+	<div class="admin-panel">
+		<Header class="header"/>
+		<div class="admin-content">
+			<Navigation class="navigation"/>
+			<router-view class="main"/>
+		</div>
+	</div>
 </template>
 
 <script>
+  import Header from '../components/layout/Header'
+  import Navigation from '../components/layout/Navigation'
+
   export default {
     name: 'Authenticated',
+    components: { Header, Navigation }
   }
 </script>
 <style scoped lang="scss">
-  #nav {
-    padding: 30px;
+	.admin-panel {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		flex-direction: column;
+	}
 
-    a {
-      font-weight: bold;
-      color: #2c3e50;
+	.admin-content {
+		display: flex;
+		flex: 1;
 
-      & .router-link-exact-active {
-        color: #42b983;
-      }
-
-    }
-  }
+		.main {
+			flex: 1;
+			overflow: auto;
+		}
+	}
 </style>

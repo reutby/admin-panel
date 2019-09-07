@@ -1,5 +1,5 @@
-import {AUTH_MUTATIONS, AUTH_TATE} from './consts';
+import { AUTH_MUTATIONS, AUTH_TATE } from './consts'
 
 export const mutations = {
-  [AUTH_MUTATIONS.SET_USER]: (state, user) => state[AUTH_TATE.USER] = user,
+  [AUTH_MUTATIONS.SET_USER]: (state, user) => state[AUTH_TATE.USER] = user
 }

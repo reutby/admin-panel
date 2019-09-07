@@ -1,0 +1,15 @@
+export const MENUS_MODULE_NAME = 'menus'
+
+export const MENUS_STATE = {
+	MENUS: 'MENUS',
+	CURRENT_MENU: 'CURRENT_MENU'
+}
+
+export const MENUS_ACTIONS = {
+	FETCH_MENUS: 'FETCH_MENUS',
+}
+
+export const MENUS_MUTATIONS = {
+	SET_MENUS: 'SET_MENUS',
+	SET_CURRENT_MENU: 'SET_CURRENT_MENU'
+}
