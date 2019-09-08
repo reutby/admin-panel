@@ -9,12 +9,37 @@
 </template>
 
 <script>
+  import { Vue, Component } from 'vue-property-decorator'
+  import { createNamespacedHelpers } from 'vuex'
+  import api from '../plugins/api'
   import Header from '../components/layout/Header'
   import Navigation from '../components/layout/Navigation'
+  import { AUTH_MODULE_NAME, AUTH_ACTIONS } from '../store/auth/consts'
 
-  export default {
-    name: 'Authenticated',
+  const { mapActions } = createNamespacedHelpers(AUTH_MODULE_NAME)
+
+  @Component({
+    methods: mapActions([AUTH_ACTIONS.FETCH_USER, AUTH_ACTIONS.REFRESH_TOKEN]),
     components: { Header, Navigation }
+  })
+  export default class Authentication extends Vue {
+    created () {
+      api.interceptors.response.use(null, err => {
+        console.log('intercepted!!!')
+        if (err.response.status === 401) {
+          if (err.config.url.includes('api/token/refresh')) {
+            return
+          }
+          return this[AUTH_ACTIONS.REFRESH_TOKEN]()
+            .then(() => api.request({
+              ...err.config,
+              headers: undefined
+            }))
+        }
+      })
+
+      this[AUTH_ACTIONS.FETCH_USER]()
+    }
   }
 </script>
 <style scoped lang="scss">

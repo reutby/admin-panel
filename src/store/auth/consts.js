@@ -1,12 +1,12 @@
 export const AUTH_MODULE_NAME = 'auth'
 
-export const AUTH_TATE = {
+export const AUTH_STATE = {
   USER: 'USER'
 }
 
 export const AUTH_ACTIONS = {
   LOGIN: 'LOGIN',
-  SET_TOKENS: 'SET_TOKENS',
+  FETCH_USER: 'FETCH_USER',
   LOGOUT: 'LOGOUT',
   REFRESH_TOKEN: 'REFRESH_TOKEN'
 }
