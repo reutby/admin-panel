@@ -1,17 +1,28 @@
 import { AUTH_ACTIONS, AUTH_MUTATIONS, AUTH_STATE } from './consts'
 import api from '../../plugins/api'
+import router from '../../router'
 
 export const actions = {
   [AUTH_ACTIONS.FETCH_USER] ({ commit, dispatch, state }) {
     if (state[AUTH_STATE.USER]) return
     if (localStorage.access_token) {
       return api.get('/api/me').then(res => {
-        return commit(AUTH_MUTATIONS.SET_USER, res.data)
+        const user = res.data || {}
+        if (user.roles.find(role => role === 'admin' || role === 'editor')) {
+          commit(AUTH_MUTATIONS.SET_USER, res.data)
+          return user
+        } else {
+          return dispatch(AUTH_ACTIONS.LOGOUT)
+        }
       })
     }
   },
-  [AUTH_ACTIONS.LOGIN] ({ commit }, data) {
-    return api.post('/api/signin', data)
+  [AUTH_ACTIONS.LOGIN] ({ commit }, { email, password }) {
+    return api.post('/api/signin', {
+      email,
+      password,
+      roles: ['admin', 'editor']
+    })
       .then(res => res.data ? res.data.payload : {})
       .then(payload => {
         localStorage.setItem('access_token', payload.token)
@@ -43,6 +54,8 @@ export const actions = {
   [AUTH_ACTIONS.LOGOUT] ({ commit }) {
     localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')
-    return commit(AUTH_MUTATIONS.SET_USER, null)
+    commit(AUTH_MUTATIONS.SET_USER, null)
+    router.push({ name: 'login' })
+    return
   }
 }

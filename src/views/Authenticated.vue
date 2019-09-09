@@ -1,5 +1,5 @@
 <template>
-	<div class="admin-panel">
+	<div class="admin-panel" v-if="isLoaded">
 		<Header class="header"/>
 		<div class="admin-content">
 			<Navigation class="navigation"/>
@@ -19,10 +19,12 @@
   const { mapActions } = createNamespacedHelpers(AUTH_MODULE_NAME)
 
   @Component({
-    methods: mapActions([AUTH_ACTIONS.FETCH_USER, AUTH_ACTIONS.REFRESH_TOKEN]),
+    methods: mapActions([AUTH_ACTIONS.FETCH_USER, AUTH_ACTIONS.REFRESH_TOKEN, AUTH_ACTIONS.LOGOUT]),
     components: { Header, Navigation }
   })
   export default class Authentication extends Vue {
+	isLoaded = false
+
     created () {
       api.interceptors.response.use(null, err => {
         if (err.response.status === 401) {
@@ -38,6 +40,7 @@
       })
 
       this[AUTH_ACTIONS.FETCH_USER]()
+        .then(() => this.isLoaded = true)
     }
   }
 </script>

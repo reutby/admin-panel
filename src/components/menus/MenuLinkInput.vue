@@ -21,11 +21,11 @@
     get id () {
       switch (this.value.kind) {
         case 'category':
-          return this.value.category._id
+          return this.value.category ? this.value.category._id : ''
         case 'post':
-          return this.value.post._id
+          return this.value.post ? this.value.post._id : ''
         case 'http':
-          return this.value.value
+          return this.value.value || ''
       }
     }
   }

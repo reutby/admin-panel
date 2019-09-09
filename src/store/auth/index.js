@@ -1,6 +1,7 @@
 import { AUTH_STATE, AUTH_MODULE_NAME } from './consts'
 import { actions } from './actions'
 import { mutations } from './mutations'
+import { getters } from './getters'
 
 export const authModule = {
   namespaced: true,
@@ -10,5 +11,6 @@ export const authModule = {
     [AUTH_STATE.REFRESH_TOKEN_CALL]: null
   },
   actions,
-  mutations
+  mutations,
+  getters
 }
