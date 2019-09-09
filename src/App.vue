@@ -30,6 +30,10 @@
 		height: 100%;
 	}
 
+	.main h1 {
+		padding: 10px;
+	}
+
 	*,
 	*:before,
 	*:after {
@@ -40,6 +44,7 @@
 	a {
 		color: #03414c;
 		text-decoration: none;
+
 		&:hover {
 			text-decoration: underline;
 		}

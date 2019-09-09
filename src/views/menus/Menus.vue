@@ -1,12 +1,12 @@
 <template>
 	<div class="menus-page">
-		<h1>This is an menus page</h1>
+		<h1>Menus</h1>
 		<MenusList/>
 	</div>
 </template>
 <script>
   import { Vue, Component } from 'vue-property-decorator'
-  import MenusList from '../components/menus/MenusList'
+  import MenusList from '../../components/menus/MenusList'
 
   @Component({
     components: { MenusList }

@@ -1,6 +1,7 @@
 <template>
 	<header>
-		<router-link to="/"><img class="logo" alt="Greenpress Admin Panel" src="../../assets/logo.png"></router-link>
+		<router-link to="/"><img class="logo" alt="greenpress Admin Panel" src="../../assets/logo.png"></router-link>
+		<span class="user-welcome" v-if="user">Hello <strong>{{user.name}}</strong></span>
 		<div class="actions">
 			<a @click="logout">Logout</a>
 		</div>
@@ -9,16 +10,19 @@
 <script>
   import { Vue, Component } from 'vue-property-decorator'
   import { createNamespacedHelpers } from 'vuex'
-  import { AUTH_MODULE_NAME, AUTH_ACTIONS } from '../../store/auth/consts'
+  import { AUTH_MODULE_NAME, AUTH_ACTIONS, AUTH_STATE } from '../../store/auth/consts'
 
-  const { mapActions } = createNamespacedHelpers(AUTH_MODULE_NAME)
+  const { mapActions, mapState } = createNamespacedHelpers(AUTH_MODULE_NAME)
 
   @Component({
-    methods: mapActions({ $logout: AUTH_ACTIONS.LOGOUT })
+    methods: mapActions({ $logout: AUTH_ACTIONS.LOGOUT }),
+    computed: mapState({ user: AUTH_STATE.USER })
   })
   export default class Header extends Vue {
-    logout() {
-      this.$logout();
+    user;
+
+    logout () {
+      this.$logout()
       this.$router.push('login')
     }
   }
@@ -30,6 +34,11 @@
 		justify-content: flex-start;
 		height: 70px;
 		background-color: #eee;
+		align-items: center;
+	}
+
+	.user-welcome {
+		padding-left: 10px;
 	}
 
 	a {
@@ -38,6 +47,10 @@
 		text-align: right;
 		height: 100%;
 		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 
 	.logo {
@@ -48,6 +61,5 @@
 	.actions {
 		margin-right: 10px;
 		margin-left: auto;
-		align-self: center;
 	}
 </style>

@@ -25,7 +25,6 @@
   export default class Authentication extends Vue {
     created () {
       api.interceptors.response.use(null, err => {
-        console.log('intercepted!!!')
         if (err.response.status === 401) {
           if (err.config.url.includes('api/token/refresh')) {
             return

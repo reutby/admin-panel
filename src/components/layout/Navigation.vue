@@ -1,9 +1,9 @@
 <template>
 	<nav>
-		<router-link to="menus">Menus</router-link>
-		<router-link to="categories">Categories</router-link>
-		<router-link to="posts">Posts</router-link>
-		<router-link to="users">Users</router-link>
+		<router-link to="/menus">Menus</router-link>
+		<router-link to="/categories">Categories</router-link>
+		<router-link to="/posts">Posts</router-link>
+		<router-link to="/users">Users</router-link>
 	</nav>
 </template>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

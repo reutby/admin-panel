@@ -1,7 +1,8 @@
 export const AUTH_MODULE_NAME = 'auth'
 
 export const AUTH_STATE = {
-  USER: 'USER'
+  USER: 'USER',
+  REFRESH_TOKEN_CALL: 'REFRESH_TOKEN_CALL'
 }
 
 export const AUTH_ACTIONS = {
@@ -12,5 +13,6 @@ export const AUTH_ACTIONS = {
 }
 
 export const AUTH_MUTATIONS = {
-  SET_USER: 'SET_USER'
+  SET_USER: 'SET_USER',
+  SET_REFRESH_TOKEN_CALL: 'SET_REFRESH_TOKEN_CALL'
 }
