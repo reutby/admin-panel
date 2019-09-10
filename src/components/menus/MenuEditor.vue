@@ -1,7 +1,12 @@
 <template>
-	<div>
-		<MenuLinkInput v-for="item in links" :value="item" @change="updateLink"/>
-	</div>
+	<form @submit.prevent="updateMenu">
+		<button @click="addLink" type="button">ADD</button>
+		<MenuLinkInput v-for="(item, $index) in links" :value="item" :key="$index"
+		               @remove="removeLink"
+		               @change="updateLink"/>
+
+		<button type="submit">SAVE</button>
+	</form>
 </template>
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
@@ -13,21 +18,31 @@
 
   @Component({
     components: { MenuLinkInput },
-    methods: mapActions({ fetch: MENUS_ACTIONS.FETCH_MENU }),
+    methods: mapActions({
+      fetch: MENUS_ACTIONS.FETCH_MENU,
+      updateLinks: MENUS_ACTIONS.UPDATE_MENU_LINKS,
+      updateMenu: MENUS_ACTIONS.UPDATE_CURRENT_MENU
+    }),
     computed: mapGetters({ links: MENUS_GETTERS.CURRENT_MENU_LINKS })
   })
   export default class MenuEditor extends Vue {
     links
     @Prop(String) menu
 
-    updatedData = null
-
     created () {
       this.fetch(this.menu)
     }
 
-    updateLink (oldItem, $event) {
+    updateLink (link) {
+      this.updateLinks(this.links.map(l => l._id === link._id ? link : l))
+    }
 
+    removeLink (item) {
+      this.updateLinks(this.links.filter(l => l !== item))
+    }
+
+    addLink () {
+      this.updateLinks([...this.links, { kind: 'category' }])
     }
   }
 </script>

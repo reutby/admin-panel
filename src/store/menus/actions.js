@@ -1,4 +1,4 @@
-import { MENUS_ACTIONS, MENUS_MUTATIONS } from './consts'
+import { MENUS_ACTIONS, MENUS_GETTERS, MENUS_MUTATIONS, MENUS_STATE } from './consts'
 import api from '../../plugins/api'
 
 export const actions = {
@@ -20,5 +20,12 @@ export const actions = {
   },
   [MENUS_ACTIONS.UPDATE_MENU_LINKS] ({ commit }, links) {
     commit(MENUS_MUTATIONS.SET_UPDATED_LINKS, links)
+  },
+  [MENUS_ACTIONS.UPDATE_CURRENT_MENU] ({ commit, state, getters }) {
+    return api.put(
+      '/api/menus/' + state[MENUS_STATE.CURRENT_MENU].name,
+      { ...state[MENUS_STATE.CURRENT_MENU], links: getters[MENUS_GETTERS.CURRENT_MENU_LINKS] })
+      .then(res => res.data)
+      .then(menu => commit(MENUS_MUTATIONS.SET_CURRENT_MENU, menu))
   }
 }
