@@ -1,8 +1,8 @@
 <template>
 	<div class="admin-panel" v-if="isLoaded">
-		<Header class="header"/>
+		<Navigation class="navigation"/>
 		<div class="admin-content">
-			<Navigation class="navigation"/>
+			<Header class="header"/>
 			<router-view class="main"/>
 		</div>
 	</div>
@@ -47,13 +47,15 @@
 <style scoped lang="scss">
 	.admin-panel {
 		display: flex;
+
 		width: 100%;
 		height: 100%;
-		flex-direction: column;
+		flex-direction: row;
 	}
 
 	.admin-content {
 		display: flex;
+		flex-direction: column;
 		flex: 1;
 
 		.main {

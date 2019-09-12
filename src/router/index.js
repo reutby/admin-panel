@@ -6,6 +6,7 @@ import Categories from '../views/Categories.vue'
 import Posts from '../views/Posts.vue'
 import Users from '../views/Users.vue'
 import Login from '../views/Login.vue'
+import Configurations from '../views/Configurations.vue'
 import menuRoutes from './menus'
 
 Vue.use(Router)
@@ -23,6 +24,11 @@ const router = new Router({
           path: '/',
           name: 'home',
           component: Home
+        },
+        {
+          path: '/configurations',
+          name: 'configurations',
+          component: Configurations
         },
         menuRoutes,
         {

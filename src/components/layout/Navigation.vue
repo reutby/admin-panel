@@ -1,5 +1,8 @@
 <template>
 	<nav>
+		<router-link to="/" class="home-logo"><img alt="greenpress Admin Panel" src="../../assets/logo.png"></router-link>
+
+		<router-link to="/Configurations">Configurations</router-link>
 		<router-link to="/menus">Menus</router-link>
 		<router-link to="/categories">Categories</router-link>
 		<router-link to="/posts">Posts</router-link>
@@ -8,12 +11,23 @@
 </template>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+	.home-logo {
+		padding: 5px 0 10px 0;
+		height: 75px;
+		text-align: center;
+
+		img {
+			max-width: 100%;
+			max-height: 100%;
+		}
+	}
+
 	nav {
 		display: flex;
 		flex-direction: column;
-		width: 110px;
+		width: 150px;
 		background-color: #d7e8e6;
-		padding-top: 50px;
 	}
 
 	a {

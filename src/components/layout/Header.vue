@@ -1,6 +1,5 @@
 <template>
 	<header>
-		<router-link to="/"><img class="logo" alt="greenpress Admin Panel" src="../../assets/logo.png"></router-link>
 		<span class="user-welcome" v-if="user">Hello <strong>{{user.name}}</strong></span>
 		<div class="actions">
 			<a @click="logout">Logout</a>
@@ -51,11 +50,6 @@
 		&:hover {
 			text-decoration: underline;
 		}
-	}
-
-	.logo {
-		max-width: 110px;
-		max-height: 100%;
 	}
 
 	.actions {
