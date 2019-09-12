@@ -4,7 +4,6 @@
 		<MenuLinkInput v-for="(item, $index) in links" :value="item" :key="$index"
 		               @remove="removeLink"
 		               @change="updateLink"/>
-
 		<button type="submit">SAVE</button>
 	</form>
 </template>
