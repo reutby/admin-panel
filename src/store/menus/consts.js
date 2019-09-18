@@ -3,7 +3,6 @@ export const MENUS_MODULE_NAME = 'menus'
 export const MENUS_STATE = {
   MENUS: 'MENUS',
   CURRENT_MENU: 'CURRENT_MENU',
-  UPDATED_LINKS: 'UPDATED_LINKS'
 }
 
 export const MENUS_ACTIONS = {

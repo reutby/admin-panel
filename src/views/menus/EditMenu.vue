@@ -1,5 +1,5 @@
 <template>
-	<div class="menus-page">
+	<div class="category-page">
 		<h1>Edit Menu <i>{{$route.params.menuName}}</i></h1>
 		<MenuEditor :menu="$route.params.menuName"/>
 	</div>

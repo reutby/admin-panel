@@ -1,14 +1,8 @@
-import Vue from 'vue'
 import Menus from '../views/menus/Menus.vue'
 import EditMenu from '../views/menus/EditMenu.vue'
+import EmptyRoute from '../components/layout/EmptyRoute.vue'
 
-const EmptyRoute = Vue.extend({
-  render (h) {
-    return h('router-view')
-  }
-})
-
-const menuRoutes = {
+const menusRoutes = {
   path: 'menus',
   redirect: { name: 'menus' },
   component: EmptyRoute,
@@ -26,4 +20,4 @@ const menuRoutes = {
   ]
 }
 
-export default menuRoutes
+export default menusRoutes

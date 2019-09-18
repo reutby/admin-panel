@@ -2,12 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Authenticated from '../views/Authenticated.vue'
 import Home from '../views/Home.vue'
-import Categories from '../views/Categories.vue'
 import Posts from '../views/Posts.vue'
 import Users from '../views/Users.vue'
 import Login from '../views/Login.vue'
 import Configurations from '../views/Configurations.vue'
-import menuRoutes from './menus'
+import menusRoutes from './menus'
+import categoriesRoutes from './categories'
 
 Vue.use(Router)
 
@@ -30,12 +30,8 @@ const router = new Router({
           name: 'configurations',
           component: Configurations
         },
-        menuRoutes,
-        {
-          path: '/categories',
-          name: 'categories',
-          component: Categories
-        },
+        menusRoutes,
+        categoriesRoutes,
         {
           path: '/posts',
           name: 'posts',
