@@ -2,7 +2,8 @@
 	<nav>
 		<router-link to="/" class="home-logo"><img alt="greenpress Admin Panel" src="../../assets/logo.png"></router-link>
 
-		<router-link to="/Configurations">Configurations</router-link>
+		<router-link to="/configurations">Configurations</router-link>
+		<router-link to="/assets">Assets</router-link>
 		<router-link to="/menus">Menus</router-link>
 		<router-link to="/categories">Categories</router-link>
 		<router-link to="/posts">Posts</router-link>

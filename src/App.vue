@@ -30,8 +30,9 @@
 		height: 100%;
 	}
 
-	.main h1 {
+	.main h1, .main h2 {
 		padding: 10px;
+		margin: 0;
 	}
 
 	*,

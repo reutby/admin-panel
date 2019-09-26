@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { authModule } from './auth'
 import { menusModule } from './menus'
 import { categoriesModule } from './categories'
+import { assetsModule } from './assets'
 
 Vue.use(Vuex)
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
     [authModule.name]: authModule,
     [menusModule.name]: menusModule,
     [categoriesModule.name]: categoriesModule,
+    [assetsModule.name]: assetsModule,
   },
   state: {}
 })

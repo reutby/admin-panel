@@ -8,6 +8,7 @@ import Login from '../views/Login.vue'
 import Configurations from '../views/Configurations.vue'
 import menusRoutes from './menus'
 import categoriesRoutes from './categories'
+import assetsRoutes from './assets'
 
 Vue.use(Router)
 
@@ -32,6 +33,7 @@ const router = new Router({
         },
         menusRoutes,
         categoriesRoutes,
+        assetsRoutes,
         {
           path: '/posts',
           name: 'posts',

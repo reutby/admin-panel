@@ -23,7 +23,7 @@
     components: { Header, Navigation }
   })
   export default class Authentication extends Vue {
-	isLoaded = false
+    isLoaded = false
 
     created () {
       api.interceptors.response.use(null, err => {
@@ -36,6 +36,7 @@
               ...err.config,
               headers: undefined
             }))
+            .catch(() => this[AUTH_ACTIONS.LOGOUT]())
         }
       })
 

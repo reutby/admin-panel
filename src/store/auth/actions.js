@@ -40,6 +40,7 @@ export const actions = {
               'authorization': 'Bearer ' + localStorage.refresh_token
             }
           })
+          .then(res => res.status !== 200 ? Promise.reject(res) : res)
           .then(res => res.data ? res.data.payload : {})
           .then(payload => {
             localStorage.setItem('access_token', payload.token)
