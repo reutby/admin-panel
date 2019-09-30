@@ -1,7 +1,9 @@
 <template>
-	<div class="categories-page">
-		<h1>Assets</h1>
-		<h2>Choose Storage to edit / manage assets within:</h2>
+	<div class="storage-page">
+		<h1>Storage</h1>
+		<p>
+			<router-link :to="{name: 'addStorage'}" tag="button">+ Add new Storage</router-link>
+		</p>
 		<AssetsStorageList/>
 	</div>
 </template>
@@ -12,6 +14,11 @@
   @Component({
     components: { AssetsStorageList }
   })
-  export default class Storage extends Vue {
+  export default class StorageList extends Vue {
   }
 </script>
+<style scoped>
+	p {
+		padding: 5px 10px;
+	}
+</style>
