@@ -32,7 +32,7 @@
     methods: mapActions({ fetch: CATEGORIES_ACTIONS.FETCH_CATEGORIES }),
     computed: mapState({ categories: CATEGORIES_STATE.CATEGORIES })
   })
-  export default class MenusList extends Vue {
+  export default class CategoriesList extends Vue {
     created () {
       this.fetch()
     }
