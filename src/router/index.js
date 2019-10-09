@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Authenticated from '../views/Authenticated.vue'
 import Home from '../views/Home.vue'
-import Posts from '../views/posts/Posts.vue'
 import Users from '../views/Users.vue'
 import Login from '../views/Login.vue'
 import Configurations from '../views/Configurations.vue'
 import menusRoutes from './menus'
 import categoriesRoutes from './categories'
 import assetsRoutes from './assets'
+import postsRoutes from './posts'
 
 Vue.use(Router)
 
@@ -34,11 +34,7 @@ const router = new Router({
         menusRoutes,
         categoriesRoutes,
         assetsRoutes,
-        {
-          path: '/posts',
-          name: 'posts',
-          component: Posts
-        },
+        postsRoutes,
         {
           path: '/users',
           name: 'users',
