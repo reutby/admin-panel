@@ -9,7 +9,7 @@ export const actions = {
         return commit(POSTS_MUTATIONS.SET_POSTS, list)
       })
   },
-  [POSTS_ACTIONS.FETCH_CATEGORY] ({ commit }, postId) {
+  [POSTS_ACTIONS.FETCH_POST] ({ commit }, postId) {
     commit(POSTS_MUTATIONS.SET_CURRENT_POST, null)
     return api.get('/api/posts/' + postId)
       .then(res => res.data)
