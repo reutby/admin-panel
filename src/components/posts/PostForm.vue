@@ -1,31 +1,17 @@
 <template>
 	<form class="post-form" @submit.prevent="submit">
-		<p>
-			<label>
-				Title:
-				<input :value="post.title" @input="editedPost.title = $event.target.value">
-			</label>
-		</p>
+		<FormInput title="Title" :value="post.title" @input="editedPost.title = $event.target.value"/>
+		<FormInput title="Path" label="leave empty to auto-generate"
+		           :value="post.path" @input="editedPost.path = $event.target.value"/>
 
-		<p>
-			<label>
-				Path <small>(leave empty to auto-generate)</small>:
-				<input :value="post.path" @input="editedPost.path = $event.target.value">
-			</label>
-		</p>
-
-		<p>
-			<label>
-				Tags:
-				<input @keyup.enter="addTag" placeholder="ADD NEW TAG">
-				<ul>
-					<li v-for="tag in tags" :key="tag">
-						{{tag}}
-						<button type="button" @click="removeTag(tag)">X</button>
-					</li>
-				</ul>
-			</label>
-		</p>
+		<FormInput title="Tags" @keyup.enter="addTag" placeholder="ADD NEW TAG">
+			<ul>
+				<li v-for="tag in tags" :key="tag">
+					{{tag}}
+					<button type="button" @click="removeTag(tag)">X</button>
+				</li>
+			</ul>
+		</FormInput>
 
 		<p>
 			<label>
@@ -46,8 +32,11 @@
 </template>
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
+  import FormInput from '../forms/FormInput'
 
-  @Component
+  @Component({
+    components: { FormInput }
+  })
   export default class PostForm extends Vue {
     @Prop(Object) post
 
@@ -67,13 +56,14 @@
       return editedTags || tags
     }
 
-    get content() {
+    get content () {
       const editedContent = this.editedPost.content
-      const content = this.post.content;
+      const content = this.post.content
       return editedContent || content
     }
-    set content(value) {
-      this.editedPost.content = value;
+
+    set content (value) {
+      this.editedPost.content = value
     }
 
     addTag (event) {
@@ -81,7 +71,7 @@
         return
       }
       this.editedPost.tags = [...this.tags, event.target.value]
-      event.target.value = '';
+      event.target.value = ''
     }
 
     removeTag (tag) {
@@ -89,7 +79,14 @@
     }
 
     submit () {
-      this.$emit('submit', this.editedPost)
+      const onlyUpdated = Object.keys(this.editedPost).reduce((obj, key) => {
+        const val = this.editedPost[key]
+        if (val !== null) {
+          obj[key] = val
+        }
+        return obj;
+      }, {})
+      this.$emit('submit', onlyUpdated)
     }
   }
 </script>

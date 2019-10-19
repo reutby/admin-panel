@@ -1,29 +1,16 @@
 <template>
 	<div>
-		<p>
-			<label>
-				FTP address:
-				<input v-model="url" @input="emit">
-			</label>
-		</p>
-		<p>
-			<label>
-				Username:
-				<input v-model="username" @input="emit">
-			</label>
-		</p>
-		<p>
-			<label>
-				Password:
-				<input type="password" v-model="password" @input="emit">
-			</label>
-		</p>
+		<FormInput title="FTP address" v-model="url" @input="emit"/>
+		<FormInput title="Username" v-model="username" @input="emit"/>
+		<FormInput title="Password" v-model="password" @input="emit"/>
 	</div>
 </template>
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
-
-  @Component
+  import FormInput from '../forms/FormInput'
+  @Component({
+    components: { FormInput }
+  })
   export default class StorageFtpAuth extends Vue {
     @Prop(Object) value
 

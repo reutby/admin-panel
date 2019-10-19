@@ -1,11 +1,6 @@
 <template>
 	<form class="storage-form" @submit.prevent="submit">
-		<p>
-			<label>
-				Name:
-				<input :value="name" @input="editedStorage.name = $event.target.value">
-			</label>
-		</p>
+		<FormInput title="Name" :value="name" @input="editedStorage.name = $event.target.value"/>
 		<p>
 			<label>
 				Kind:
@@ -26,9 +21,10 @@
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
   import StorageFtpAuth from './StorageFtpAuth'
+  import FormInput from '../forms/FormInput'
 
   @Component({
-    components: { StorageFtpAuth }
+    components: { FormInput, StorageFtpAuth }
   })
   export default class StorageForm extends Vue {
     @Prop(Object) value
