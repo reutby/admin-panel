@@ -28,7 +28,16 @@
     @Prop(Object) value
 
     changeKind (kind) {
-      this.emitUpdate({ kind })
+      let value;
+      switch (kind) {
+        case 'category':
+        case 'post':
+          value = '';
+          break;
+        case 'http':
+          value = {};
+      }
+      this.emitUpdate({ kind, value })
     }
 
     changeValue (value) {
