@@ -17,7 +17,7 @@
 
   @Component
   export default class PostSelector extends Vue {
-    @Prop(Object) value // object:  {url: String, text: String, newWindow: Boolean}
+    @Prop({ type: Object, default: {} }) value // object:  {url: String, text: String, newWindow: Boolean}
 
     emitChange (key, value) {
       this.$emit('change', {

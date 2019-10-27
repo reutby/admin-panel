@@ -57,9 +57,10 @@
     }
 
     get content () {
-      const editedContent = this.editedPost.content
-      const content = this.post.content
-      return editedContent || content
+      if (this.editedPost.content === null) {
+        return this.post.content
+      }
+      return this.editedPost.content
     }
 
     set content (value) {
@@ -84,7 +85,7 @@
         if (val !== null) {
           obj[key] = val
         }
-        return obj;
+        return obj
       }, {})
       this.$emit('submit', onlyUpdated)
     }
