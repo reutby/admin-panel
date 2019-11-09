@@ -1,32 +1,30 @@
 <template>
-	<div>
-		<table>
-			<thead>
-			<tr>
-				<th>Title</th>
-				<th>Category</th>
-				<th>Public</th>
-				<th>Path</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr v-for="post in posts" :key="post._id">
-				<td>
-					<router-link :to="{name: 'editPost', params: {postId: post._id}}">
-						{{post.title}}
-					</router-link>
-				</td>
-				<td>
-					<router-link :to="{name: 'editCategory', params: {categoryId: post.category._id}}">
-						{{post.category.name}}
-					</router-link>
-				</td>
-				<td>{{post.isPublic ? 'V' : 'X'}}</td>
-				<td>{{post.path}}</td>
-			</tr>
-			</tbody>
-		</table>
-	</div>
+	<table>
+		<thead>
+		<tr>
+			<th>Title</th>
+			<th>Category</th>
+			<th>Public</th>
+			<th>Path</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr v-for="post in posts" :key="post._id">
+			<td>
+				<router-link :to="{name: 'editPost', params: {postId: post._id}}">
+					{{post.title}}
+				</router-link>
+			</td>
+			<td>
+				<router-link :to="{name: 'editCategory', params: {categoryId: post.category._id}}">
+					{{post.category.name}}
+				</router-link>
+			</td>
+			<td>{{post.isPublic ? 'V' : 'X'}}</td>
+			<td>{{post.path}}</td>
+		</tr>
+		</tbody>
+	</table>
 </template>
 <script>
   import { Vue, Component } from 'vue-property-decorator'
@@ -48,12 +46,4 @@
   }
 </script>
 <style scoped lang="scss">
-	table {
-		width: 100%;
-	}
-
-	tr, td {
-		text-align: center;
-		border: 1px solid #eee;
-	}
 </style>
