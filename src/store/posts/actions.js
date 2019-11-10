@@ -15,6 +15,12 @@ export const actions = {
         return commit(POSTS_MUTATIONS.SET_CURRENT_POST, post)
       })
   },
+  [POSTS_ACTIONS.CREATE_POST] ({ commit, state }, post) {
+    return api.withData.post(
+      '/api/posts',
+      post)
+      .then(post => commit(POSTS_MUTATIONS.SET_CURRENT_POST, post))
+  },
   [POSTS_ACTIONS.UPDATE_CURRENT_POST] ({ commit, state }, updatedData) {
     return api.withData.put(
       '/api/posts/' + state[POSTS_STATE.CURRENT_POST]._id,

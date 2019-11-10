@@ -4,7 +4,14 @@
 		<FormInput title="Path" label="leave empty to auto-generate"
 		           :value="post.path" @input="editedPost.path = $event.target.value"/>
 
-		<FormInput title="Tags" @keyup.enter="addTag" placeholder="ADD NEW TAG">
+		<p>
+			<label>
+				Category:
+				<CategorySelector :value="categoryPath" @change="editedPost.category = $event"/>
+			</label>
+		</p>
+
+		<FormInput title="Tags" @keypress.enter="addTag" placeholder="ADD NEW TAG">
 			<ul>
 				<li v-for="tag in tags" :key="tag">
 					{{tag}}
@@ -16,14 +23,14 @@
 		<p>
 			<label>
 				Short:
-				<gp-editor :value="post.short" @input="editedPost.short = $event"></gp-editor>
+				<gp-editor :value="post.short" @input="editedPost.short = $event"/>
 			</label>
 		</p>
 
 		<p>
 			<label>
 				Content:
-				<gp-editor v-model="content"></gp-editor>
+				<gp-editor v-model="content"/>
 			</label>
 		</p>
 
@@ -33,9 +40,10 @@
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
   import FormInput from '../forms/FormInput'
+  import CategorySelector from '../categories/CategorySelector'
 
   @Component({
-    components: { FormInput }
+    components: { CategorySelector, FormInput }
   })
   export default class PostForm extends Vue {
     @Prop(Object) post
@@ -53,7 +61,7 @@
     get tags () {
       const editedTags = this.editedPost.tags
       const tags = this.post.tags
-      return editedTags || tags
+      return editedTags || tags || []
     }
 
     get content () {
@@ -67,7 +75,12 @@
       this.editedPost.content = value
     }
 
+    get categoryPath() {
+      return this.post.category ? this.post.category.path : null;
+    }
+
     addTag (event) {
+      event.preventDefault();
       if (this.tags.includes(event.target.value)) {
         return
       }

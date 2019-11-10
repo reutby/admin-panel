@@ -2,7 +2,10 @@ import { CATEGORIES_ACTIONS, CATEGORIES_MUTATIONS, CATEGORIES_STATE } from './co
 import api from '../../plugins/api'
 
 export const actions = {
-  [CATEGORIES_ACTIONS.FETCH_CATEGORIES] ({ commit }) {
+  [CATEGORIES_ACTIONS.FETCH_CATEGORIES] ({ commit, state }) {
+    if (state[CATEGORIES_STATE.CATEGORIES_LOADED]) {
+      return Promise.resolve()
+    }
     return api.get('/api/categories')
       .then(res => res.data)
       .then(categories => {
