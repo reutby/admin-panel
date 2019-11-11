@@ -26,7 +26,7 @@
       const value = this.value;
       const categories = this.categories || [];
 
-      return value || categories.length ? categories[0].path : null;
+      return value || (categories.length ? categories[0].path : null);
     }
     set model(value) {
       this.$emit('change',value)
