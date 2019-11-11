@@ -26,5 +26,9 @@ export const actions = {
       '/api/posts/' + state[POSTS_STATE.CURRENT_POST]._id,
       updatedData)
       .then(post => commit(POSTS_MUTATIONS.SET_CURRENT_POST, post))
-  }
+  },
+  [POSTS_ACTIONS.REMOVE_POST] ({ dispatch }, postId) {
+    return api.delete('/api/posts/' + postId)
+      .then(() => dispatch(POSTS_ACTIONS.FETCH_POSTS))
+  },
 }

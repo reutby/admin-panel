@@ -4,6 +4,13 @@
 		<FormInput title="Path" label="leave empty to auto-generate"
 		           :value="post.path" @input="editedPost.path = $event.target.value"/>
 
+
+		<FormInput
+				title="Public?"
+				type="checkbox"
+				:checked="isPublic"
+				@change="editedPost.isPublic = $event.target.checked"
+		/>
 		<p>
 			<label>
 				Category:
@@ -56,6 +63,13 @@
       path: null,
       tags: null,
       category: null,
+      isPublic: null,
+    }
+
+    mounted () {
+      if (!this.post._id) {
+        this.editedPost.isPublic = true
+      }
     }
 
     get tags () {
@@ -75,12 +89,19 @@
       this.editedPost.content = value
     }
 
-    get categoryPath() {
-      return this.post.category ? this.post.category.path : null;
+    get categoryPath () {
+      return this.post.category ? this.post.category.path : null
+    }
+
+    get isPublic () {
+      const isBool = typeof this.editedPost.isPublic === 'boolean'
+      return isBool ?
+        this.editedPost.isPublic :
+        this.post.isPublic
     }
 
     addTag (event) {
-      event.preventDefault();
+      event.preventDefault()
       if (this.tags.includes(event.target.value)) {
         return
       }

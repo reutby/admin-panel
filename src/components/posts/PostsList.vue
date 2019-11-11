@@ -6,6 +6,7 @@
 			<th>Category</th>
 			<th>Public</th>
 			<th>Path</th>
+			<th></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -22,6 +23,9 @@
 			</td>
 			<td>{{post.isPublic ? 'V' : 'X'}}</td>
 			<td>{{post.path}}</td>
+			<td>
+				<button @click.prevent="remove(post._id)">REMOVE</button>
+			</td>
 		</tr>
 		</tbody>
 	</table>
@@ -34,7 +38,7 @@
   const { mapActions, mapState } = createNamespacedHelpers(POSTS_MODULE_NAME)
 
   @Component({
-    methods: mapActions({ fetch: POSTS_ACTIONS.FETCH_POSTS }),
+    methods: mapActions({ fetch: POSTS_ACTIONS.FETCH_POSTS, remove: POSTS_ACTIONS.REMOVE_POST }),
     computed: mapState({ posts: POSTS_STATE.POSTS })
   })
   export default class PostsList extends Vue {
