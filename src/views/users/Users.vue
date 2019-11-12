@@ -6,7 +6,7 @@
 </template>
 <script>
   import { Vue, Component } from 'vue-property-decorator'
-  import UsersList from '../components/users/UsersList'
+  import UsersList from '../../components/users/UsersList'
 
   @Component({
     components: { UsersList }
