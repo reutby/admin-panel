@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<FormInput title="FTP address" v-model="url" @input="emit"/>
+		<FormInput title="FTP Host" v-model="host" @input="emit"/>
 		<FormInput title="Username" v-model="username" @input="emit"/>
 		<FormInput title="Password" v-model="password" @input="emit"/>
 	</div>
@@ -14,13 +14,13 @@
   export default class StorageFtpAuth extends Vue {
     @Prop(Object) value
 
-    url = 'ftp://'
+    host = ''
     username = ''
     password = ''
 
     created () {
       if (this.value) {
-        this.url = this.value.url
+        this.host = this.value.host
         this.username = this.value.username
         this.password = this.value.password
       }
@@ -28,7 +28,7 @@
 
     emit () {
       this.$emit('change', {
-        url: this.url,
+        host: this.host,
         username: this.username,
         password: this.password
       })
