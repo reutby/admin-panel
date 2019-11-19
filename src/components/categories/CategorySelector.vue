@@ -22,18 +22,20 @@
 
     @Prop(String) value
 
-    get model() {
-      const value = this.value;
-      const categories = this.categories || [];
+    get model () {
+      const value = this.value
+      const categories = this.categories || []
 
-      return value || (categories.length ? categories[0].path : null);
+      return value || (categories.length ? categories[0].path : null)
     }
-    set model(value) {
-      this.$emit('change',value)
+
+    set model (value) {
+      this.$emit('change', value)
     }
 
     created () {
       this.fetch()
+        .then(() => this.$emit('mounted', this.value || (this.categories[0] && this.categories[0].path)))
     }
   }
 </script>

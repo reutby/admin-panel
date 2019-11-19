@@ -9,12 +9,12 @@
 				title="Public?"
 				type="checkbox"
 				:checked="isPublic"
-				@change="editedPost.isPublic = $event.target.checked"
-		/>
+				@change="editedPost.isPublic = $event.target.checked"/>
 		<p>
 			<label>
 				Category:
-				<CategorySelector :value="categoryPath" @change="editedPost.category = $event"/>
+				<CategorySelector :value="categoryPath" @change="editedPost.category = $event"
+				                  @mounted="mountCategory"/>
 			</label>
 		</p>
 
@@ -98,6 +98,12 @@
       return isBool ?
         this.editedPost.isPublic :
         this.post.isPublic
+    }
+
+    mountCategory (path) {
+      if (!this.post._id) {
+        this.editedPost.category = path
+      }
     }
 
     addTag (event) {
