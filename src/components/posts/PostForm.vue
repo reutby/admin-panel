@@ -4,6 +4,10 @@
 		<FormInput title="Path" label="leave empty to auto-generate"
 		           :value="post.path" @input="editedPost.path = $event.target.value"/>
 
+		<FormInput title="Thumbnail"
+		           :value="editedPost.thumbnail || post.thumbnail" placeholder="https://" @input="editedPost.thumbnail = $event.target.value">
+			<div><img class="thumbnail-image" :src="editedPost.thumbnail || post.thumbnail"></div>
+		</FormInput>
 
 		<FormInput
 				title="Public?"
@@ -58,6 +62,7 @@
     editedPost = {
       title: null,
       authors: null,
+      thumbnail: null,
       short: null,
       content: null,
       path: null,
@@ -131,3 +136,8 @@
     }
   }
 </script>
+<style scoped>
+	.thumbnail-image {
+		max-width: 100px;
+	}
+</style>
