@@ -10,11 +10,8 @@
 </template>
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { USERS_MODULE_NAME } from '../../store/users/consts'
   import FormInput from '../forms/FormInput'
 
-  const { mapActions, mapState } = createNamespacedHelpers(USERS_MODULE_NAME)
   @Component({
     components: { FormInput }
   })
