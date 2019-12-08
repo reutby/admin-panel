@@ -16,8 +16,8 @@ function flattenMenuLinks (links = []) {
 export const mutations = {
   [MENUS_MUTATIONS.SET_MENUS]: (state, list) => state[MENUS_STATE.MENUS] = list,
   [MENUS_MUTATIONS.SET_CURRENT_MENU]: (state, menu) => {
-    state[MENUS_STATE.CURRENT_MENU] = menu ?
-      {
+    state[MENUS_STATE.CURRENT_MENU] = menu
+      ? {
         ...menu,
         links: flattenMenuLinks(menu.links || [])
       } : null

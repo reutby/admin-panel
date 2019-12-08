@@ -30,5 +30,5 @@ export const actions = {
   [POSTS_ACTIONS.REMOVE_POST] ({ dispatch }, postId) {
     return api.delete('/api/posts/' + postId)
       .then(() => dispatch(POSTS_ACTIONS.FETCH_POSTS))
-  },
+  }
 }

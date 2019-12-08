@@ -2,7 +2,7 @@ export const MENUS_MODULE_NAME = 'menus'
 
 export const MENUS_STATE = {
   MENUS: 'MENUS',
-  CURRENT_MENU: 'CURRENT_MENU',
+  CURRENT_MENU: 'CURRENT_MENU'
 }
 
 export const MENUS_ACTIONS = {

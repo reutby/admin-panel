@@ -57,6 +57,5 @@ export const actions = {
     localStorage.removeItem('refresh_token')
     commit(AUTH_MUTATIONS.SET_USER, null)
     router.push({ name: 'login' })
-    return
   }
 }

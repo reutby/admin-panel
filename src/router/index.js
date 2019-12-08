@@ -35,7 +35,7 @@ const router = new Router({
         categoriesRoutes,
         assetsRoutes,
         postsRoutes,
-        usersRoutes,
+        usersRoutes
       ]
     },
     {

@@ -16,7 +16,7 @@ export default new Vuex.Store({
     [categoriesModule.name]: categoriesModule,
     [assetsModule.name]: assetsModule,
     [postsModule.name]: postsModule,
-    [usersModule.name]: usersModule,
+    [usersModule.name]: usersModule
   },
   state: {}
 })

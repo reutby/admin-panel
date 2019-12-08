@@ -33,7 +33,7 @@ export const actions = {
       .then(category => {
         commit(CATEGORIES_MUTATIONS.SET_CURRENT_CATEGORY, category)
         commit(CATEGORIES_MUTATIONS.SET_CATEGORIES, null)
-        return category;
+        return category
       })
   },
   [CATEGORIES_ACTIONS.REMOVE_CATEGORY] ({ commit, state, dispatch }, category) {

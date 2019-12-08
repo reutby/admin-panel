@@ -18,5 +18,5 @@ export const AUTH_MUTATIONS = {
 }
 
 export const AUTH_GETTERS = {
-  IS_ADMIN: 'IS_ADMIN',
+  IS_ADMIN: 'IS_ADMIN'
 }
