@@ -1,5 +1,6 @@
 import Categories from '../views/categories/Categories.vue'
 import EditCategory from '../views/categories/EditCategory.vue'
+import CreateCategory from '../views/categories/CreateCategory'
 import EmptyRoute from '../components/layout/EmptyRoute.vue'
 
 const categoriesRoutes = {
@@ -13,7 +14,12 @@ const categoriesRoutes = {
       component: Categories
     },
     {
-      path: ':categoryId',
+      path: 'new',
+      name: 'createCategory',
+      component: CreateCategory
+    },
+    {
+      path: ':categoryPath',
       name: 'editCategory',
       component: EditCategory
     }

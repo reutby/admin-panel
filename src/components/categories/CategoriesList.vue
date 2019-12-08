@@ -11,11 +11,14 @@
 			<tbody>
 			<tr v-for="category in categories" :key="category._id">
 				<td>
-					<router-link :to="{name: 'editCategory', params: {categoryId: category._id}}">{{category.name}}
+					<router-link :to="{name: 'editCategory', params: {categoryPath: category.path}}">{{category.name}}
 					</router-link>
 				</td>
 				<td>{{category.isPublic ? 'V' : 'X'}}</td>
 				<td>{{category.path}}</td>
+				<td>
+					<button @click.prevent="askBeforeRemove(category)">REMOVE</button>
+				</td>
 			</tr>
 			</tbody>
 		</table>
@@ -29,12 +32,18 @@
   const { mapActions, mapState } = createNamespacedHelpers(CATEGORIES_MODULE_NAME)
 
   @Component({
-    methods: mapActions({ fetch: CATEGORIES_ACTIONS.FETCH_CATEGORIES }),
+    methods: mapActions({ fetch: CATEGORIES_ACTIONS.FETCH_CATEGORIES, remove: CATEGORIES_ACTIONS.REMOVE_CATEGORY }),
     computed: mapState({ categories: CATEGORIES_STATE.CATEGORIES })
   })
   export default class CategoriesList extends Vue {
     created () {
       this.fetch()
+    }
+
+    askBeforeRemove (category) {
+      if (confirm('Are you sure?')) {
+        this.remove(category)
+      }
     }
   }
 </script>
@@ -42,6 +51,7 @@
 	table {
 		width: 100%;
 	}
+
 	tr, td {
 		text-align: center;
 		border: 1px solid #eee;

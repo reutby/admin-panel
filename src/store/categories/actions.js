@@ -6,25 +6,43 @@ export const actions = {
     if (state[CATEGORIES_STATE.CATEGORIES_LOADED]) {
       return Promise.resolve()
     }
-    return api.get('/api/categories')
-      .then(res => res.data)
+    return api.withData.get('/api/categories')
       .then(categories => {
         return commit(CATEGORIES_MUTATIONS.SET_CATEGORIES, categories)
       })
   },
-  [CATEGORIES_ACTIONS.FETCH_CATEGORY] ({ commit }, categoryId) {
+  [CATEGORIES_ACTIONS.FETCH_CATEGORY] ({ commit }, categoryPath) {
     commit(CATEGORIES_MUTATIONS.SET_CURRENT_CATEGORY, null)
-    return api.get('/api/categories/' + categoryId)
-      .then(res => res.data)
+    return api.withData.get('/api/categories/' + categoryPath)
       .then(category => {
         return commit(CATEGORIES_MUTATIONS.SET_CURRENT_CATEGORY, category)
       })
   },
-  [CATEGORIES_ACTIONS.UPDATE_CURRENT_CATEGORY] ({ commit, state }) {
-    return api.put(
-      '/api/categories/' + state[CATEGORIES_STATE.CURRENT_CATEGORY]._id,
-      state[CATEGORIES_STATE.CURRENT_CATEGORY])
-      .then(res => res.data)
-      .then(category => commit(CATEGORIES_MUTATIONS.SET_CURRENT_CATEGORY, category))
+  [CATEGORIES_ACTIONS.CREATE_CATEGORY] ({ commit, state }, category) {
+    return api.withData.post('/api/categories', category)
+      .then(category => {
+        commit(CATEGORIES_MUTATIONS.SET_CURRENT_CATEGORY, category)
+        commit(CATEGORIES_MUTATIONS.SET_CATEGORIES, null)
+        return category
+      })
+  },
+  [CATEGORIES_ACTIONS.UPDATE_CURRENT_CATEGORY] ({ commit, state }, category) {
+    return api.withData.put(
+      '/api/categories/' + state[CATEGORIES_STATE.CURRENT_CATEGORY].path,
+      category)
+      .then(category => {
+        commit(CATEGORIES_MUTATIONS.SET_CURRENT_CATEGORY, category)
+        commit(CATEGORIES_MUTATIONS.SET_CATEGORIES, null)
+        return category;
+      })
+  },
+  [CATEGORIES_ACTIONS.REMOVE_CATEGORY] ({ commit, state, dispatch }, category) {
+    return api.withData.delete(
+      '/api/categories/' + category.path,
+      category)
+      .then(() => {
+        commit(CATEGORIES_MUTATIONS.SET_CATEGORIES, null)
+        dispatch(CATEGORIES_ACTIONS.FETCH_CATEGORIES)
+      })
   }
 }
