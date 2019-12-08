@@ -15,10 +15,9 @@
   @Component({
     components: { UserForm },
     methods: mapActions({ fetch: USERS_ACTIONS.FETCH_USER, updateUser: USERS_ACTIONS.UPDATE_CURRENT_USER }),
-    computed: mapState({ user: USERS_STATE.CURRENT_USER }),
+    computed: mapState({ user: USERS_STATE.CURRENT_USER })
   })
   export default class EditUser extends Vue {
-
     created () {
       this.fetch(this.$route.params.userId)
     }

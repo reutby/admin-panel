@@ -22,7 +22,7 @@
         .then(category => this.$router.push({
           name: 'editCategory',
           params: { categoryPath: category.path }
-        }));
+        }))
     }
   }
 </script>

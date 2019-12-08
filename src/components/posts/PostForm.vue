@@ -5,7 +5,8 @@
 		           :value="post.path" @input="editedPost.path = $event.target.value"/>
 
 		<FormInput title="Thumbnail"
-		           :value="editedPost.thumbnail || post.thumbnail" placeholder="https://" @input="editedPost.thumbnail = $event.target.value">
+		           :value="editedPost.thumbnail || post.thumbnail" placeholder="https://"
+		           @input="editedPost.thumbnail = $event.target.value">
 			<div><img class="thumbnail-image" :src="editedPost.thumbnail || post.thumbnail"></div>
 		</FormInput>
 
@@ -100,9 +101,7 @@
 
     get isPublic () {
       const isBool = typeof this.editedPost.isPublic === 'boolean'
-      return isBool ?
-        this.editedPost.isPublic :
-        this.post.isPublic
+      return isBool ? this.editedPost.isPublic : this.post.isPublic
     }
 
     mountCategory (path) {

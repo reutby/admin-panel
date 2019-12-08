@@ -14,9 +14,10 @@ module.exports = {
 		'no-trailing-spaces': 'off',
 		'object-curly-spacing': 'error',
 		'no-return-assign': 'off',
-		'indent': ['warning', 2],
+		'indent': 'off',
+		'comma-dangle': 'off',
 		'no-mixed-spaces-and-tabs': 'off',
-		'vue/script-indent': ['warning', 2, { 'baseIndent': 2 }],
+		'vue/script-indent': ['warn', 2, { 'baseIndent': 1 }],
 	},
 	parserOptions: {
 		parser: 'babel-eslint',

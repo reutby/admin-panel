@@ -19,7 +19,6 @@
     computed: mapState({ categories: CATEGORIES_STATE.CATEGORIES })
   })
   export default class CategorySelector extends Vue {
-
     @Prop(String) value
 
     get model () {

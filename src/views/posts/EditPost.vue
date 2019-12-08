@@ -18,7 +18,6 @@
     computed: mapState({ post: POSTS_STATE.CURRENT_POST }),
   })
   export default class EditPost extends Vue {
-
     save (data) {
       this.updatePost(data)
     }

@@ -16,7 +16,6 @@
     components: { FormInput }
   })
   export default class UserForm extends Vue {
-
     editedData = {}
 
     @Prop(Object) user

@@ -2,7 +2,6 @@
 	<ckeditor
 			v-bind="$attrs"
 			v-on="$listeners"
-			editor="classic"
 			:editor="editor"
 			tag-name="textarea"></ckeditor>
 </template>

@@ -8,8 +8,8 @@
 			              :title="value.post ? value.post.name : null"
 			              @change="changeValue"/>
 			<MenuHttpInput v-else-if="value.kind === 'http'"
-			              :value="value.value"
-			              @change="changeValue"/>
+			               :value="value.value"
+			               @change="changeValue"/>
 		</div>
 		<button type="button" @click="$emit('remove', value)">REMOVE</button>
 	</div>
@@ -28,14 +28,14 @@
     @Prop(Object) value
 
     changeKind (kind) {
-      let value;
+      let value
       switch (kind) {
-        case 'category':
-        case 'post':
-          value = '';
-          break;
-        case 'http':
-          value = {};
+      case 'category':
+      case 'post':
+        value = ''
+        break
+      case 'http':
+        value = {}
       }
       this.emitUpdate({ kind, value })
     }
