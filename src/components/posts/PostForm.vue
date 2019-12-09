@@ -1,8 +1,8 @@
 <template>
 	<form class="post-form" @submit.prevent="submit">
-		<FormInput title="Title" :value="post.title" @input="editedPost.title = $event.target.value"/>
+		<FormInput title="Title" :value="title" @input="editedPost.title = $event.target.value"/>
 		<FormInput title="Path" label="leave empty to auto-generate"
-		           :value="post.path" @input="editedPost.path = $event.target.value"/>
+		           :value="path" @input="editedPost.path = $event.target.value"/>
 
 		<FormInput title="Thumbnail"
 		           :value="editedPost.thumbnail || post.thumbnail" placeholder="https://"
@@ -76,6 +76,14 @@
       if (!this.post._id) {
         this.editedPost.isPublic = true
       }
+    }
+
+    get title () {
+      return this.editedPost.title === null ? this.post.title : this.editedPost.title
+    }
+
+    get path () {
+      return this.editedPost.path === null ? this.post.path : this.editedPost.path
     }
 
     get tags () {
