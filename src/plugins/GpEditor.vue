@@ -7,11 +7,14 @@
 </template>
 
 <script>
+  const editor = require('@novicov/ckeditor5-build-classic-full')
+  require('@novicov/ckeditor5-build-classic-full/build/translations/en.js')
+  editor.defaultConfig.language = 'en'
   export default {
     name: 'GpEditor',
     data () {
       return {
-        editor: require('@ckeditor/ckeditor5-build-classic/build/ckeditor.js')
+        editor
       }
     }
   }
