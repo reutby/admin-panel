@@ -9,8 +9,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-vue": "^1.0.0",
-    "@novicov/ckeditor5-build-classic-full": "^2.0.5",
+    "@ckeditor/ckeditor5-build-classic": "^16.0.0",
+    "@ckeditor/ckeditor5-vue": "^1.0.1",
     "axios": "^0.19.0",
     "core-js": "^3.4.3",
     "express": "^4.17.1",

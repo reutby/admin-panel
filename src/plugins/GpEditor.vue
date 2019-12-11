@@ -3,18 +3,23 @@
 			v-bind="$attrs"
 			v-on="$listeners"
 			:editor="editor"
-			tag-name="textarea"></ckeditor>
+			tag-name="textarea"/>
 </template>
-
 <script>
-  const editor = require('@novicov/ckeditor5-build-classic-full')
-  require('@novicov/ckeditor5-build-classic-full/build/translations/en.js')
-  editor.defaultConfig.language = 'en'
+  import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+  import CKEditor from '@ckeditor/ckeditor5-vue'
+
+  ClassicEditor.defaultConfig.language = {
+    ui: 'en',
+    content: 'en'
+  }
+
   export default {
     name: 'GpEditor',
+    components: { ckeditor: CKEditor.component },
     data () {
       return {
-        editor
+        editor: ClassicEditor
       }
     }
   }
