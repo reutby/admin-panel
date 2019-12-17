@@ -42,7 +42,9 @@
 		<p>
 			<label>
 				Content:
-				<gp-editor v-model="content"/>
+				<template v-for="(content, index) in contents">
+					<gp-editor :key="index" :value="content" @input="setContent(index, $event)"/>
+				</template>
 			</label>
 		</p>
 
@@ -65,7 +67,7 @@
       authors: null,
       thumbnail: null,
       short: null,
-      content: null,
+      contents: null,
       path: null,
       tags: null,
       category: null,
@@ -92,15 +94,11 @@
       return editedTags || tags || []
     }
 
-    get content () {
-      if (this.editedPost.content === null) {
-        return this.post.content
+    get contents () {
+      if (this.editedPost.contents === null) {
+        return this.post.contents
       }
-      return this.editedPost.content
-    }
-
-    set content (value) {
-      this.editedPost.content = value
+      return this.editedPost.contents
     }
 
     get categoryPath () {
@@ -110,6 +108,11 @@
     get isPublic () {
       const isBool = typeof this.editedPost.isPublic === 'boolean'
       return isBool ? this.editedPost.isPublic : this.post.isPublic
+    }
+
+    setContent (index, html) {
+      this.editedPost.contents = this.editedPost.contents || [...this.post.contents]
+      this.editedPost.contents[index] = html
     }
 
     mountCategory (path) {
