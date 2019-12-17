@@ -2,7 +2,7 @@
 	<select v-model="model">
 		<option v-for="category in categories"
 		        :key="category._id"
-		        :value="category.path">
+		        :value="category[prop]">
 			{{category.name}}
 		</option>
 	</select>
@@ -20,6 +20,7 @@
   })
   export default class CategorySelector extends Vue {
     @Prop(String) value
+    @Prop({ type: String, default: 'path' }) prop
 
     get model () {
       const value = this.value

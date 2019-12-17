@@ -2,7 +2,7 @@
 	<div class="menu-link-input">
 		<MenuKindInput :value="value.kind" @change="changeKind"/>
 		<div>
-			<CategorySelector v-if="value.kind === 'category'" :value="value.value" @change="changeValue"/>
+			<CategorySelector v-if="value.kind === 'category'" prop="_id" :value="value.value" @change="changeValue"/>
 			<PostSelector v-else-if="value.kind === 'post'"
 			              :value="value.value"
 			              :title="value.post ? value.post.name : null"
@@ -17,12 +17,12 @@
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
   import MenuKindInput from './MenuKindInput'
-  import CategorySelector from './CategorySelector'
   import PostSelector from './PostSelector'
   import MenuHttpInput from './MenuHttpInput'
+  import CategorySelector from '../categories/CategorySelector'
 
   @Component({
-    components: { MenuHttpInput, PostSelector, CategorySelector, MenuKindInput }
+    components: { CategorySelector, MenuHttpInput, PostSelector, MenuKindInput }
   })
   export default class MenuLinkInput extends Vue {
     @Prop(Object) value
