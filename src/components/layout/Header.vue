@@ -1,5 +1,6 @@
 <template>
 	<header>
+		<el-button type="default" icon="el-icon-menu" class="btn" circle @click="$emit('open')"/>
 		<span class="user-welcome" v-if="user">Hello <strong>{{user.name}}</strong></span>
 		<div class="actions">
 			<a @click="logout">Logout</a>
@@ -18,7 +19,7 @@
     computed: mapState({ user: AUTH_STATE.USER })
   })
   export default class Header extends Vue {
-    user;
+    user
 
     logout () {
       this.$logout()
@@ -40,6 +41,12 @@
 		padding-left: 10px;
 	}
 
+	.btn {
+		margin-left: 10px;
+		font-size: 18px;
+		display: none;
+	}
+
 	a {
 		text-decoration: none;
 		border: 0;
@@ -55,5 +62,11 @@
 	.actions {
 		margin-right: 10px;
 		margin-left: auto;
+	}
+
+	@media (max-width: 600px) {
+		.btn {
+			display: block;
+		}
 	}
 </style>

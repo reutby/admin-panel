@@ -2,7 +2,7 @@
 	<p>
 		<label>
 			{{title}}<small v-if="label"> ({{label}})</small>:
-			<input v-on="$listeners" v-bind="binds">
+			<el-input v-on="$listeners" v-bind="binds"/>
 			<slot></slot>
 		</label>
 	</p>

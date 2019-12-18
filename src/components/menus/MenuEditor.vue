@@ -1,10 +1,10 @@
 <template>
 	<form @submit.prevent="updateMenu">
-		<button @click="addLink" type="button">ADD</button>
+		<el-button @click="addLink" type="button">ADD</el-button>
 		<MenuLinkInput v-for="(item, $index) in links" :value="item" :key="$index"
 		               @remove="removeLink"
 		               @change="updateLink"/>
-		<button type="submit">SAVE</button>
+		<el-button native-type="submit">SAVE</el-button>
 	</form>
 </template>
 <script>

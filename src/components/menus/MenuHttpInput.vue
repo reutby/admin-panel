@@ -1,13 +1,13 @@
 <template>
 	<div>
 		<label>
-			Text: <input :value="value.text" @input="emitChange('text', $event.target.value)">
+			Text: <el-input :value="value.text" @input="emitChange('text', $event.target.value)"/>
 		</label>
 		<label>
-			URL: <input :value="value.url" @input="emitChange('url', $event.target.value)">
+			URL: <el-input :value="value.url" @input="emitChange('url', $event.target.value)"/>
 		</label>
 		<label>
-			<input :checked="value.newWindow" type="checkbox" @input="emitChange('newWindow', $event.target.checked)">
+			<el-input :checked="value.newWindow" type="checkbox" @input="emitChange('newWindow', $event.target.checked)"/>
 			Open in new window
 		</label>
 	</div>

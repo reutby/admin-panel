@@ -1,11 +1,9 @@
 <template>
-	<select v-model="model">
-		<option v-for="category in categories"
+	<el-select v-model="model">
+		<el-option v-for="category in categories"
 		        :key="category._id"
-		        :value="category[prop]">
-			{{category.name}}
-		</option>
-	</select>
+		        :value="category[prop]" :label="category.name"/>
+	</el-select>
 </template>
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
@@ -26,7 +24,7 @@
       const value = this.value
       const categories = this.categories || []
 
-      return value || (categories.length ? categories[0].path : null)
+      return value || (categories.length ? categories[0][this.prop] : null)
     }
 
     set model (value) {
@@ -35,7 +33,7 @@
 
     created () {
       this.fetch()
-        .then(() => this.$emit('mounted', this.value || (this.categories[0] && this.categories[0].path)))
+        .then(() => this.$emit('mounted', this.value || (this.categories[0] && this.categories[0][this.prop])))
     }
   }
 </script>

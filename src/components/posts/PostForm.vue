@@ -27,7 +27,7 @@
 			<ul>
 				<li v-for="tag in tags" :key="tag">
 					{{tag}}
-					<button type="button" @click="removeTag(tag)">X</button>
+					<el-button native-type="button" @click="removeTag(tag)">X</el-button>
 				</li>
 			</ul>
 		</FormInput>
@@ -48,7 +48,7 @@
 			</label>
 		</p>
 
-		<button>SAVE</button>
+		<el-button native-type="submit">SAVE</el-button>
 	</form>
 </template>
 <script>
@@ -102,7 +102,7 @@
     }
 
     get categoryPath () {
-      return this.post.category ? this.post.category.path : null
+      return this.editedPost.category || (this.post.category && this.post.category.path)
     }
 
     get isPublic () {

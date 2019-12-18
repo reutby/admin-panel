@@ -1,13 +1,15 @@
 <template>
 	<form class="login-form" @submit.prevent="submit">
 		<label>
-			<span>Email:</span><input name="email" v-model="email" type="email" autocomplete="off" required>
+			<span>Email:</span>
+			<el-input name="email" v-model="email" type="email" autocomplete="off" required/>
 		</label>
 		<label>
-			<span>Password:</span><input name="password" v-model="password" type="password" required>
+			<span>Password:</span>
+			<el-input name="password" v-model="password" type="password" required/>
 		</label>
 		<div>
-			<button>Submit</button>
+			<el-button native-type="submit">Login</el-button>
 		</div>
 	</form>
 </template>

@@ -1,8 +1,8 @@
 <template>
 	<div class="admin-panel" v-if="isLoaded">
-		<Navigation class="navigation"/>
+		<Navigation class="navigation" :opened="navigationOpened" @close="navigationOpened = false"/>
 		<div class="admin-content">
-			<Header class="header"/>
+			<Header class="header" @open="navigationOpened = true"/>
 			<router-view class="main"/>
 		</div>
 	</div>
@@ -24,6 +24,7 @@
   })
   export default class Authentication extends Vue {
     isLoaded = false
+    navigationOpened = false
 
     created () {
       api.interceptors.response.use(null, err => {
@@ -42,6 +43,8 @@
 
       this[AUTH_ACTIONS.FETCH_USER]()
         .then(() => this.isLoaded = true)
+
+      this.$router.afterEach(() => this.navigationOpened = false)
     }
   }
 </script>
@@ -62,6 +65,12 @@
 		.main {
 			flex: 1;
 			overflow: auto;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.admin-panel {
+			flex-direction: column;
 		}
 	}
 </style>

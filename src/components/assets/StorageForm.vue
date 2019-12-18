@@ -4,18 +4,18 @@
 		<p>
 			<label>
 				Kind:
-				<select :value="kind" @change="editedStorage.kind = $event.target.value">
-					<option value="s3">Amazon S3</option>
-					<option value="gcloud">Google Cloud</option>
-					<option value="ftp">FTP</option>
-				</select>
+				<el-select :value="kind" @change="editedStorage.kind = $event">
+					<el-option value="s3" label="Amazon S3"/>
+					<el-option value="gcloud" label="Google Cloud"/>
+					<el-option value="ftp" label="FTP"/>
+				</el-select>
 			</label>
 		</p>
 		<StorageFtpAuth v-if="kind === 'ftp'"
 		                :value="editedStorage.authentication"
 		                @change="editedStorage.authentication = $event"/>
 
-		<button>SAVE</button>
+		<el-button native-type="submit">SAVE</el-button>
 	</form>
 </template>
 <script>

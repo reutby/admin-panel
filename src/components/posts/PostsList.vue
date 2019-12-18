@@ -21,10 +21,11 @@
 					{{post.category.name}}
 				</router-link>
 			</td>
-			<td>{{post.isPublic ? 'V' : 'X'}}</td>
+			<td>
+				<i v-if="post.isPublic" class="el-icon-check" /></td>
 			<td>{{post.path}}</td>
 			<td>
-				<button @click.prevent="remove(post._id)">REMOVE</button>
+				<i @click.prevent="remove(post._id)" class="el-icon-delete"/>
 			</td>
 		</tr>
 		</tbody>

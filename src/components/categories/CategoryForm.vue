@@ -8,7 +8,7 @@
 				type="checkbox"
 				:checked="isPublic"
 				@change="editedCategory.isPublic = $event.target.checked"/>
-		<button>SAVE</button>
+		<el-button native-type="submit">SAVE</el-button>
 	</form>
 </template>
 <script>

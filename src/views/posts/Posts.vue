@@ -1,9 +1,9 @@
 <template>
 	<div class="posts-page">
-		<h1>Posts</h1>
-		<p>
-			<router-link :to="{name: 'createPost'}" tag="button">+ Add new Post</router-link>
-		</p>
+		<h1>
+			<span>Posts</span>
+			<el-button type="primary" icon="el-icon-edit" @click="$router.push({name: 'createPost'})"/>
+		</h1>
 		<PostsList/>
 	</div>
 </template>
@@ -17,3 +17,15 @@
   export default class Posts extends Vue {
   }
 </script>
+<style scoped lang="scss">
+	h1 {
+		span {
+			margin-right: 20px;
+		}
+
+		> * {
+			vertical-align: middle;
+		}
+
+	}
+</style>

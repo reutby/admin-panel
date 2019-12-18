@@ -5,7 +5,7 @@
 		<FormInput title="Password" label="Leave empty to ignore changes"
 		           type="password"
 		           @change="editedData.password = $event.target.value"/>
-		<button type="submit">SAVE</button>
+		<el-button native-type="submit">SAVE</el-button>
 	</form>
 </template>
 <script>

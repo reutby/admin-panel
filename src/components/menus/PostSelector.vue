@@ -1,7 +1,7 @@
 <template>
 	<label>
 		Search Post by Title:
-		<input :value="title" @input="onInput" name="post-title">
+		<el-input :value="title" @input="onInput" name="post-title"/>
 	</label>
 </template>
 <script>

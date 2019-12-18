@@ -11,7 +11,7 @@
 			               :value="value.value"
 			               @change="changeValue"/>
 		</div>
-		<button type="button" @click="$emit('remove', value)">REMOVE</button>
+		<i @click="$emit('remove', value)" class="el-icon-delete"/>
 	</div>
 </template>
 <script>

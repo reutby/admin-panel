@@ -17,7 +17,7 @@
 				<td>{{category.isPublic ? 'V' : 'X'}}</td>
 				<td>{{category.path}}</td>
 				<td>
-					<button @click.prevent="askBeforeRemove(category)">REMOVE</button>
+					<i @click.prevent="askBeforeRemove(category)" class="el-icon-delete"/>
 				</td>
 			</tr>
 			</tbody>
