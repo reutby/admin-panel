@@ -8,7 +8,8 @@ export const postsModule = {
 
   state: {
     [POSTS_STATE.POSTS]: [],
-    [POSTS_STATE.CURRENT_POST]: null
+    [POSTS_STATE.CURRENT_POST]: null,
+    [POSTS_STATE.SUBMITTING]: false,
   },
   actions,
   mutations

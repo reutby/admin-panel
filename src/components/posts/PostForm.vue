@@ -10,11 +10,7 @@
 			<div><img class="thumbnail-image" :src="editedPost.thumbnail || post.thumbnail"></div>
 		</FormInput>
 
-		<FormInput
-				title="Public?"
-				type="checkbox"
-				:checked="isPublic"
-				@change="editedPost.isPublic = $event.target.checked"/>
+		<el-checkbox :checked="isPublic" @change="editedPost.isPublic = $event">Public Post</el-checkbox>
 		<p>
 			<label>
 				Category:
@@ -27,7 +23,7 @@
 			<ul>
 				<li v-for="tag in tags" :key="tag">
 					{{tag}}
-					<el-button native-type="button" @click="removeTag(tag)">X</el-button>
+					<i @click="removeTag(tag)" class="el-icon-delete"/>
 				</li>
 			</ul>
 		</FormInput>
@@ -48,7 +44,7 @@
 			</label>
 		</p>
 
-		<el-button native-type="submit">SAVE</el-button>
+		<el-button native-type="submit" :loading="submitting">SAVE</el-button>
 	</form>
 </template>
 <script>
@@ -61,6 +57,7 @@
   })
   export default class PostForm extends Vue {
     @Prop(Object) post
+    @Prop(Boolean) submitting
 
     editedPost = {
       title: null,

@@ -1,7 +1,7 @@
 <template>
 	<div class="edit-post-page">
 		<h1>Edit Post</h1>
-		<PostForm v-if="post" :post="post" @submit="save"/>
+		<PostForm v-if="post" :post="post" :submitting="submitting" @submit="save"/>
 	</div>
 </template>
 <script>
@@ -15,7 +15,7 @@
   @Component({
     components: { PostForm },
     methods: mapActions({ fetch: POSTS_ACTIONS.FETCH_POST, updatePost: POSTS_ACTIONS.UPDATE_CURRENT_POST }),
-    computed: mapState({ post: POSTS_STATE.CURRENT_POST }),
+    computed: mapState({ post: POSTS_STATE.CURRENT_POST, submitting: POSTS_STATE.SUBMITTING }),
   })
   export default class EditPost extends Vue {
     save (data) {

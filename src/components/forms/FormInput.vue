@@ -13,12 +13,15 @@
     name: 'FormInput',
     props: {
       title: String,
-      label: String
+      label: String,
+      type: String
     },
     computed: {
       binds () {
         return {
           ...this.$attrs,
+          nativeType: this.$attrs.type,
+          type: undefined,
           title: undefined,
           label: undefined
         }
