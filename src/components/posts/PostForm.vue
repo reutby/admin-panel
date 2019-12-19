@@ -1,25 +1,23 @@
 <template>
-	<form class="post-form" @submit.prevent="submit">
-		<FormInput title="Title" :value="title" @input="editedPost.title = $event.target.value"/>
+	<el-form class="post-form" @submit.native.prevent="submit">
+		<el-checkbox :checked="isPublic" @change="editedPost.isPublic = $event">Public Post</el-checkbox>
+
+		<FormInput title="Title" :value="title" @input="editedPost.title = $event"/>
 		<FormInput title="Path" label="leave empty to auto-generate"
-		           :value="path" @input="editedPost.path = $event.target.value"/>
+		           :value="path" @input="editedPost.path = $event"/>
 
 		<FormInput title="Thumbnail"
 		           :value="editedPost.thumbnail || post.thumbnail" placeholder="https://"
-		           @input="editedPost.thumbnail = $event.target.value">
+		           @input="editedPost.thumbnail = $event">
 			<div><img class="thumbnail-image" :src="editedPost.thumbnail || post.thumbnail"></div>
 		</FormInput>
 
-		<el-checkbox :checked="isPublic" @change="editedPost.isPublic = $event">Public Post</el-checkbox>
-		<p>
-			<label>
-				Category:
-				<CategorySelector :value="categoryPath" @change="editedPost.category = $event"
-				                  @mounted="mountCategory"/>
-			</label>
-		</p>
+		<el-form-item label="Category">
+			<CategorySelector :value="categoryPath" @change="editedPost.category = $event"
+			                  @mounted="mountCategory"/>
+		</el-form-item>
 
-		<FormInput title="Tags" @keypress.enter="addTag" placeholder="ADD NEW TAG">
+		<FormInput title="Tags" v-model="currentTagText" @keypress.native.enter="addTag" placeholder="ADD NEW TAG">
 			<ul>
 				<li v-for="tag in tags" :key="tag">
 					{{tag}}
@@ -28,24 +26,22 @@
 			</ul>
 		</FormInput>
 
-		<p>
-			<label>
-				Short:
+		<el-form-item label="Short" class="form-item-flex">
+			<div>
 				<gp-editor :value="post.short" @input="editedPost.short = $event"/>
-			</label>
-		</p>
+			</div>
+		</el-form-item>
 
-		<p>
-			<label>
-				Content:
+		<el-form-item label="Content" class="form-item-flex">
+			<div>
 				<template v-for="(content, index) in contents">
 					<gp-editor :key="index" :value="content" @input="setContent(index, $event)"/>
 				</template>
-			</label>
-		</p>
+			</div>
+		</el-form-item>
 
 		<el-button native-type="submit" :loading="submitting">SAVE</el-button>
-	</form>
+	</el-form>
 </template>
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
@@ -70,6 +66,8 @@
       category: null,
       isPublic: null,
     }
+
+    currentTagText = '';
 
     mounted () {
       if (!this.post._id) {
@@ -124,7 +122,7 @@
         return
       }
       this.editedPost.tags = [...this.tags, event.target.value]
-      event.target.value = ''
+      this.currentTagText = ''
     }
 
     removeTag (tag) {
@@ -143,7 +141,22 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="scss">
+
+	.post-form {
+		padding: 0 10px;
+		margin-bottom: 20px;
+	}
+
+	.form-item-flex {
+		display: flex;
+		flex-direction: column;
+
+		/deep/ .el-form-item__label {
+			text-align: left;
+		}
+	}
+
 	.thumbnail-image {
 		max-width: 100px;
 	}

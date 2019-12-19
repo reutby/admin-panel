@@ -1,11 +1,11 @@
 <template>
-	<p>
-		<label>
-			{{title}}<small v-if="label"> ({{label}})</small>:
-			<el-input v-on="$listeners" v-bind="binds"/>
-			<slot></slot>
-		</label>
-	</p>
+	<div>
+		<el-form-item :label="title">
+			<small v-if="label"> ({{label}})</small>
+			<el-input v-on="$listeners" :value="value" :native-type="type" />
+		</el-form-item>
+		<slot></slot>
+	</div>
 </template>
 
 <script>
@@ -14,18 +14,8 @@
     props: {
       title: String,
       label: String,
-      type: String
-    },
-    computed: {
-      binds () {
-        return {
-          ...this.$attrs,
-          nativeType: this.$attrs.type,
-          type: undefined,
-          title: undefined,
-          label: undefined
-        }
-      }
+      type: String,
+      value: [String, Number, Object],
     }
   }
 </script>

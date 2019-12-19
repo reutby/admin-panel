@@ -1,17 +1,15 @@
 <template>
-	<form class="login-form" @submit.prevent="submit">
-		<label>
-			<span>Email:</span>
+	<el-form class="login-form" @submit.native.prevent="submit">
+		<el-form-item label="Email">
 			<el-input name="email" v-model="email" type="email" autocomplete="off" required/>
-		</label>
-		<label>
-			<span>Password:</span>
+		</el-form-item>
+		<el-form-item label="Password">
 			<el-input name="password" v-model="password" type="password" required/>
-		</label>
+		</el-form-item>
 		<div>
 			<el-button native-type="submit">Login</el-button>
 		</div>
-	</form>
+	</el-form>
 </template>
 
 <script>
@@ -44,7 +42,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		width: 100%;
+		width: 90%;
 		max-width: 500px;
 		margin: 0 auto;
 	}
@@ -67,14 +65,5 @@
 			outline: none;
 			font-size: 14px;
 		}
-	}
-
-	button {
-		padding: 10px;
-		background-color: #00C48D;
-		border-radius: 5px;
-		font-size: 14px;
-		cursor: pointer;
-		outline: none;
 	}
 </style>

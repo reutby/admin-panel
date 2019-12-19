@@ -22,5 +22,7 @@
 	}
 	img {
 		max-width: 400px;
+		width: 80%;
+		padding: 10%;
 	}
 </style>
