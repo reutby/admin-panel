@@ -1,20 +1,18 @@
 <template>
-	<form class="category-form" @submit.prevent="submit">
-		<FormInput title="Name" :value="name" @input="editedCategory.name = $event.target.value"/>
-		<FormInput title="Path" label="leave empty to auto-generate"
-		           :value="path" @input="editedCategory.path = $event.target.value"/>
-		<FormInput
-				title="Public?"
-				type="checkbox"
-				:checked="isPublic"
-				@change="editedCategory.isPublic = $event.target.checked"/>
+	<el-form class="category-form" @submit.native.prevent="submit">
+		<div>
+			<el-checkbox label="Public?" :checked="isPublic" @change="editedCategory.isPublic = $event"/>
+		</div>
+		<FormInput title="Name" :value="name" @input="editedCategory.name = $event"/>
+		<FormInput title="Path" label="leave empty to auto-generate" :value="path" @input="editedCategory.path = $event"/>
 		<el-button native-type="submit">SAVE</el-button>
-	</form>
+	</el-form>
 </template>
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
   import FormInput from '../forms/FormInput'
   import CategorySelector from '../categories/CategorySelector'
+  import { clearNulls } from '../../helpers/clear-nulls'
 
   @Component({
     components: { CategorySelector, FormInput }
@@ -47,14 +45,7 @@
     }
 
     submit () {
-      const onlyUpdated = Object.keys(this.editedCategory).reduce((obj, key) => {
-        const val = this.editedCategory[key]
-        if (val !== null) {
-          obj[key] = val
-        }
-        return obj
-      }, {})
-      this.$emit('submit', onlyUpdated)
+      this.$emit('submit', clearNulls(this.editedCategory))
     }
   }
 </script>

@@ -1,27 +1,44 @@
 <template>
-	<form @submit.prevent="submit">
-		<FormInput title="Name" :value="user.name" @change="editedData.name = $event.target.value"/>
-		<FormInput title="Email" :value="user.email" @change="editedData.email = $event.target.value"/>
-		<FormInput title="Password" label="Leave empty to ignore changes"
-		           type="password"
-		           @change="editedData.password = $event.target.value"/>
+	<el-form @submit.native.prevent="submit">
+		<FormInput title="Name" :value="name" @input="editedData.name = $event"/>
+		<FormInput title="Email" :value="email" @input="editedData.email = $event"/>
+		<el-form-item label="Password">
+			<small>Leave empty to ignore changes</small>
+			<el-input name="password"
+			          type="password"
+			          :value="editedData.password"
+			          @input="editedData.password = $event"/>
+		</el-form-item>
 		<el-button native-type="submit">SAVE</el-button>
-	</form>
+	</el-form>
 </template>
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'
   import FormInput from '../forms/FormInput'
+  import { clearNulls } from '../../helpers/clear-nulls'
 
   @Component({
     components: { FormInput }
   })
   export default class UserForm extends Vue {
-    editedData = {}
+    editedData = {
+      name: null,
+      email: null,
+      password: null
+    }
 
     @Prop(Object) user
 
+    get name () {
+      return this.editedData.name === null ? this.user.name : this.editedData.name
+    }
+
+    get email () {
+      return this.editedData.email === null ? this.user.email : this.editedData.email
+    }
+
     submit () {
-      this.$emit('submit', this.editedData)
+      this.$emit('submit', clearNulls(this.editedData))
     }
   }
 </script>

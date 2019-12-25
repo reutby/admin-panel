@@ -2,9 +2,9 @@
 	<div>
 		<el-form-item :label="title">
 			<small v-if="label"> ({{label}})</small>
-			<el-input v-on="$listeners" :value="value" :native-type="type" />
+			<el-input v-on="$listeners" :value="value" :native-type="type"/>
 		</el-form-item>
-		<slot></slot>
+		<slot/>
 	</div>
 </template>
 

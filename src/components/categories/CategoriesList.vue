@@ -14,7 +14,7 @@
 					<router-link :to="{name: 'editCategory', params: {categoryPath: category.path}}">{{category.name}}
 					</router-link>
 				</td>
-				<td>{{category.isPublic ? 'V' : 'X'}}</td>
+				<td><i v-if="category.isPublic" class="el-icon-check" /></td>
 				<td>{{category.path}}</td>
 				<td>
 					<i @click.prevent="askBeforeRemove(category)" class="el-icon-delete"/>

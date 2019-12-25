@@ -1,6 +1,6 @@
 <template>
-	<form class="storage-form" @submit.prevent="submit">
-		<FormInput title="Name" :value="name" @input="editedStorage.name = $event.target.value"/>
+	<el-form class="storage-form" @submit.native.prevent="submit">
+		<FormInput title="Name" :value="name" @input="editedStorage.name = $event"/>
 		<p>
 			<label>
 				Kind:
@@ -16,7 +16,7 @@
 		                @change="editedStorage.authentication = $event"/>
 
 		<el-button native-type="submit">SAVE</el-button>
-	</form>
+	</el-form>
 </template>
 <script>
   import { Vue, Component, Prop } from 'vue-property-decorator'

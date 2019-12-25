@@ -21,8 +21,7 @@
 					{{post.category.name}}
 				</router-link>
 			</td>
-			<td>
-				<i v-if="post.isPublic" class="el-icon-check" /></td>
+			<td><i v-if="post.isPublic" class="el-icon-check" /></td>
 			<td>{{post.path}}</td>
 			<td>
 				<i @click.prevent="remove(post._id)" class="el-icon-delete"/>

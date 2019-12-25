@@ -47,6 +47,7 @@
   import { Vue, Component, Prop } from 'vue-property-decorator'
   import FormInput from '../forms/FormInput'
   import CategorySelector from '../categories/CategorySelector'
+  import { clearNulls } from '../../helpers/clear-nulls'
 
   @Component({
     components: { CategorySelector, FormInput }
@@ -130,14 +131,7 @@
     }
 
     submit () {
-      const onlyUpdated = Object.keys(this.editedPost).reduce((obj, key) => {
-        const val = this.editedPost[key]
-        if (val !== null) {
-          obj[key] = val
-        }
-        return obj
-      }, {})
-      this.$emit('submit', onlyUpdated)
+      this.$emit('submit', clearNulls(this.editedPost))
     }
   }
 </script>
