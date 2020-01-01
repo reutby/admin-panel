@@ -34,9 +34,12 @@
 
 		<el-form-item label="Content" class="form-item-flex">
 			<div>
-				<template v-for="(content, index) in contents">
-					<gp-editor :key="index" :value="content" @input="setContent(index, $event)"/>
-				</template>
+				<PostContentEditor v-for="item in contents"
+				                   :key="item.index"
+				                   :value="item.content"
+				                   :state="item.state"
+				                   @contentChange="setContent(item.index, $event)"
+				                   @typeChange="setContentsStates(item.index, $event)"/>
 			</div>
 		</el-form-item>
 
@@ -48,9 +51,10 @@
   import FormInput from '../forms/FormInput'
   import CategorySelector from '../categories/CategorySelector'
   import { clearNulls } from '../../helpers/clear-nulls'
+  import PostContentEditor from './PostContentEditor'
 
   @Component({
-    components: { CategorySelector, FormInput }
+    components: { PostContentEditor, CategorySelector, FormInput }
   })
   export default class PostForm extends Vue {
     @Prop(Object) post
@@ -62,13 +66,14 @@
       thumbnail: null,
       short: null,
       contents: null,
+      editorContentsStates: null,
       path: null,
       tags: null,
       category: null,
       isPublic: null,
     }
 
-    currentTagText = '';
+    currentTagText = ''
 
     mounted () {
       if (!this.post._id) {
@@ -90,11 +95,23 @@
       return editedTags || tags || []
     }
 
-    get contents () {
-      if (this.editedPost.contents === null) {
-        return this.post.contents
+    get editorContentsStates () {
+      if (this.editedPost.editorContentsStates === null) {
+        return this.post.editorContentsStates || ['editor']
       }
-      return this.editedPost.contents
+      return this.editedPost.editorContentsStates
+    }
+
+    get contents () {
+      const states = this.editorContentsStates
+      const contents = (this.editedPost.contents === null ? this.post.contents : this.editedPost.contents) || [null]
+      return contents.map((content, index) => {
+        return {
+          content,
+          index,
+          state: states[index],
+        }
+      })
     }
 
     get categoryPath () {
@@ -107,8 +124,13 @@
     }
 
     setContent (index, html) {
-      this.editedPost.contents = this.editedPost.contents || [...this.post.contents]
+      this.editedPost.contents = this.editedPost.contents || [...(this.post.contents || [])]
       this.editedPost.contents[index] = html
+    }
+
+    setContentsStates (index, type) {
+      this.editedPost.editorContentsStates = [].concat(this.editedPost.editorContentsStates || this.post.editorContentsStates || [])
+      this.editedPost.editorContentsStates[index] = type
     }
 
     mountCategory (path) {
