@@ -5,12 +5,10 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
   import MenusList from '../../components/menus/MenusList'
 
-  @Component({
+  export default {
+    name: 'Menus',
     components: { MenusList }
-  })
-  export default class Menus extends Vue {
   }
 </script>

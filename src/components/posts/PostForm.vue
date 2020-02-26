@@ -47,113 +47,52 @@
 	</el-form>
 </template>
 <script>
-  import { Vue, Component, Prop } from 'vue-property-decorator'
   import FormInput from '../forms/FormInput'
   import CategorySelector from '../categories/CategorySelector'
   import { clearNulls } from '../../helpers/clear-nulls'
   import PostContentEditor from './PostContentEditor'
+  import { computed, onBeforeMount } from '@vue/composition-api'
+  import { usePostTags } from '../../views/posts/compositions/post-tags'
+  import { usePostContents } from '../../views/posts/compositions/post-contents'
+  import { useNewPost } from '../../views/posts/compositions/posts'
+  import { useEditedInputs } from '../../views/core/compositions/edited-inputs'
 
-  @Component({
-    components: { PostContentEditor, CategorySelector, FormInput }
-  })
-  export default class PostForm extends Vue {
-    @Prop(Object) post
-    @Prop(Boolean) submitting
+  export default {
+    components: { PostContentEditor, CategorySelector, FormInput },
+    props: {
+      post: Object,
+      submitting: Boolean
+    },
+    setup (props, { emit }) {
+      const editedPost = useNewPost().post
+      const tagsContext = usePostTags(editedPost, props.post)
+      const contentsContext = usePostContents(editedPost, props.post)
 
-    editedPost = {
-      title: null,
-      authors: null,
-      thumbnail: null,
-      short: null,
-      contents: null,
-      editorContentsStates: null,
-      path: null,
-      tags: null,
-      category: null,
-      isPublic: null,
-    }
-
-    currentTagText = ''
-
-    mounted () {
-      if (!this.post._id) {
-        this.editedPost.isPublic = true
-      }
-    }
-
-    get title () {
-      return this.editedPost.title === null ? this.post.title : this.editedPost.title
-    }
-
-    get path () {
-      return this.editedPost.path === null ? this.post.path : this.editedPost.path
-    }
-
-    get tags () {
-      const editedTags = this.editedPost.tags
-      const tags = this.post.tags
-      return editedTags || tags || []
-    }
-
-    get editorContentsStates () {
-      if (this.editedPost.editorContentsStates === null) {
-        return this.post.editorContentsStates || ['editor']
-      }
-      return this.editedPost.editorContentsStates
-    }
-
-    get contents () {
-      const states = this.editorContentsStates
-      const contents = (this.editedPost.contents === null ? this.post.contents : this.editedPost.contents) || [null]
-      return contents.map((content, index) => {
-        return {
-          content,
-          index,
-          state: states[index],
+      onBeforeMount(() => {
+        if (!props.post._id) {
+          editedPost.isPublic = true
         }
       })
-    }
 
-    get categoryPath () {
-      return this.editedPost.category || (this.post.category && this.post.category.path)
-    }
-
-    get isPublic () {
-      const isBool = typeof this.editedPost.isPublic === 'boolean'
-      return isBool ? this.editedPost.isPublic : this.post.isPublic
-    }
-
-    setContent (index, html) {
-      this.editedPost.contents = this.editedPost.contents || [...(this.post.contents || [])]
-      this.editedPost.contents[index] = html
-    }
-
-    setContentsStates (index, type) {
-      this.editedPost.editorContentsStates = [].concat(this.editedPost.editorContentsStates || this.post.editorContentsStates || [])
-      this.editedPost.editorContentsStates[index] = type
-    }
-
-    mountCategory (path) {
-      if (!this.post._id) {
-        this.editedPost.category = path
+      return {
+        ...tagsContext,
+        ...contentsContext,
+        ...useEditedInputs(editedPost, props.post, ['title', 'path']),
+        editedPost,
+        categoryPath: computed(() => editedPost.category || (props.post.category && props.post.category.path)),
+        isPublic: computed(() => {
+          const isBool = typeof editedPost.isPublic === 'boolean'
+          return isBool ? editedPost.isPublic : props.post.isPublic
+        }),
+        mountCategory (path) {
+          if (!props.post._id) {
+            editedPost.category = path
+          }
+        },
+        submit () {
+          emit('submit', clearNulls(editedPost))
+        }
       }
-    }
-
-    addTag (event) {
-      event.preventDefault()
-      if (this.tags.includes(event.target.value)) {
-        return
-      }
-      this.editedPost.tags = [...this.tags, event.target.value]
-      this.currentTagText = ''
-    }
-
-    removeTag (tag) {
-      this.editedPost.tags = this.tags.filter(t => t !== tag)
-    }
-
-    submit () {
-      this.$emit('submit', clearNulls(this.editedPost))
     }
   }
 </script>

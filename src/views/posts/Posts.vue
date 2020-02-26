@@ -8,13 +8,11 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
   import PostsList from '../../components/posts/PostsList'
 
-  @Component({
+  export default {
+    name: 'Posts',
     components: { PostsList }
-  })
-  export default class Posts extends Vue {
   }
 </script>
 <style scoped lang="scss">

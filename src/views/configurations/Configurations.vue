@@ -5,12 +5,9 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
   import ConfigurationsList from '../../components/confiigurations/ConfigurationsList'
 
-  @Component({
+  export default {
     components: { ConfigurationsList }
-  })
-  export default class Configurations extends Vue {
   }
 </script>

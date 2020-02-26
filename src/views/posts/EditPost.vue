@@ -5,25 +5,14 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { POSTS_MODULE_NAME, POSTS_ACTIONS, POSTS_STATE } from '../../store/posts/consts'
   import PostForm from '../../components/posts/PostForm'
+  import { useEditPost } from './compositions/posts'
 
-  const { mapActions, mapState } = createNamespacedHelpers(POSTS_MODULE_NAME)
-
-  @Component({
+  export default {
+    name: 'EditPost',
     components: { PostForm },
-    methods: mapActions({ fetch: POSTS_ACTIONS.FETCH_POST, updatePost: POSTS_ACTIONS.UPDATE_CURRENT_POST }),
-    computed: mapState({ post: POSTS_STATE.CURRENT_POST, submitting: POSTS_STATE.SUBMITTING }),
-  })
-  export default class EditPost extends Vue {
-    save (data) {
-      this.updatePost(data)
-    }
-
-    created () {
-      this.fetch(this.$route.params.postId)
+    setup (_, { root: { $route: { params } } }) {
+      return useEditPost(params.postId)
     }
   }
 </script>

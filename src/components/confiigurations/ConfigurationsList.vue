@@ -22,23 +22,12 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import {
-    CONFIGURATIONS_ACTIONS,
-    CONFIGURATIONS_MODULE_NAME,
-    CONFIGURATIONS_STATE
-  } from '../../store/configurations/consts'
+  import { useConfigurationsList } from '../../views/configurations/compositions/configurations'
 
-  const { mapActions, mapState } = createNamespacedHelpers(CONFIGURATIONS_MODULE_NAME)
-
-  @Component({
-    methods: mapActions({ fetch: CONFIGURATIONS_ACTIONS.FETCH_CONFIGURATIONS }),
-    computed: mapState({ list: CONFIGURATIONS_STATE.CONFIGURATIONS })
-  })
-  export default class ConfigurationsList extends Vue {
-    created () {
-      this.fetch()
+  export default {
+    name: 'ConfigurationsList',
+    setup () {
+      return useConfigurationsList()
     }
   }
 </script>

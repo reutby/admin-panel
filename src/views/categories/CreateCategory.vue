@@ -5,24 +5,24 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
   import CategoryForm from '../../components/categories/CategoryForm'
-  import { CATEGORIES_MODULE_NAME, CATEGORIES_ACTIONS } from '../../store/categories/consts'
+  import { createCategory } from './compositions/categories'
 
-  const { mapActions } = createNamespacedHelpers(CATEGORIES_MODULE_NAME)
-
-  @Component({
+  export default {
+    name: 'CreateCategory',
     components: { CategoryForm },
-    methods: mapActions({ save: CATEGORIES_ACTIONS.CREATE_CATEGORY })
-  })
-  export default class CreateCategory extends Vue {
-    submit (category) {
-      this.save(category)
-        .then(category => this.$router.push({
+    setup (_, { root: { $router } }) {
+      async function submit (data) {
+        const { path } = await createCategory(data)
+        $router.push({
           name: 'editCategory',
-          params: { categoryPath: category.path }
-        }))
+          params: { categoryPath: path }
+        })
+      }
+
+      return {
+        submit
+      }
     }
   }
 </script>

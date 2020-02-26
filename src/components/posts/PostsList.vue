@@ -21,7 +21,7 @@
 					{{post.category.name}}
 				</router-link>
 			</td>
-			<td><i v-if="post.isPublic" class="el-icon-check" /></td>
+			<td><i v-if="post.isPublic" class="el-icon-check"/></td>
 			<td>{{post.path}}</td>
 			<td>
 				<i @click.prevent="remove(post._id)" class="el-icon-delete"/>
@@ -31,21 +31,11 @@
 	</table>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { POSTS_MODULE_NAME, POSTS_ACTIONS, POSTS_STATE } from '../../store/posts/consts'
+  import { usePostsList } from '../../views/posts/compositions/posts'
 
-  const { mapActions, mapState } = createNamespacedHelpers(POSTS_MODULE_NAME)
-
-  @Component({
-    methods: mapActions({ fetch: POSTS_ACTIONS.FETCH_POSTS, remove: POSTS_ACTIONS.REMOVE_POST }),
-    computed: mapState({ posts: POSTS_STATE.POSTS })
-  })
-  export default class PostsList extends Vue {
-    posts
-
-    created () {
-      this.fetch()
+  export default {
+    setup () {
+      return usePostsList()
     }
   }
 </script>

@@ -1,37 +1,35 @@
 <template>
 	<div>
-		<FormInput title="FTP Host" v-model="host" @input="emit"/>
-		<FormInput title="Username" v-model="username" @input="emit"/>
-		<FormInput title="Password" v-model="password" @input="emit"/>
+		<FormInput title="FTP Host" v-model="form.host"/>
+		<FormInput title="Username" v-model="form.username"/>
+		<FormInput title="Password" v-model="form.password"/>
 	</div>
 </template>
 <script>
-  import { Vue, Component, Prop } from 'vue-property-decorator'
+  import { watch, reactive } from '@vue/composition-api'
   import FormInput from '../forms/FormInput'
-  @Component({
-    components: { FormInput }
-  })
-  export default class StorageFtpAuth extends Vue {
-    @Prop(Object) value
 
-    host = ''
-    username = ''
-    password = ''
-
-    created () {
-      if (this.value) {
-        this.host = this.value.host
-        this.username = this.value.username
-        this.password = this.value.password
-      }
-    }
-
-    emit () {
-      this.$emit('change', {
-        host: this.host,
-        username: this.username,
-        password: this.password
+  export default {
+    name: 'StorageFtpAuth',
+    props: {
+      value: Object
+    },
+    components: { FormInput },
+    setup (props, { emit }) {
+      const form = reactive({
+        host: '',
+        username: '',
+        password: ''
       })
+      if (props.value) {
+        form.host = props.value.host
+        form.username = props.value.username
+        form.password = props.value.password
+      }
+      watch(() => emit('change', form))
+      return {
+        form
+      }
     }
   }
 </script>

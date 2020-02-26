@@ -17,25 +17,20 @@
 			<td>
 				<a :href="user.email">{{user.email}}</a>
 			</td>
-			<td>{{user.roles.join(', ')}}</td>
+			<td>{{user.roles | join}}</td>
 		</tr>
 		</tbody>
 	</table>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { USERS_MODULE_NAME, USERS_ACTIONS, USERS_STATE } from '../../store/users/consts'
+  import { useUsersList } from '../../views/users/compositions/users'
 
-  const { mapActions, mapState } = createNamespacedHelpers(USERS_MODULE_NAME)
-
-  @Component({
-    methods: mapActions({ fetch: USERS_ACTIONS.FETCH_USERS }),
-    computed: mapState({ users: USERS_STATE.USERS })
-  })
-  export default class UsersList extends Vue {
-    created () {
-      this.fetch()
+  export default {
+    filters: {
+      join: (arr) => arr.join(', ')
+    },
+    setup () {
+      return useUsersList()
     }
   }
 </script>

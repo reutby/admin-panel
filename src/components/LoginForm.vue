@@ -1,10 +1,10 @@
 <template>
-	<el-form class="login-form" @submit.native.prevent="submit">
+	<el-form class="login-form" @submit.native.prevent="login">
 		<el-form-item label="Email">
-			<el-input name="email" v-model="email" type="email" autocomplete="off" required/>
+			<el-input name="email" v-model="form.email" type="email" autocomplete="off" required/>
 		</el-form-item>
 		<el-form-item label="Password">
-			<el-input name="password" v-model="password" type="password" required/>
+			<el-input name="password" v-model="form.password" type="password" required/>
 		</el-form-item>
 		<div>
 			<el-button native-type="submit">Login</el-button>
@@ -13,25 +13,20 @@
 </template>
 
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { AUTH_MODULE_NAME, AUTH_ACTIONS } from '../store/auth/consts'
+  import { watch } from '@vue/composition-api'
+  import { useLogin } from '../views/core/compositions/authentication'
 
-  const { mapActions } = createNamespacedHelpers(AUTH_MODULE_NAME)
+  export default {
+    name: 'LoginForm',
+    setup (_, { root: { $router } }) {
+      const { login, form, isLoggedIn } = useLogin()
 
-  @Component({
-    methods: mapActions({ login: AUTH_ACTIONS.LOGIN })
-  })
-  export default class LoginForm extends Vue {
-    email = ''
-    password = ''
+      watch(isLoggedIn, () => $router.push({ name: 'home' }))
 
-    submit () {
-      this.login({
-        email: this.email,
-        password: this.password
-      })
-        .then(() => this.$router.push({ name: 'home' }))
+      return {
+        login,
+        form
+      }
     }
   }
 </script>

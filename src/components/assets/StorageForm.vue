@@ -19,34 +19,24 @@
 	</el-form>
 </template>
 <script>
-  import { Vue, Component, Prop } from 'vue-property-decorator'
   import StorageFtpAuth from './StorageFtpAuth'
   import FormInput from '../forms/FormInput'
+  import { useStorageForm } from '../../views/assets/compositions/storages'
 
-  @Component({
-    components: { FormInput, StorageFtpAuth }
-  })
-  export default class StorageForm extends Vue {
-    @Prop(Object) value
-
-    editedStorage = {
-      name: '',
-      kind: '',
-      authentication: null
-    }
-
-    get name () {
-      const name = this.value ? this.value.name : ''
-      return this.editedStorage.name || name
-    }
-
-    get kind () {
-      const kind = this.value ? this.value.kind : 's3'
-      return this.editedStorage.kind || kind
-    }
-
-    submit () {
-      this.$emit('submit', this.editedStorage)
+  export default {
+    name: 'StorageForm',
+    components: { FormInput, StorageFtpAuth },
+    props: {
+      value: Object
+    },
+    setup (props, { emit }) {
+      const data = useStorageForm(props)
+      return {
+        ...data,
+        submit () {
+          return emit('submit', data.editedStorage)
+        }
+      }
     }
   }
 </script>

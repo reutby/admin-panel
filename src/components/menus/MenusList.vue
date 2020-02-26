@@ -8,19 +8,12 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { MENUS_MODULE_NAME, MENUS_ACTIONS, MENUS_STATE } from '../../store/menus/consts'
+  import { useMenusList } from '../../views/menus/compositions/menus'
 
-  const { mapActions, mapState } = createNamespacedHelpers(MENUS_MODULE_NAME)
-
-  @Component({
-    methods: mapActions({ fetch: MENUS_ACTIONS.FETCH_MENUS }),
-    computed: mapState({ menus: MENUS_STATE.MENUS })
-  })
-  export default class MenusList extends Vue {
-    created () {
-      this.fetch()
+  export default {
+    name: 'MenusList',
+    setup () {
+      return useMenusList()
     }
   }
 </script>

@@ -5,13 +5,11 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
   import MenuEditor from '../../components/menus/MenuEditor'
 
-  @Component({
+  export default {
+    name: 'EditMenu',
     components: { MenuEditor }
-  })
-  export default class EditMenu extends Vue {
   }
 </script>
 <style scoped>

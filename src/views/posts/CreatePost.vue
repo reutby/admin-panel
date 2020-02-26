@@ -5,18 +5,14 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { POSTS_MODULE_NAME, POSTS_ACTIONS, POSTS_STATE } from '../../store/posts/consts'
   import PostForm from '../../components/posts/PostForm'
+  import { useCreatePost } from './compositions/posts'
 
-  const { mapActions, mapState } = createNamespacedHelpers(POSTS_MODULE_NAME)
-
-  @Component({
+  export default {
+    name: 'CreatePost',
     components: { PostForm },
-    computed: mapState({ submitting: POSTS_STATE.SUBMITTING }),
-    methods: mapActions({ save: POSTS_ACTIONS.CREATE_POST }),
-  })
-  export default class CreatePost extends Vue {
+    setup () {
+      return useCreatePost()
+    }
   }
 </script>

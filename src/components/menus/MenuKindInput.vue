@@ -9,14 +9,17 @@
 	</label>
 </template>
 <script>
-  import { Vue, Component, Prop } from 'vue-property-decorator'
-
-  @Component
-  export default class MenuKindInput extends Vue {
-    @Prop(String) value
-
-    emitChange (event) {
-      this.$emit('change', event)
+  export default {
+    name: 'MenuKindInput',
+    props: {
+      value: String
+    },
+    setup (_, { emit }) {
+      return {
+        emitChange (event) {
+          emit('change', event)
+        }
+      }
     }
   }
 </script>

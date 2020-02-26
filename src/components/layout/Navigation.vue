@@ -1,6 +1,6 @@
 <template>
 	<nav :class="{show: opened}">
-		<div class="mobile-mask" @click="$emit('close')"/>
+		<div class="mobile-mask" @click="close"/>
 		<router-link to="/" class="home-logo">
 			<img alt="greenpress Admin Panel" src="../../assets/logo.png">
 		</router-link>
@@ -14,12 +14,16 @@
 </template>
 
 <script>
-  import { Vue, Component, Prop } from 'vue-property-decorator'
-
-  @Component({})
-  export default class Navigation extends Vue {
-    // relevant for mobile only
-    @Prop(Boolean) opened
+  export default {
+    name: 'Navigation',
+    props: {
+      opened: Boolean
+    },
+    setup (_, { emit }) {
+      return {
+        close: () => emit('close')
+      }
+    }
   }
 </script>
 <style scoped lang="scss">

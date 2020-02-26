@@ -5,12 +5,10 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
   import UsersList from '../../components/users/UsersList'
 
-  @Component({
+  export default {
+    name: 'Users',
     components: { UsersList }
-  })
-  export default class Users extends Vue {
   }
 </script>

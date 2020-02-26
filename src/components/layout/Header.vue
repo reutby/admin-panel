@@ -1,6 +1,6 @@
 <template>
 	<header>
-		<el-button type="default" icon="el-icon-menu" class="btn" circle @click="$emit('open')"/>
+		<el-button type="default" icon="el-icon-menu" class="btn" circle @click="open"/>
 		<span class="user-welcome" v-if="user">Hello <strong>{{user.name}}</strong></span>
 		<div class="actions">
 			<a @click="logout">Logout</a>
@@ -8,26 +8,24 @@
 	</header>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { AUTH_MODULE_NAME, AUTH_ACTIONS, AUTH_STATE } from '../../store/auth/consts'
+  import { useAuth } from '../../views/core/compositions/authentication'
 
-  const { mapActions, mapState } = createNamespacedHelpers(AUTH_MODULE_NAME)
+  export default {
+    name: 'Header',
+    setup (_, { root: { $router }, emit }) {
+      const { user, logout } = useAuth()
 
-  @Component({
-    methods: mapActions({ $logout: AUTH_ACTIONS.LOGOUT }),
-    computed: mapState({ user: AUTH_STATE.USER })
-  })
-  export default class Header extends Vue {
-    user
-
-    logout () {
-      this.$logout()
-      this.$router.push('login')
+      return {
+        user,
+        open: () => emit('open'),
+        logout: async () => {
+          await logout()
+          $router.push('login')
+        }
+      }
     }
   }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 	header {
 		position: sticky;

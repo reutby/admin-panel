@@ -5,20 +5,16 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
   import StorageForm from '../../components/assets/StorageForm'
-  import { createNamespacedHelpers } from 'vuex'
-  import { ASSETS_MODULE_NAME, ASSETS_ACTIONS } from '../../store/assets/consts'
+  import { createStorage } from './compositions/storages'
 
-  const { mapActions } = createNamespacedHelpers(ASSETS_MODULE_NAME)
-
-  @Component({
-    methods: mapActions([ASSETS_ACTIONS.CREATE_STORAGE]),
-    components: { StorageForm }
-  })
-  export default class AddStorage extends Vue {
-    save (storage) {
-      return this[ASSETS_ACTIONS.CREATE_STORAGE](storage)
+  export default {
+    name: 'AddStorage',
+    components: { StorageForm },
+    setup () {
+      return {
+        save: createStorage
+      }
     }
   }
 </script>

@@ -1,16 +1,16 @@
 <template>
 	<div class="login-page">
-		<img alt="greenpress Admin Panel" src="../assets/logo.png">
+		<img alt="greenpress Admin Panel" src="../../assets/logo.png">
 		<h1>Please login:</h1>
 		<LoginForm/>
 	</div>
 </template>
 
 <script>
-  import LoginForm from '../components/LoginForm'
+  import LoginForm from '../../components/LoginForm'
 
   export default {
-    name: 'login',
+    name: 'Login',
     components: {
       LoginForm
     }

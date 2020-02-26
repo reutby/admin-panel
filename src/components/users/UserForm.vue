@@ -13,32 +13,30 @@
 	</el-form>
 </template>
 <script>
-  import { Vue, Component, Prop } from 'vue-property-decorator'
+  import { reactive } from '@vue/composition-api'
   import FormInput from '../forms/FormInput'
   import { clearNulls } from '../../helpers/clear-nulls'
+  import { useEditedInputs } from '../../views/core/compositions/edited-inputs'
 
-  @Component({
-    components: { FormInput }
-  })
-  export default class UserForm extends Vue {
-    editedData = {
-      name: null,
-      email: null,
-      password: null
-    }
+  export default {
+    components: { FormInput },
+    props: {
+      user: Object
+    },
+    setup (props, { emit }) {
+      const editedData = reactive({
+        name: null,
+        email: null,
+        password: null
+      })
 
-    @Prop(Object) user
-
-    get name () {
-      return this.editedData.name === null ? this.user.name : this.editedData.name
-    }
-
-    get email () {
-      return this.editedData.email === null ? this.user.email : this.editedData.email
-    }
-
-    submit () {
-      this.$emit('submit', clearNulls(this.editedData))
+      return {
+        editedData,
+        ...useEditedInputs(editedData, props.user, ['name', 'email']),
+        submit () {
+          emit('submit', clearNulls(editedData))
+        }
+      }
     }
   }
 </script>

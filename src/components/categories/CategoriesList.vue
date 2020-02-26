@@ -14,7 +14,7 @@
 					<router-link :to="{name: 'editCategory', params: {categoryPath: category.path}}">{{category.name}}
 					</router-link>
 				</td>
-				<td><i v-if="category.isPublic" class="el-icon-check" /></td>
+				<td><i v-if="category.isPublic" class="el-icon-check"/></td>
 				<td>{{category.path}}</td>
 				<td>
 					<i @click.prevent="askBeforeRemove(category)" class="el-icon-delete"/>
@@ -25,24 +25,20 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { CATEGORIES_MODULE_NAME, CATEGORIES_ACTIONS, CATEGORIES_STATE } from '../../store/categories/consts'
+  import { useCategoriesList } from '../../views/categories/compositions/categories'
 
-  const { mapActions, mapState } = createNamespacedHelpers(CATEGORIES_MODULE_NAME)
+  export default {
+    name: 'CategoriesList',
+    setup () {
+      const { categories, removeCategory } = useCategoriesList()
 
-  @Component({
-    methods: mapActions({ fetch: CATEGORIES_ACTIONS.FETCH_CATEGORIES, remove: CATEGORIES_ACTIONS.REMOVE_CATEGORY }),
-    computed: mapState({ categories: CATEGORIES_STATE.CATEGORIES })
-  })
-  export default class CategoriesList extends Vue {
-    created () {
-      this.fetch()
-    }
-
-    askBeforeRemove (category) {
-      if (confirm('Are you sure?')) {
-        this.remove(category)
+      return {
+        categories,
+        askBeforeRemove (category) {
+          if (confirm('Are you sure?')) {
+            removeCategory(category)
+          }
+        }
       }
     }
   }

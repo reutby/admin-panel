@@ -8,13 +8,11 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
   import AssetsStorageList from '../../components/assets/AssetsStorageList'
 
-  @Component({
+  export default {
+    name: 'StorageList',
     components: { AssetsStorageList }
-  })
-  export default class StorageList extends Vue {
   }
 </script>
 <style scoped>

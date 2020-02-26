@@ -15,40 +15,39 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component, Prop } from 'vue-property-decorator'
   import MenuKindInput from './MenuKindInput'
   import PostSelector from './PostSelector'
   import MenuHttpInput from './MenuHttpInput'
   import CategorySelector from '../categories/CategorySelector'
 
-  @Component({
-    components: { CategorySelector, MenuHttpInput, PostSelector, MenuKindInput }
-  })
-  export default class MenuLinkInput extends Vue {
-    @Prop(Object) value
-
-    changeKind (kind) {
-      let value
-      switch (kind) {
-      case 'category':
-      case 'post':
-        value = ''
-        break
-      case 'http':
-        value = {}
+  export default {
+    components: { CategorySelector, MenuHttpInput, PostSelector, MenuKindInput },
+    props: {
+      value: Object
+    },
+    setup (props, { emit }) {
+      function emitUpdate (changes) {
+        emit('change', {
+          ...props.value,
+          ...changes
+        })
       }
-      this.emitUpdate({ kind, value })
-    }
 
-    changeValue (value) {
-      this.emitUpdate({ value })
-    }
-
-    emitUpdate (changes) {
-      this.$emit('change', {
-        ...this.value,
-        ...changes
-      })
+      return {
+        changeKind (kind) {
+          let value
+          switch (kind) {
+          case 'category':
+          case 'post':
+            value = ''
+            break
+          case 'http':
+            value = {}
+          }
+          emitUpdate({ kind, value })
+        },
+        changeValue: (value) => emitUpdate({ value })
+      }
     }
   }
 </script>

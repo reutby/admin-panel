@@ -20,21 +20,12 @@
 	</div>
 </template>
 <script>
-  import { Vue, Component } from 'vue-property-decorator'
-  import { createNamespacedHelpers } from 'vuex'
-  import { ASSETS_MODULE_NAME, ASSETS_ACTIONS, ASSETS_STATE } from '../../store/assets/consts'
+  import { useStorageList } from '../../views/assets/compositions/storages'
 
-  const { mapActions, mapState } = createNamespacedHelpers(ASSETS_MODULE_NAME)
-
-  @Component({
-    methods: mapActions({ fetch: ASSETS_ACTIONS.FETCH_STORAGE_LIST }),
-    computed: mapState({ items: ASSETS_STATE.STORAGE_LIST })
-  })
-  export default class AssetsStorageList extends Vue {
-    items
-
-    created () {
-      this.fetch()
+  export default {
+    name: 'AssetsStorageList',
+    setup () {
+      return useStorageList()
     }
   }
 </script>
