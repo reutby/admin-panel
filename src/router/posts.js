@@ -1,7 +1,7 @@
-import EditPost from '../views/posts/EditPost.vue'
-import CreatePost from '../views/posts/CreatePost.vue'
-import EmptyRoute from '../components/layout/EmptyRoute.vue'
-import Posts from '../views/posts/Posts'
+import EditPost from '../sections/posts/EditPost.vue'
+import CreatePost from '../sections/posts/CreatePost.vue'
+import EmptyRoute from '../sections/core/components/layout/EmptyRoute.vue'
+import Posts from '../sections/posts/Posts'
 
 const postsRoutes = {
   path: 'posts',

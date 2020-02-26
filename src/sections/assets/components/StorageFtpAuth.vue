@@ -1,0 +1,35 @@
+<template>
+	<div>
+		<FormInput title="FTP Host" v-model="form.host"/>
+		<FormInput title="Username" v-model="form.username"/>
+		<FormInput title="Password" v-model="form.password"/>
+	</div>
+</template>
+<script>
+  import { watch, reactive } from '@vue/composition-api'
+  import FormInput from '../../core/components/forms/FormInput'
+
+  export default {
+    name: 'StorageFtpAuth',
+    props: {
+      value: Object
+    },
+    components: { FormInput },
+    setup (props, { emit }) {
+      const form = reactive({
+        host: '',
+        username: '',
+        password: ''
+      })
+      if (props.value) {
+        form.host = props.value.host
+        form.username = props.value.username
+        form.password = props.value.password
+      }
+      watch(() => emit('change', form))
+      return {
+        form
+      }
+    }
+  }
+</script>

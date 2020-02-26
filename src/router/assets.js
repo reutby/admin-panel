@@ -1,6 +1,6 @@
-import EmptyRoute from '../components/layout/EmptyRoute.vue'
-import StorageList from '../views/assets/StorageList'
-import AddStorage from '../views/assets/AddStorage'
+import EmptyRoute from '../sections/core/components/layout/EmptyRoute.vue'
+import StorageList from '../sections/assets/StorageList'
+import AddStorage from '../sections/assets/AddStorage'
 
 const assetsRoutes = {
   path: 'assets',

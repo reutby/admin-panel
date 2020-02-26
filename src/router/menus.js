@@ -1,6 +1,6 @@
-import Menus from '../views/menus/Menus.vue'
-import EditMenu from '../views/menus/EditMenu.vue'
-import EmptyRoute from '../components/layout/EmptyRoute.vue'
+import Menus from '../sections/menus/Menus.vue'
+import EditMenu from '../sections/menus/EditMenu.vue'
+import EmptyRoute from '../sections/core/components/layout/EmptyRoute.vue'
 
 const menusRoutes = {
   path: 'menus',
