@@ -4,7 +4,7 @@ COPY . .
 ENV BASE_URL '/gp-admin'
 RUN npm install
 RUN npm run build
-FROM node:alpine
+FROM node:13.3-alpine
 RUN mkdir /app
 WORKDIR /app
 ENV PORT=3001
