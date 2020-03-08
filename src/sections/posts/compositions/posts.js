@@ -1,5 +1,7 @@
+import { computed, reactive, ref } from '@vue/composition-api'
+import debounce from 'lodash.debounce'
 import store from '../../../store'
-import { computed, reactive } from '@vue/composition-api'
+import api from '../../../plugins/api'
 import { POSTS_ACTIONS, POSTS_MODULE_NAME, POSTS_STATE } from '../../../store/posts/consts'
 
 function dispatch (action, payload) {
@@ -54,5 +56,25 @@ export function usePostsList () {
   return {
     posts: computed(() => fromState(POSTS_STATE.POSTS)),
     remove: (postId) => dispatch(POSTS_ACTIONS.REMOVE_POST, postId)
+  }
+}
+
+export function usePostsSearch () {
+  const searchPostsList = ref([])
+  const selectedPost = reactive({
+    title: '',
+    value: ''
+  })
+
+  function search () {
+    return api.withData
+      .get('/api/posts', { params: { populate: ['categories'], lean: true, q: selectedPost.title } })
+      .then(list => searchPostsList.value = list)
+  }
+
+  return {
+    search: debounce(search, 500),
+    selectedPost,
+    searchPostsList
   }
 }

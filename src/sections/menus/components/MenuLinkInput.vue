@@ -5,7 +5,7 @@
 			<CategorySelector v-if="value.kind === 'category'" prop="_id" :value="value.value" @change="changeValue"/>
 			<PostSelector v-else-if="value.kind === 'post'"
 			              :value="value.value"
-			              :title="value.post ? value.post.name : null"
+			              :title="value.post ? value.post.title : null"
 			              @change="changeValue"/>
 			<MenuHttpInput v-else-if="value.kind === 'http'"
 			               :value="value.value"
