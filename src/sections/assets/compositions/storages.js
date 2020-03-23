@@ -1,20 +1,29 @@
-import store from '../../../store'
-import { computed, reactive } from '@vue/composition-api'
-import { ASSETS_ACTIONS, ASSETS_MODULE_NAME, ASSETS_STATE } from '../../../store/assets/consts'
-
-function dispatch (action, payload) {
-  return store.dispatch(ASSETS_MODULE_NAME + '/' + action, payload)
-}
+import { computed, reactive, ref } from '@vue/composition-api'
+import api from '../../../plugins/api'
 
 export function createStorage (storage) {
-  return dispatch(ASSETS_ACTIONS.CREATE_STORAGE, storage)
+  return api.withData.post('/api/storage', storage)
+}
+
+export function updateStorage (storage) {
+  return api.withData.put('/api/storage/' + storage._id, storage)
+}
+
+export function removeStorage (storageId) {
+  return api.withData.delete('/api/storage/' + storageId)
 }
 
 export function useStorageList () {
-  dispatch(ASSETS_ACTIONS.FETCH_STORAGE_LIST)
+  const items = ref([])
+
+  api.withData.get('/api/storage').then(data => items.value = data)
 
   return {
-    items: computed(() => store.state[ASSETS_MODULE_NAME][ASSETS_STATE.STORAGE_LIST])
+    items,
+    remove: async (storage) => {
+      await removeStorage(storage._id)
+      items.value = items.value.filter(s => s !== storage)
+    }
   }
 }
 
@@ -38,4 +47,16 @@ export function useStorageForm (props) {
     name,
     kind
   }
+}
+
+export function useStorage (storageId) {
+  const data = reactive({
+    loading: true,
+    storage: {},
+    files: null
+  })
+
+  api.withData.get('/api/storage/' + storageId).then(storage => data.storage = storage)
+
+  return { data }
 }

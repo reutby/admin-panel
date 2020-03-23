@@ -14,6 +14,9 @@
 					</router-link>
 				</td>
 				<td>{{item.kind}}</td>
+				<td>
+					<i @click.prevent="remove(item)" class="el-icon-delete"/>
+				</td>
 			</tr>
 			</tbody>
 		</table>

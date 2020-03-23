@@ -1,6 +1,7 @@
 import EmptyRoute from '../sections/core/components/layout/EmptyRoute.vue'
 import StorageList from '../sections/assets/StorageList'
 import AddStorage from '../sections/assets/AddStorage'
+import EditStorage from '../sections/assets/EditStorage'
 
 const assetsRoutes = {
   path: 'assets',
@@ -20,7 +21,7 @@ const assetsRoutes = {
     {
       path: ':storageId',
       name: 'editStorage',
-      component: EmptyRoute
+      component: EditStorage
     }
   ]
 }
