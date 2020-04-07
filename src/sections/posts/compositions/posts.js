@@ -1,35 +1,48 @@
 import { computed, reactive, ref } from '@vue/composition-api'
 import debounce from 'lodash.debounce'
-import store from '../../../store'
 import api from '../../../plugins/api'
-import { POSTS_ACTIONS, POSTS_MODULE_NAME, POSTS_STATE } from '../../../store/posts/consts'
-
-function dispatch (action, payload) {
-  return store.dispatch(POSTS_MODULE_NAME + '/' + action, payload)
-}
-
-function fromState (prop) {
-  return store.state[POSTS_MODULE_NAME][prop]
-}
-
-function submittingRef () {
-  return fromState(POSTS_STATE.SUBMITTING)
-}
 
 export function useCreatePost () {
+  const submitting = ref(false)
+
   return {
-    submitting: computed(submittingRef),
-    save: (post) => dispatch(POSTS_ACTIONS.CREATE_POST, post)
+    submitting,
+    save: (post) => {
+      submitting.value = true
+      return api.withData
+        .post('/api/posts', post)
+        .then(post => {
+          return post
+        })
+        .finally(() => submitting.value = false)
+    }
   }
 }
 
+function fetchPosts () {
+  return api.withData.get('/api/posts', { params: { populate: ['categories'] } })
+}
+
+function fetchPost (postId) {
+  return api.withData.get('/api/posts/' + postId)
+}
+
 export function useEditPost (postId) {
-  dispatch(POSTS_ACTIONS.FETCH_POST, postId)
+  const data = reactive({ post: null, submitting: false })
+  fetchPost(postId).then(post => data.post = post)
 
   return {
-    submitting: computed(submittingRef),
-    post: computed(() => fromState(POSTS_STATE.CURRENT_POST)),
-    save: (post) => dispatch(POSTS_ACTIONS.UPDATE_CURRENT_POST, post)
+    submitting: computed(() => data.submitting),
+    post: computed(() => data.post),
+    save: (updatedPost) => {
+      data.submitting = true
+      return api.withData
+        .put('/api/posts/' + data.post._id, updatedPost)
+        .then(post => {
+          data.submitting = false
+          data.post = post
+        })
+    }
   }
 }
 
@@ -51,11 +64,15 @@ export function useNewPost () {
 }
 
 export function usePostsList () {
-  dispatch(POSTS_ACTIONS.FETCH_POSTS)
+  const posts = ref([])
+
+  fetchPosts().then(list => posts.value = list)
 
   return {
-    posts: computed(() => fromState(POSTS_STATE.POSTS)),
-    remove: (postId) => dispatch(POSTS_ACTIONS.REMOVE_POST, postId)
+    posts,
+    remove: (postId) => api
+      .delete('/api/posts/' + postId)
+      .then(() => posts.value = posts.value.filter(({ _id }) => _id !== postId))
   }
 }
 

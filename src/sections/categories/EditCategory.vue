@@ -1,16 +1,17 @@
 <template>
 	<div class="category-page">
-		<h1>Edit Category</h1>
+		<PageTitle title="Create Category" :item-name="category.name"/>
 		<CategoryForm v-if="category" :category="category" @submit="submit"/>
 	</div>
 </template>
 <script>
   import CategoryForm from './components/CategoryForm'
   import { useEditCategory } from './compositions/categories'
+  import PageTitle from '../core/components/semantics/PageTitle'
 
   export default {
     name: 'EditCategory',
-    components: { CategoryForm },
+    components: { PageTitle, CategoryForm },
     setup (_, { root: { $router, $route: { params } } }) {
       const { category, updateCategory } = useEditCategory(params.categoryPath)
 
@@ -31,8 +32,3 @@
     }
   }
 </script>
-<style scoped>
-	h1 i {
-		color: #00C48D;
-	}
-</style>

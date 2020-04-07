@@ -1,16 +1,17 @@
 <template>
 	<div class="add-storage-page">
-		<h1>Add new Storage</h1>
+		<PageTitle title="Add new Storage"/>
 		<StorageForm @submit="save"/>
 	</div>
 </template>
 <script>
   import StorageForm from './components/StorageForm'
   import { createStorage } from './compositions/storages'
+  import PageTitle from '../core/components/semantics/PageTitle'
 
   export default {
     name: 'AddStorage',
-    components: { StorageForm },
+    components: { PageTitle, StorageForm },
     setup () {
       return {
         save: createStorage
@@ -18,8 +19,3 @@
     }
   }
 </script>
-<style scoped>
-	h1 i {
-		color: #00C48D;
-	}
-</style>

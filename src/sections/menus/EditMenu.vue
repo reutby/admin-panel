@@ -1,19 +1,15 @@
 <template>
 	<div class="category-page">
-		<h1>Edit Menu <i>{{$route.params.menuName}}</i></h1>
+		<PageTitle title="Edit Menu" :item-name="$route.params.menuName"/>
 		<MenuEditor :menu="$route.params.menuName"/>
 	</div>
 </template>
 <script>
   import MenuEditor from './components/MenuEditor'
+  import PageTitle from '../core/components/semantics/PageTitle'
 
   export default {
     name: 'EditMenu',
-    components: { MenuEditor }
+    components: { PageTitle, MenuEditor }
   }
 </script>
-<style scoped>
-	h1 i {
-		color: #00C48D;
-	}
-</style>

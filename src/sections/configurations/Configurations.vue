@@ -1,13 +1,14 @@
 <template>
 	<div class="categories-page">
-		<h1>Configurations</h1>
+		<PageTitle title="Configurations"/>
 		<ConfigurationsList/>
 	</div>
 </template>
 <script>
   import ConfigurationsList from './components/ConfigurationsList'
+  import PageTitle from '../core/components/semantics/PageTitle'
 
   export default {
-    components: { ConfigurationsList }
+    components: { PageTitle, ConfigurationsList }
   }
 </script>

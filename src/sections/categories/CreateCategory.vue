@@ -1,16 +1,17 @@
 <template>
 	<div class="category-page">
-		<h1>Create Category</h1>
+		<PageTitle title="Create Category"/>
 		<CategoryForm :category="{}" @submit="submit"/>
 	</div>
 </template>
 <script>
   import CategoryForm from './components/CategoryForm'
   import { createCategory } from './compositions/categories'
+  import PageTitle from '../core/components/semantics/PageTitle'
 
   export default {
     name: 'CreateCategory',
-    components: { CategoryForm },
+    components: { PageTitle, CategoryForm },
     setup (_, { root: { $router } }) {
       async function submit (data) {
         const { path } = await createCategory(data)
@@ -26,8 +27,3 @@
     }
   }
 </script>
-<style scoped>
-	h1 i {
-		color: #00C48D;
-	}
-</style>

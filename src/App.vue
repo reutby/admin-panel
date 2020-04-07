@@ -30,7 +30,7 @@
 		height: 100%;
 	}
 
-	.main h1, .main h2 {
+	.main h1, .main h2, .main form {
 		padding: 10px;
 		margin: 0;
 	}

@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import { authModule } from './auth'
 import { menusModule } from './menus'
 import { categoriesModule } from './categories'
-import { postsModule } from './posts'
 import { usersModule } from './users'
 import { configurationsModule } from './configurations'
 
@@ -15,7 +14,6 @@ export default new Vuex.Store({
     [configurationsModule.name]: configurationsModule,
     [menusModule.name]: menusModule,
     [categoriesModule.name]: categoriesModule,
-    [postsModule.name]: postsModule,
     [usersModule.name]: usersModule
   },
   state: {}

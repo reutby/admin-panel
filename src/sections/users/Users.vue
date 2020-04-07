@@ -1,14 +1,15 @@
 <template>
 	<div class="about-page">
-		<h1>Users</h1>
+		<PageTitle title="Users"/>
 		<UsersList/>
 	</div>
 </template>
 <script>
   import UsersList from './components/UsersList'
+  import PageTitle from '../core/components/semantics/PageTitle'
 
   export default {
     name: 'Users',
-    components: { UsersList }
+    components: { PageTitle, UsersList }
   }
 </script>
