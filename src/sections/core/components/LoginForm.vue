@@ -1,5 +1,5 @@
 <template>
-	<el-form class="login-form" @submit.native.prevent="login">
+	<el-form class="login-form" @submit.native.prevent="submit">
 		<el-form-item label="Email">
 			<el-input name="email" v-model="form.email" type="email" autocomplete="off" required/>
 		</el-form-item>
@@ -15,17 +15,20 @@
 <script>
   import { watch } from '@vue/composition-api'
   import { useLogin } from '../compositions/authentication'
+  import { useSubmitting } from '../compositions/submitting'
 
   export default {
     name: 'LoginForm',
     setup (_, { root: { $router } }) {
       const { login, form, isLoggedIn } = useLogin()
+      const { submit, submitting } = useSubmitting(login)
 
       watch(isLoggedIn, () => $router.push({ name: 'home' }))
 
       return {
-        login,
-        form
+        submit,
+        form,
+        submitting,
       }
     }
   }
