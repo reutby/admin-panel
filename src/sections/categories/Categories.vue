@@ -1,17 +1,15 @@
 <template>
 	<div class="categories-page">
-		<h1>Categories</h1>
-		<p>
-			<router-link :to="{name: 'createCategory'}" tag="button">+ Add new Category</router-link>
-		</p>
+		<ListPageTitle title="Categories" create-route="createCategory"/>
 		<CategoriesList/>
 	</div>
 </template>
 <script>
   import CategoriesList from './components/CategoriesList'
+  import ListPageTitle from '../core/components/semantics/ListPageTitle'
 
   export default {
     name: 'Categories',
-    components: { CategoriesList }
+    components: { ListPageTitle, CategoriesList }
   }
 </script>

@@ -1,18 +1,16 @@
 <template>
 	<div class="storage-page">
-		<h1>Storage</h1>
-		<p>
-			<router-link :to="{name: 'addStorage'}" tag="button">+ Add new Storage</router-link>
-		</p>
+		<ListPageTitle title="Storage" create-route="addStorage"/>
 		<AssetsStorageList/>
 	</div>
 </template>
 <script>
   import AssetsStorageList from './components/AssetsStorageList'
+  import ListPageTitle from '../core/components/semantics/ListPageTitle'
 
   export default {
     name: 'StorageList',
-    components: { AssetsStorageList }
+    components: { ListPageTitle, AssetsStorageList }
   }
 </script>
 <style scoped>

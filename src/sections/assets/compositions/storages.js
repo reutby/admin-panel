@@ -1,4 +1,4 @@
-import { computed, reactive, ref } from '@vue/composition-api'
+import { reactive, ref } from '@vue/composition-api'
 import api from '../../../plugins/api'
 
 export function createStorage (storage) {
@@ -29,34 +29,35 @@ export function useStorageList () {
 
 export function useStorageForm (props) {
   const editedStorage = reactive({
-    name: '',
-    kind: '',
-    authentication: null
+    ...(props.value || {
+      name: 'New Storage',
+      kind: 'ftp',
+    }),
+    authentication: null,
+    metadata: {
+      publicUrl: '',
+      basePath: '/',
+      ...props.value ? props.value.metadata : {}
+    }
   })
-  const name = computed(() => {
-    const name = props.value ? props.value.name : ''
-    return editedStorage.name || name
-  })
-  const kind = computed(() => {
-    const kind = props.value ? props.value.kind : 's3'
-    return editedStorage.kind || kind
-  })
+  const showAuth = ref(!props.value)
 
   return {
     editedStorage,
-    name,
-    kind
+    showAuth
   }
 }
 
 export function useStorage (storageId) {
   const data = reactive({
     loading: true,
-    storage: {},
-    files: null
+    storage: {}
   })
 
-  api.withData.get('/api/storage/' + storageId).then(storage => data.storage = storage)
+  api.withData.get('/api/storage/' + storageId).then(storage => {
+    data.storage = storage
+    data.loading = false
+  })
 
   return { data }
 }

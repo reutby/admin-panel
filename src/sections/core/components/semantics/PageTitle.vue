@@ -11,8 +11,9 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+	@import "../../../../style/colors";
 	h1 i {
-		color: #00C48D;
+		color: $main-color;
 	}
 </style>
