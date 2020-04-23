@@ -1,4 +1,24 @@
 import api from '../../../plugins/api'
+import { computed, ref } from '@vue/composition-api'
+
+export function getAssetInStorage (storageId, identifier) {
+  return api.withData.get('/api/assets/' + storageId, { params: { identifier } })
+}
+
+export function useAssetsUpload (storage, location) {
+  const uploadUrl = ref('')
+  return {
+    headers: computed(() => api.defaults.headers.common),
+    setUploadUrl (file) {
+      const url = new URL(`/api/assets/${storage}`, api.defaults.baseURL)
+      const locationPath = location.value + (location.value.endsWith('/') ? '' : '/')
+      url.searchParams.append('identifier', locationPath + file.name)
+
+      uploadUrl.value = url.toString()
+    },
+    uploadUrl
+  }
+}
 
 export function uploadAssetToStorage (storageId, identifier = '/', file) {
   return api.withData.post('/api/assets/' + storageId, file, { params: { identifier } })

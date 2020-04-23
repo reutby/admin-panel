@@ -9,6 +9,7 @@
   import { updateStorage, useStorage } from './compositions/storages'
   import PageTitle from '../core/components/semantics/PageTitle'
   import { useSubmitting } from '../core/compositions/submitting'
+  import BasicFileUploader from './components/BasicFileUploader'
 
   export default {
     name: 'EditStorage',

@@ -1,5 +1,6 @@
 import { reactive, ref } from '@vue/composition-api'
 import api from '../../../plugins/api'
+import { getAssetInStorage } from './assets'
 
 export function createStorage (storage) {
   return api.withData.post('/api/storage', storage)
@@ -58,6 +59,8 @@ export function useStorage (storageId) {
     data.storage = storage
     data.loading = false
   })
+
+  getAssetInStorage(storageId)
 
   return { data }
 }
