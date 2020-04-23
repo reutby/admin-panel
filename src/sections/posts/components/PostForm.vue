@@ -6,11 +6,22 @@
 		<FormInput title="Path" label="leave empty to auto-generate"
 		           :value="path" @input="editedPost.path = $event"/>
 
-		<FormInput title="Thumbnail"
-		           :value="editedPost.thumbnail || post.thumbnail" placeholder="https://"
-		           @input="editedPost.thumbnail = $event">
-			<div><img class="thumbnail-image" :src="editedPost.thumbnail || post.thumbnail"></div>
-		</FormInput>
+		<el-form-item label="Thumbnail">
+			<a @click="toggleUpload">Upload</a>
+			<template v-if="uploadThumbnailOpen">
+				<div>
+					<label>Storage </label>
+					<AssetsStorageSelector @change="uploadStorage = $event._id"/>
+				</div>
+				<BasicFileUploader v-if="uploadStorage" :storage="uploadStorage" @upload="uploadComplete"/>
+			</template>
+			<FormInput v-else :value="thumbnail" placeholder="https://"
+			           @input="thumbnail = $event">
+			</FormInput>
+			<div>
+				<img v-if="!uploadThumbnailOpen" class="thumbnail-image" :src="editedPost.thumbnail || post.thumbnail">
+			</div>
+		</el-form-item>
 
 		<el-form-item label="Category">
 			<CategorySelector :value="categoryPath" @change="editedPost.category = $event"
@@ -56,9 +67,12 @@
   import { usePostContents } from '../compositions/post-contents'
   import { useNewPost } from '../compositions/posts'
   import { useEditedInputs } from '../../core/compositions/edited-inputs'
+  import BasicFileUploader from '../../assets/components/BasicFileUploader'
+  import { usePostThumbnail } from '../compositions/post-thumbnail'
+  import AssetsStorageSelector from '../../assets/components/AssetsStorageSelector'
 
   export default {
-    components: { PostContentEditor, CategorySelector, FormInput },
+    components: { AssetsStorageSelector, BasicFileUploader, PostContentEditor, CategorySelector, FormInput },
     props: {
       post: Object,
       submitting: Boolean
@@ -77,6 +91,7 @@
       return {
         ...tagsContext,
         ...contentsContext,
+        ...usePostThumbnail(editedPost, props.post),
         ...useEditedInputs(editedPost, props.post, ['title', 'path']),
         editedPost,
         categoryPath: computed(() => editedPost.category || (props.post.category && props.post.category.path)),

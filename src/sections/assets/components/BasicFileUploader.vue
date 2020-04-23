@@ -1,10 +1,12 @@
 <template>
-	<div>
-		<el-input v-model="location" placeholder="Location"/>
+	<div class="basic-file-uploader">
+		<el-input v-model="location" placeholder="Choose Location"/>
 		<el-upload
+				class="uploader"
 				drag
 				:headers="headers"
 				:action="uploadUrl"
+				:on-success="onSuccess"
 				:before-upload="beforeUpload">
 			<i class="el-icon-upload"></i>
 			<div class="el-upload__text">Drop file here or <em>click to upload</em></div>
@@ -21,7 +23,7 @@
     props: {
       storage: String,
     },
-    setup (props, { root }) {
+    setup (props, { root, emit }) {
       const location = ref('')
       const { headers, uploadUrl, setUploadUrl } = useAssetsUpload(props.storage, location)
 
@@ -32,8 +34,20 @@
           setUploadUrl(file)
           return root.$nextTick()
         },
-        location
+        location,
+        onSuccess (res) {
+          emit('upload', res)
+        }
       }
     }
   }
 </script>
+<style scoped>
+	.basic-file-uploader {
+		padding: 0 10px;
+	}
+
+	.uploader /deep/ .el-upload, .uploader /deep/ .el-upload-dragger {
+		width: 100%;
+	}
+</style>
