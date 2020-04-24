@@ -8,6 +8,12 @@ export function usePostContents (editedPost, originalPost) {
     return editedPost.editorContentsStates
   })
 
+  function getCurrent () {
+    const contents = editedPost.contents || originalPost.contents
+    const editorContentsStates = editedPost.editorContentsStates || originalPost.editorContentsStates
+    return { contents, editorContentsStates }
+  }
+
   const contents = computed(() => {
     const states = editorContentsStates.value
     const contents = (editedPost.contents === null ? originalPost.contents : editedPost.contents) || [null]
@@ -30,10 +36,32 @@ export function usePostContents (editedPost, originalPost) {
     editedPost.editorContentsStates[index] = type
   }
 
+  function removeContent (index) {
+    const { contents, editorContentsStates } = getCurrent()
+
+    contents.splice(index, 1)
+    editorContentsStates.splice(index, 1)
+
+    editedPost.contents = contents
+    editedPost.editorContentsStates = editorContentsStates
+  }
+
+  function addContent () {
+    const { contents, editorContentsStates } = getCurrent()
+
+    contents.push('')
+    editorContentsStates.push('editor')
+
+    editedPost.contents = contents
+    editedPost.editorContentsStates = editorContentsStates
+  }
+
   return {
     editorContentsStates,
     contents,
     setContent,
-    setContentsStates
+    setContentsStates,
+    removeContent,
+    addContent
   }
 }

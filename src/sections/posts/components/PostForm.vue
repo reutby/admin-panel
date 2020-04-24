@@ -44,13 +44,15 @@
 		</el-form-item>
 
 		<el-form-item label="Content" class="form-item-flex">
-			<div>
+			<div class="post-contents">
 				<PostContentEditor v-for="item in contents"
 				                   :key="item.index"
 				                   :value="item.content"
 				                   :state="item.state"
+				                   @remove="removeContent(item.index)"
 				                   @contentChange="setContent(item.index, $event)"
 				                   @typeChange="setContentsStates(item.index, $event)"/>
+				<el-button native-type="button" type="text" icon="el-icon-plus" @click="addContent"/>
 			</div>
 		</el-form-item>
 
@@ -129,5 +131,16 @@
 
 	.thumbnail-image {
 		max-width: 100px;
+	}
+
+	.post-contents {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.content-editor {
+			width: 100%;
+			margin-bottom: 5px;
+		}
 	}
 </style>

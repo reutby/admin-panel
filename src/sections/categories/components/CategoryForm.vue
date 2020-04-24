@@ -1,12 +1,12 @@
 <template>
 	<el-form class="category-form" @submit.native.prevent="submit">
 		<div>
-			<el-checkbox label="Public?" :checked="isPublic" @change="editedCategory.isPublic = $event"/>
+			<el-checkbox label="Public?" :size="'small'" :checked="isPublic" @change="editedCategory.isPublic = $event"/>
 		</div>
 		<FormInput title="Name" :value="name" @input="editedCategory.name = $event"/>
 		<FormInput title="Path" label="leave empty to auto-generate" :value="path"
 		           @input="editedCategory.path = $event"/>
-		<el-button native-type="submit">SAVE</el-button>
+		<el-button native-type="submit" :loading="submitting">SAVE</el-button>
 	</el-form>
 </template>
 <script>
@@ -18,7 +18,8 @@
     name: 'CategoryForm',
     components: { FormInput },
     props: {
-      category: Object
+      category: Object,
+      submitting: Boolean
     },
     setup (props, { emit }) {
       const data = useCategoryForm(props)

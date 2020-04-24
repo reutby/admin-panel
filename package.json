@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^16.0.0",
+    "@ckeditor/ckeditor5-font": "^18.0.0",
     "@ckeditor/ckeditor5-vue": "^1.0.1",
     "@vue/composition-api": "^0.5.0",
     "axios": "^0.19.0",

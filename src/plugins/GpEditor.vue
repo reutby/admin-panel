@@ -1,26 +1,20 @@
 <template>
 	<ckeditor
+			v-if="editor"
 			v-bind="$attrs"
 			v-on="$listeners"
 			:editor="editor"
 			tag-name="textarea"/>
 </template>
 <script>
-  import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
   import CKEditor from '@ckeditor/ckeditor5-vue'
-
-  ClassicEditor.defaultConfig.language = {
-    ui: 'en',
-    content: 'en'
-  }
+  import { useEditor } from '../sections/posts/compositions/gp-editor'
 
   export default {
     name: 'GpEditor',
     components: { ckeditor: CKEditor.component },
-    data () {
-      return {
-        editor: ClassicEditor
-      }
+    setup () {
+      return useEditor()
     }
   }
 </script>
