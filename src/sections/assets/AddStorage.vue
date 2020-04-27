@@ -13,8 +13,14 @@
   export default {
     name: 'AddStorage',
     components: { PageTitle, StorageForm },
-    setup () {
-      const { submitting, submit } = useSubmitting(createStorage)
+    setup (_, { root: { $router } }) {
+      const { submitting, submit } = useSubmitting(async function onCreate (data) {
+        const storage = await createStorage(data)
+        $router.push({
+          name: 'editStorage',
+          params: { storageId: storage._id }
+        })
+      })
 
       return {
         submitting,

@@ -6,7 +6,7 @@
 	</div>
 </template>
 <script>
-  import { watch, reactive } from '@vue/composition-api'
+  import { watchEffect, reactive } from '@vue/composition-api'
   import FormInput from '../../core/components/forms/FormInput'
 
   export default {
@@ -26,7 +26,7 @@
         form.username = props.value.username
         form.password = props.value.password
       }
-      watch(() => emit('change', form))
+      watchEffect(() => emit('change', form))
       return {
         form
       }
