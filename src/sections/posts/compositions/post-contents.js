@@ -21,7 +21,7 @@ export function usePostContents (editedPost, originalPost) {
       return {
         content,
         index,
-        state: states[index],
+        state: states[index] || 'editor',
       }
     })
   })
