@@ -1,6 +1,7 @@
 import EmptyRoute from '../sections/core/components/layout/EmptyRoute.vue'
 import Users from '../sections/users/Users'
 import EditUser from '../sections/users/EditUser'
+import CreateUser from '../sections/users/CreateUser'
 
 const usersRoutes = {
   path: 'users',
@@ -15,7 +16,7 @@ const usersRoutes = {
     {
       path: 'new',
       name: 'createUser',
-      component: EmptyRoute
+      component: CreateUser
     },
     {
       path: ':userId',

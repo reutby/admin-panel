@@ -1,6 +1,7 @@
 import { computed } from '@vue/composition-api'
 import store from '../../../store'
 import { USERS_ACTIONS, USERS_MODULE_NAME, USERS_STATE } from '../../../store/users/consts'
+import { useConfirmAction } from '../../core/compositions/confirm-action'
 
 function dispatch (action, payload) {
   return store.dispatch(USERS_MODULE_NAME + '/' + action, payload)
@@ -19,10 +20,17 @@ export function useEditUsers (userId) {
   }
 }
 
+export function useCreateUser () {
+  return {
+    createUser: (payload) => dispatch(USERS_ACTIONS.CREATE_USER, payload)
+  }
+}
+
 export function useUsersList () {
   dispatch(USERS_ACTIONS.FETCH_USERS)
 
   return {
-    users: computed(() => fromState(USERS_STATE.USERS))
+    users: computed(() => fromState(USERS_STATE.USERS)),
+    remove: useConfirmAction((user) => dispatch(USERS_ACTIONS.REMOVE_USER, user._id))
   }
 }

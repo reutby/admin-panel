@@ -11,8 +11,16 @@ export const actions = {
   [USERS_ACTIONS.FETCH_USER] ({ commit }, userId) {
     commit(USERS_MUTATIONS.SET_CURRENT_USER, null)
     return api.withData.get('/api/users/' + userId)
-      .then(post => {
-        return commit(USERS_MUTATIONS.SET_CURRENT_USER, post)
+      .then(user => {
+        return commit(USERS_MUTATIONS.SET_CURRENT_USER, user)
+      })
+  },
+  [USERS_ACTIONS.REMOVE_USER] ({ commit, state }, userId) {
+    commit(USERS_MUTATIONS.SET_CURRENT_USER, null)
+    return api.delete('/api/users/' + userId)
+      .then(() => {
+        const list = state[USERS_STATE.USERS] || []
+        return commit(USERS_MUTATIONS.SET_USERS, list.filter(user => user._id !== userId))
       })
   },
   [USERS_ACTIONS.UPDATE_CURRENT_USER] ({ commit, state }, updatedData) {
@@ -20,5 +28,12 @@ export const actions = {
       '/api/users/' + state[USERS_STATE.CURRENT_USER]._id,
       updatedData)
       .then(user => commit(USERS_MUTATIONS.SET_CURRENT_USER, user))
+  },
+  [USERS_ACTIONS.CREATE_USER] ({ commit, state }, data) {
+    return api.withData.post('/api/users', data)
+      .then(user => {
+        commit(USERS_MUTATIONS.SET_CURRENT_USER, user)
+        return user
+      })
   }
 }

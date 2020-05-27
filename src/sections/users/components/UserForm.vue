@@ -9,11 +9,18 @@
 			          :value="editedData.password"
 			          @input="editedData.password = $event"/>
 		</el-form-item>
+		<el-form-item>
+			<el-checkbox-group v-model="roles">
+				<el-checkbox label="admin"></el-checkbox>
+				<el-checkbox label="editor"></el-checkbox>
+				<el-checkbox label="user"></el-checkbox>
+			</el-checkbox-group>
+		</el-form-item>
 		<el-button native-type="submit">SAVE</el-button>
 	</el-form>
 </template>
 <script>
-  import { reactive } from '@vue/composition-api'
+  import { computed, reactive } from '@vue/composition-api'
   import FormInput from '../../core/components/forms/FormInput'
   import { clearNulls } from '../../../helpers/clear-nulls'
   import { useEditedInputs } from '../../core/compositions/edited-inputs'
@@ -27,12 +34,17 @@
       const editedData = reactive({
         name: null,
         email: null,
-        password: null
+        password: null,
+        roles: props.user && props.user._id ? null : ['user'],
       })
 
       return {
         editedData,
         ...useEditedInputs(editedData, props.user, ['name', 'email']),
+        roles: computed({
+          get: () => editedData.roles || props.user.roles,
+          set: (roles) => editedData.roles = roles
+        }),
         submit () {
           emit('submit', clearNulls(editedData))
         }

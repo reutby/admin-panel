@@ -18,6 +18,9 @@
 				<a :href="user.email">{{user.email}}</a>
 			</td>
 			<td>{{user.roles | join}}</td>
+			<td>
+				<i @click.prevent="remove(user)" class="el-icon-delete"/>
+			</td>
 		</tr>
 		</tbody>
 	</table>

@@ -1,15 +1,15 @@
 <template>
 	<div class="about-page">
-		<PageTitle title="Users"/>
+		<ListPageTitle title="Users" create-route="createUser"/>
 		<UsersList/>
 	</div>
 </template>
 <script>
   import UsersList from './components/UsersList'
-  import PageTitle from '../core/components/semantics/PageTitle'
+  import ListPageTitle from '../core/components/semantics/ListPageTitle'
 
   export default {
     name: 'Users',
-    components: { PageTitle, UsersList }
+    components: { ListPageTitle, UsersList }
   }
 </script>
