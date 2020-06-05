@@ -8,7 +8,7 @@
 </template>
 <script>
   import CKEditor from '@ckeditor/ckeditor5-vue'
-  import { useEditor } from '../sections/posts/compositions/gp-editor'
+  import { useEditor } from '../modules/posts/compositions/gp-editor'
 
   export default {
     name: 'GpEditor',

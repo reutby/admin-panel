@@ -1,7 +1,7 @@
-import EmptyRoute from '../sections/core/components/layout/EmptyRoute.vue'
-import Users from '../sections/users/Users'
-import EditUser from '../sections/users/EditUser'
-import CreateUser from '../sections/users/CreateUser'
+import EmptyRoute from '../modules/core/components/layout/EmptyRoute.vue'
+import Users from '../modules/users/Users'
+import EditUser from '../modules/users/EditUser'
+import CreateUser from '../modules/users/CreateUser'
 
 const usersRoutes = {
   path: 'users',
