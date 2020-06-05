@@ -18,7 +18,7 @@
       const { $route } = getCurrentInstance()
       const { config, updateConfiguration } = useEditConfiguration($route.params.key)
 
-      const { submitting, submit } = useSubmitting(updateConfiguration)
+      const { submitting, submit } = useSubmitting((metadata) => updateConfiguration({ metadata }))
 
       return {
         config,
