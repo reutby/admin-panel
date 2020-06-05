@@ -1,5 +1,5 @@
 import EmptyRoute from '../core/components/layout/EmptyRoute.vue'
-import Users from './routes'
+import Users from './Users'
 import EditUser from './EditUser'
 import CreateUser from './CreateUser'
 
