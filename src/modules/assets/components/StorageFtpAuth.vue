@@ -2,7 +2,7 @@
 	<div>
 		<FormInput title="FTP Host" v-model="form.host"/>
 		<FormInput title="Username" v-model="form.username"/>
-		<FormInput title="Password" v-model="form.password"/>
+		<FormInput title="Password" type="password" v-model="form.password"/>
 	</div>
 </template>
 <script>
