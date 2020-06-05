@@ -23,3 +23,10 @@ export function useConfiguration (key = 'app-configuration') {
     config: computed(() => store.state[CONFIGURATIONS_MODULE_NAME][CONFIGURATIONS_STATE.CURRENT_CONFIGURATION])
   }
 }
+
+export function useEditConfiguration (key) {
+  return {
+    ...useConfiguration(key),
+    updateConfiguration: (payload) => dispatch(CONFIGURATIONS_ACTIONS.UPDATE_CURRENT_CONFIGURATION, payload)
+  }
+}

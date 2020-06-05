@@ -11,7 +11,7 @@
 </template>
 <script>
   import FormInput from '../../core/components/forms/FormInput'
-  import { clearNulls } from '../../../helpers/clear-nulls'
+  import { clearNulls } from '../../core/utils/clear-nulls'
   import { useCategoryForm } from '../compositions/categories'
 
   export default {

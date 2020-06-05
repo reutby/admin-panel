@@ -1,7 +1,7 @@
-import Categories from '../modules/categories/Categories.vue'
-import EditCategory from '../modules/categories/EditCategory.vue'
-import CreateCategory from '../modules/categories/CreateCategory'
-import EmptyRoute from '../modules/core/components/layout/EmptyRoute.vue'
+import Categories from './Categories.vue'
+import EditCategory from './EditCategory.vue'
+import CreateCategory from './CreateCategory'
+import EmptyRoute from '../core/components/layout/EmptyRoute.vue'
 
 const categoriesRoutes = {
   path: 'categories',

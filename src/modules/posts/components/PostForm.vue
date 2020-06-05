@@ -62,7 +62,7 @@
 <script>
   import FormInput from '../../core/components/forms/FormInput'
   import CategorySelector from '../../categories/components/CategorySelector'
-  import { clearNulls } from '../../../helpers/clear-nulls'
+  import { clearNulls } from '../../core/utils/clear-nulls'
   import PostContentEditor from './PostContentEditor'
   import { computed, onBeforeMount } from '@vue/composition-api'
   import { usePostTags } from '../compositions/post-tags'

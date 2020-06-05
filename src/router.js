@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Authenticated from '../modules/core/Authenticated.vue'
-import Home from '../modules/core/Home.vue'
-import Login from '../modules/core/Login.vue'
-import Configurations from '../modules/configurations/Configurations.vue'
-import menusRoutes from './menus'
-import categoriesRoutes from './categories'
-import assetsRoutes from './assets'
-import postsRoutes from './posts'
-import usersRoutes from './users'
+import Authenticated from './modules/core/Authenticated.vue'
+import Home from './modules/core/Home.vue'
+import Login from './modules/core/Login.vue'
+import menusRoutes from './modules/menus/routes'
+import categoriesRoutes from './modules/categories/routes'
+import assetsRoutes from './modules/assets/routes'
+import postsRoutes from './modules/posts/routes'
+import usersRoutes from './modules/users/routes'
+import configurationsRoutes from './modules/configurations/routes'
 
 Vue.use(Router)
 
@@ -26,11 +26,7 @@ const router = new Router({
           name: 'home',
           component: Home
         },
-        {
-          path: '/configurations',
-          name: 'configurations',
-          component: Configurations
-        },
+        configurationsRoutes,
         menusRoutes,
         categoriesRoutes,
         assetsRoutes,

@@ -22,7 +22,7 @@
 <script>
   import { computed, reactive } from '@vue/composition-api'
   import FormInput from '../../core/components/forms/FormInput'
-  import { clearNulls } from '../../../helpers/clear-nulls'
+  import { clearNulls } from '../../core/utils/clear-nulls'
   import { useEditedInputs } from '../../core/compositions/edited-inputs'
 
   export default {
