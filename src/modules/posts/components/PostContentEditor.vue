@@ -15,7 +15,7 @@
 		</div>
 		<template>
 			<gp-editor v-if="state === 'editor'" :value="value" @input="changeContent"/>
-			<textarea v-else-if="state === 'html'" :value="value" @input="changeContent"/>
+			<textarea v-else-if="state === 'html'" :value="value" @input="changeContent($event.target.value)"/>
 			<iframe v-else-if="state === 'view'" :src="iFrameSrc"/>
 		</template>
 	</div>
