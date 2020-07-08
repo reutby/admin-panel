@@ -7,5 +7,21 @@ export const mutations = {
   },
   [CONFIGURATIONS_MUTATIONS.SET_CURRENT_CONFIGURATION]: (state, configuration) => {
     state[CONFIGURATIONS_STATE.CURRENT_CONFIGURATION] = configuration
+  },
+  [CONFIGURATIONS_MUTATIONS.SET_CURRENT_CONFIGURATION]: (state, configuration) => {
+    state[CONFIGURATIONS_STATE.CURRENT_CONFIGURATION] = configuration
+    if (configuration) {
+      state[CONFIGURATIONS_STATE.PROMISES][configuration.key] = null
+    }
+  },
+  [CONFIGURATIONS_MUTATIONS.SET_CONFIGURATION_LOADED]: (state, loaded) => {
+    state[CONFIGURATIONS_STATE.CONFIGURATIONS_LOADED] = loaded
+  },
+  [CONFIGURATIONS_MUTATIONS.SET_CONFIGURATION_LOADING]: (state, loaded) => {
+    state[CONFIGURATIONS_STATE.CONFIGURATIONS_LOADING] = loaded
+  },
+  [CONFIGURATIONS_MUTATIONS.SET_PROMISES]: (state, { key, promise }) => {
+    state[CONFIGURATIONS_STATE.PROMISES][key] = promise
+    return promise
   }
 }

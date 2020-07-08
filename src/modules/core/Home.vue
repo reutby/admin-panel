@@ -21,5 +21,6 @@
 	.home img {
 		max-height: 90%;
 		max-width: 90%;
+		width: 500px;
 	}
 </style>

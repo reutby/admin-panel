@@ -44,12 +44,4 @@
   }
 </script>
 <style scoped lang="scss">
-	table {
-		width: 100%;
-	}
-
-	tr, td {
-		text-align: center;
-		border: 1px solid #eee;
-	}
 </style>

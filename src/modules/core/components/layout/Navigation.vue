@@ -4,12 +4,30 @@
 		<router-link to="/" class="home-logo">
 			<img alt="greenpress Admin Panel" src="../../../../assets/logo.png">
 		</router-link>
-		<router-link to="/configurations">Configurations</router-link>
-		<router-link to="/assets">Storage & Assets</router-link>
-		<router-link to="/menus">Menus</router-link>
-		<router-link to="/categories">Categories</router-link>
-		<router-link to="/posts">Posts</router-link>
-		<router-link to="/users">Users</router-link>
+		<router-link to="/configurations">
+			<i class="el-icon-setting"/>
+			<span>Configurations</span>
+		</router-link>
+		<router-link to="/assets">
+			<i class="el-icon-files"/>
+			<span>Storage & Assets</span>
+		</router-link>
+		<router-link to="/menus">
+			<i class="el-icon-menu"/>
+			<span>Menus</span>
+		</router-link>
+		<router-link to="/categories">
+			<i class="el-icon-folder-opened"/>
+			<span>Categories</span>
+		</router-link>
+		<router-link to="/posts">
+			<i class="el-icon-document"/>
+			<span>Posts</span>
+		</router-link>
+		<router-link to="/users">
+			<i class="el-icon-user"/>
+			<span>Users</span>
+		</router-link>
 	</nav>
 </template>
 
@@ -27,12 +45,14 @@
   }
 </script>
 <style scoped lang="scss">
+	@import "../../../../style/colors";
 
 	nav {
 		display: flex;
 		flex-direction: column;
-		width: 150px;
-		background-color: #d7e8e6;
+		width: 220px;
+		background-color: #eee;
+		box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.4);
 	}
 
 	.mobile-mask {
@@ -52,11 +72,20 @@
 
 	a {
 		font-weight: bold;
-		color: #2c3e50;
-		padding: 10px;
+		color: $negative-color;
+		padding: 15px 3px;
+
+		&:hover {
+			text-decoration: none;
+			background-color: #e4e4e4;
+		}
 
 		&.router-link-active {
-			color: #42b983;
+			color: $main-color;
+		}
+
+		i {
+			padding: 0 7px;
 		}
 	}
 

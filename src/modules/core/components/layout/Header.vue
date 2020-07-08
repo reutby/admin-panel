@@ -27,6 +27,8 @@
   }
 </script>
 <style scoped lang="scss">
+	@import "../../../../style/colors";
+
 	header {
 		position: sticky;
 		top: 0;
@@ -34,8 +36,9 @@
 		display: flex;
 		justify-content: flex-start;
 		height: 70px;
-		background-color: #eee;
+		background-color: $negative-color;
 		align-items: center;
+		color: $main-color;
 	}
 
 	.user-welcome {
@@ -54,6 +57,7 @@
 		text-align: right;
 		height: 100%;
 		cursor: pointer;
+		color: $main-color;
 
 		&:hover {
 			text-decoration: underline;

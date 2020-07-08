@@ -1,7 +1,7 @@
 <template>
 	<el-form class="login-form" @submit.native.prevent="submit">
 		<el-form-item label="Email">
-			<el-input name="email" v-model="form.email" type="email" autocomplete="off" required/>
+			<el-input name="email" v-model="form.email" type="email" required/>
 		</el-form-item>
 		<el-form-item label="Password">
 			<el-input name="password" v-model="form.password" type="password" required/>
@@ -23,7 +23,7 @@
       const { login, form, isLoggedIn } = useLogin()
       const { submit, submitting } = useSubmitting(login)
 
-      watch(isLoggedIn, () => $router.push({ name: 'home' }))
+      watch(isLoggedIn, (is) => is && $router.push({ name: 'home' }))
 
       return {
         submit,
