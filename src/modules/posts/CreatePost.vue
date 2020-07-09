@@ -13,11 +13,11 @@
     name: 'CreatePost',
     components: { PageTitle, PostForm },
     setup (_, { root: { $router } }) {
-      const { submitting, save } = useCreatePost()
+      const { submitting, submit } = useCreatePost()
       return {
         submitting,
-        async submit (updatedPost) {
-          const { _id } = await save(updatedPost)
+        submit: async (updatedPost) => {
+          const { _id } = await submit(updatedPost)
           $router.push({
             name: 'editPost',
             params: { postId: _id }

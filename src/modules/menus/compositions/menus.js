@@ -1,6 +1,7 @@
 import { computed } from '@vue/composition-api'
 import store from '../../../store'
 import { MENUS_ACTIONS, MENUS_GETTERS, MENUS_MODULE_NAME, MENUS_STATE } from '../../../store/menus/consts'
+import { useSubmitting } from '../../core/compositions/submitting'
 
 function dispatch (action, payload) {
   return store.dispatch(MENUS_MODULE_NAME + '/' + action, payload)
@@ -35,7 +36,9 @@ export function useMenuOperations (menuName) {
         [...links.value, { kind: 'category' }]
       )
     },
-    updateMenu: () => dispatch(MENUS_ACTIONS.UPDATE_CURRENT_MENU)
+    updateMenu: useSubmitting(
+      () => dispatch(MENUS_ACTIONS.UPDATE_CURRENT_MENU),
+      { success: 'Menu updated successfully', error: 'Failed to update menu' }).submit
   }
 }
 

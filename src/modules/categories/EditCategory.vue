@@ -26,7 +26,7 @@
             params: { categoryPath: path }
           })
         }
-      })
+      }, { success: 'Category saved successfully', error: 'Failed to save category' })
 
       return {
         category,

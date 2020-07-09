@@ -1,7 +1,7 @@
 <template>
 	<div class="edit-post-page" v-if="post">
 		<PageTitle title="Edit Post" :item-name="post.title"/>
-		<PostForm :post="post" :submitting="submitting" @submit="save"/>
+		<PostForm :post="post" :submitting="submitting" @submit="submit"/>
 	</div>
 </template>
 <script>

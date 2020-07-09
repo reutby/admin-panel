@@ -23,7 +23,7 @@
         const { _id, name, kind } = data.storage
         return updateStorage({ _id, name, kind, ...changes })
           .then((newStorage) => Object.assign(data.storage, newStorage))
-      })
+      }, { success: 'Storage updated successfully', error: 'Failed to update storage' })
       return {
         data,
         submitting,

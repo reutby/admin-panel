@@ -10,8 +10,7 @@
 			<tbody>
 			<tr v-for="item in items" :key="item._id">
 				<td>
-					<router-link :to="{name: 'editStorage', params: {storageId: item._id}}">{{item.name}}
-					</router-link>
+					<router-link :to="{name: 'editStorage', params: {storageId: item._id}}">{{item.name}}</router-link>
 				</td>
 				<td>{{item.kind}}</td>
 				<td>
@@ -24,11 +23,13 @@
 </template>
 <script>
   import { useStorageList } from '../compositions/storages'
+  import { useConfirmAction } from '../../core/compositions/confirm-action'
 
   export default {
     name: 'AssetsStorageList',
     setup () {
-      return useStorageList()
+      const { items, remove } = useStorageList()
+      return { items, remove: useConfirmAction(remove) }
     }
   }
 </script>

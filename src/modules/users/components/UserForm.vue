@@ -42,7 +42,7 @@
         editedData,
         ...useEditedInputs(editedData, props.user, ['name', 'email']),
         roles: computed({
-          get: () => editedData.roles || props.user.roles,
+          get: () => editedData.roles || props.user.roles || [],
           set: (roles) => editedData.roles = roles
         }),
         submit () {

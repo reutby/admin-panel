@@ -20,7 +20,7 @@
           name: 'editStorage',
           params: { storageId: storage._id }
         })
-      })
+      }, { success: 'Storage created successfully', error: 'Failed to create storage' })
 
       return {
         submitting,

@@ -26,6 +26,7 @@
 </template>
 <script>
   import { useCategoriesList } from '../compositions/categories'
+  import { useConfirmAction } from '../../core/compositions/confirm-action'
 
   export default {
     name: 'CategoriesList',
@@ -34,11 +35,7 @@
 
       return {
         categories,
-        askBeforeRemove (category) {
-          if (confirm('Are you sure?')) {
-            removeCategory(category)
-          }
-        }
+        askBeforeRemove: useConfirmAction(removeCategory)
       }
     }
   }

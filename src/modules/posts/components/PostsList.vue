@@ -32,10 +32,12 @@
 </template>
 <script>
   import { usePostsList } from '../compositions/posts'
+  import { useConfirmAction } from '../../core/compositions/confirm-action'
 
   export default {
     setup () {
-      return usePostsList()
+      const { posts, remove } = usePostsList()
+      return { posts, remove: useConfirmAction(remove) }
     }
   }
 </script>

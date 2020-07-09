@@ -18,7 +18,9 @@
       const { $route } = getCurrentInstance()
       const { config, updateConfiguration } = useEditConfiguration($route.params.key)
 
-      const { submitting, submit } = useSubmitting((metadata) => updateConfiguration({ metadata }))
+      const { submitting, submit } = useSubmitting(
+        (metadata) => updateConfiguration({ metadata }),
+        { success: 'Configurations updated successfully', error: 'Failed to updated configurations' })
 
       return {
         config,

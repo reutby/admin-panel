@@ -1,10 +1,10 @@
 <template>
 	<el-form class="login-form" @submit.native.prevent="submit">
 		<el-form-item label="Email">
-			<el-input name="email" v-model="form.email" type="email" required/>
+			<el-input name="email" v-model="form.email" type="email" required @focus="onFocus"/>
 		</el-form-item>
 		<el-form-item label="Password">
-			<el-input name="password" v-model="form.password" type="password" required/>
+			<el-input name="password" v-model="form.password" type="password" required @focus="onFocus"/>
 		</el-form-item>
 		<div>
 			<el-button native-type="submit" :loading="submitting">Login</el-button>
@@ -21,7 +21,7 @@
     name: 'LoginForm',
     setup (_, { root: { $router } }) {
       const { login, form, isLoggedIn } = useLogin()
-      const { submit, submitting } = useSubmitting(login)
+      const { submit, submitting } = useSubmitting(login, { error: 'Login failed' })
 
       watch(isLoggedIn, (is) => is && $router.push({ name: 'home' }))
 
@@ -29,6 +29,10 @@
         submit,
         form,
         submitting,
+        onFocus: () => {
+          window.scrollTo(0, 0)
+          document.body.scrollTop = 0
+        }
       }
     }
   }

@@ -1,22 +1,16 @@
-import { computed, reactive, ref } from '@vue/composition-api'
+import { reactive, ref } from '@vue/composition-api'
 import debounce from 'lodash.debounce'
 import api from '../../../plugins/api'
+import { useSubmitting } from '../../core/compositions/submitting'
 
 export function useCreatePost () {
-  const submitting = ref(false)
-
-  return {
-    submitting,
-    save: (post) => {
-      submitting.value = true
-      return api.withData
-        .post('/api/posts', post)
-        .then(post => {
-          return post
-        })
-        .finally(() => submitting.value = false)
-    }
-  }
+  return useSubmitting((post) => {
+    return api.withData
+      .post('/api/posts', post)
+      .then(post => {
+        return post
+      })
+  }, { success: 'Post created successfully', error: 'Failed to create post' })
 }
 
 function fetchPosts () {
@@ -28,21 +22,18 @@ function fetchPost (postId) {
 }
 
 export function useEditPost (postId) {
-  const data = reactive({ post: null, submitting: false })
-  fetchPost(postId).then(post => data.post = post)
+  const post = ref(null)
+  fetchPost(postId).then(data => post.value = data)
 
   return {
-    submitting: computed(() => data.submitting),
-    post: computed(() => data.post),
-    save: (updatedPost) => {
-      data.submitting = true
+    ...useSubmitting((updatedPost) => {
       return api.withData
-        .put('/api/posts/' + data.post._id, updatedPost)
+        .put('/api/posts/' + post.value._id, updatedPost)
         .then(post => {
-          data.submitting = false
-          data.post = post
+          post.value = post
         })
-    }
+    }, { success: 'Post updated successfully', error: 'Failed to update post' }),
+    post,
   }
 }
 
