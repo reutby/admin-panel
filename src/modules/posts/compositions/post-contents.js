@@ -10,8 +10,7 @@ export function usePostContents (editedPost, originalPost) {
 
   function getCurrent () {
     const contents = editedPost.contents || originalPost.contents
-    const editorContentsStates = editedPost.editorContentsStates || originalPost.editorContentsStates
-    return { contents, editorContentsStates }
+    return { contents, editorContentsStates: editorContentsStates.value }
   }
 
   const contents = computed(() => {
@@ -27,7 +26,7 @@ export function usePostContents (editedPost, originalPost) {
   })
 
   function setContent (index, html) {
-    editedPost.contents = editedPost.contents || [...(originalPost.contents || [])]
+    editedPost.contents = [...editedPost.contents] || [...(originalPost.contents || [])]
     editedPost.contents[index] = html
   }
 

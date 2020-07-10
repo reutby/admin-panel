@@ -8,6 +8,7 @@
   import PostForm from './components/PostForm'
   import { useCreatePost } from './compositions/posts'
   import PageTitle from '../core/components/semantics/PageTitle'
+  import { removeUnsavedChanges } from './compositions/unsaved-changes'
 
   export default {
     name: 'CreatePost',
@@ -17,11 +18,16 @@
       return {
         submitting,
         submit: async (updatedPost) => {
-          const { _id } = await submit(updatedPost)
-          $router.push({
-            name: 'editPost',
-            params: { postId: _id }
-          })
+          try {
+            const { _id } = await submit(updatedPost)
+            removeUnsavedChanges()
+            $router.push({
+              name: 'editPost',
+              params: { postId: _id }
+            })
+          } catch (e) {
+            //
+          }
         }
       }
     }

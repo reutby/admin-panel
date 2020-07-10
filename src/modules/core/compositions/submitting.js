@@ -17,7 +17,10 @@ export function useSubmitting (submitFn, messages = {}) {
         }
         return data
       })
-      .catch(err => error(errorMessage(err)))
+      .catch(err => {
+        error(errorMessage(err))
+        throw err
+      })
       .finally(() => submitting.value = false)
   }
 

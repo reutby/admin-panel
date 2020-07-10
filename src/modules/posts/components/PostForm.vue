@@ -39,7 +39,7 @@
 
 		<el-form-item label="Short" class="form-item-flex">
 			<div>
-				<gp-editor :value="post.short" @input="editedPost.short = $event"/>
+				<gp-editor :value="post.short || editedPost.short" @input="editedPost.short = $event"/>
 			</div>
 		</el-form-item>
 
@@ -72,6 +72,7 @@
   import BasicFileUploader from '../../assets/components/BasicFileUploader'
   import { usePostThumbnail } from '../compositions/post-thumbnail'
   import AssetsStorageSelector from '../../assets/components/AssetsStorageSelector'
+  import { useUnsavedChanges } from '../compositions/unsaved-changes'
 
   export default {
     components: { AssetsStorageSelector, BasicFileUploader, PostContentEditor, CategorySelector, FormInput },
@@ -83,6 +84,8 @@
       const editedPost = useNewPost().post
       const tagsContext = usePostTags(editedPost, props.post)
       const contentsContext = usePostContents(editedPost, props.post)
+
+      const { saveChanges } = useUnsavedChanges(props.post.id, editedPost, contentsContext)
 
       onBeforeMount(() => {
         if (!props.post._id) {
@@ -107,7 +110,9 @@
           }
         },
         submit () {
-          emit('submit', clearNulls(editedPost))
+          const submittedPost = clearNulls(editedPost)
+          saveChanges(submittedPost)
+          emit('submit', submittedPost)
         }
       }
     }
