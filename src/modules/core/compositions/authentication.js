@@ -18,11 +18,12 @@ function interceptAuthenticatedRequests () {
         return
       }
       return dispatch(AUTH_ACTIONS.REFRESH_TOKEN)
-        .then(() => api.request({
-          ...err.config,
-          headers: undefined
-        }))
-        .catch(() => dispatch(AUTH_ACTIONS.LOGOUT))
+        .then(
+          () => api.request({
+            ...err.config,
+            headers: undefined
+          }),
+          () => dispatch(AUTH_ACTIONS.LOGOUT))
     }
   })
 }

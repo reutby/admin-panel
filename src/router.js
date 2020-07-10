@@ -46,7 +46,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.guest || localStorage.access_token || to.name === 'login') {
+  if (to.meta.guest || localStorage.refresh_token || to.name === 'login') {
     return next()
   }
   next({

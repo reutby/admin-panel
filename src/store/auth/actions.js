@@ -3,7 +3,6 @@ import api from '../../plugins/api'
 import router from '../../router'
 
 function setPayload (payload) {
-  localStorage.setItem('access_token', payload.token)
   localStorage.setItem('refresh_token', payload.refreshToken)
   api.defaults.headers.common['authorization'] = 'Bearer ' + payload.token
 }
@@ -11,17 +10,15 @@ function setPayload (payload) {
 export const actions = {
   [AUTH_ACTIONS.FETCH_USER] ({ commit, dispatch, state }) {
     if (state[AUTH_STATE.USER]) return
-    if (localStorage.access_token) {
-      return api.get('/api/me').then(res => {
-        const user = res.data || {}
-        if (user.roles.find(role => role === 'admin' || role === 'editor')) {
-          commit(AUTH_MUTATIONS.SET_USER, res.data)
-          return user
-        } else {
-          return dispatch(AUTH_ACTIONS.LOGOUT)
-        }
-      })
-    }
+    return api.get('/api/me').then(res => {
+      const user = res.data || {}
+      if (user.roles.find(role => role === 'admin' || role === 'editor')) {
+        commit(AUTH_MUTATIONS.SET_USER, res.data)
+        return user
+      } else {
+        return dispatch(AUTH_ACTIONS.LOGOUT)
+      }
+    })
   },
   [AUTH_ACTIONS.LOGIN] ({ commit }, { email, password }) {
     return api.post('/api/signin', {
@@ -56,7 +53,6 @@ export const actions = {
     return state[AUTH_STATE.REFRESH_TOKEN_CALL]
   },
   [AUTH_ACTIONS.LOGOUT] ({ commit }) {
-    localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')
     api.defaults.headers.common['authorization'] = null
     commit(AUTH_MUTATIONS.SET_USER, null)
