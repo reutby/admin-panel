@@ -17,7 +17,7 @@
 				</router-link>
 			</td>
 			<td>
-				<router-link :to="{name: 'editCategory', params: {categoryId: post.category._id}}">
+				<router-link :to="{name: 'editCategory', params: {categoryPath: post.category.path}}">
 					{{post.category.name}}
 				</router-link>
 			</td>
