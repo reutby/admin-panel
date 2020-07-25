@@ -2,6 +2,7 @@ import { reactive, ref } from '@vue/composition-api'
 import debounce from 'lodash.debounce'
 import api from '../../../plugins/api'
 import { useSubmitting } from '../../core/compositions/submitting'
+import { removeUnsavedChanges } from './unsaved-changes'
 
 export function useCreatePost () {
   return useSubmitting((post) => {
@@ -31,6 +32,7 @@ export function useEditPost (postId) {
         .put('/api/posts/' + post.value._id, updatedPost)
         .then(post => {
           post.value = post
+          removeUnsavedChanges(post._id)
         })
     }, { success: 'Post updated successfully', error: 'Failed to update post' }),
     post,

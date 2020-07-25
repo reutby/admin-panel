@@ -26,7 +26,7 @@ export function usePostContents (editedPost, originalPost) {
   })
 
   function setContent (index, html) {
-    editedPost.contents = [...editedPost.contents] || [...(originalPost.contents || [])]
+    editedPost.contents = editedPost.contents !== null ? [...editedPost.contents] : [...(originalPost.contents || [])]
     editedPost.contents[index] = html
   }
 
