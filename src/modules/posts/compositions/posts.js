@@ -15,7 +15,7 @@ export function useCreatePost () {
 }
 
 function fetchPosts () {
-  return api.withData.get('/api/posts', { params: { populate: ['categories'] } })
+  return api.withData.get('/api/posts', { params: { populate: ['category'] } })
 }
 
 function fetchPost (postId) {
@@ -78,7 +78,7 @@ export function usePostsSearch () {
 
   function search () {
     return api.withData
-      .get('/api/posts', { params: { populate: ['categories'], lean: true, q: selectedPost.title } })
+      .get('/api/posts', { params: { populate: ['category'], lean: true, q: selectedPost.title } })
       .then(list => searchPostsList.value = list)
   }
 
