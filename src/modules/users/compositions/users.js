@@ -1,36 +1,51 @@
-import { computed } from '@vue/composition-api'
-import store from '../../../store'
-import { USERS_ACTIONS, USERS_MODULE_NAME, USERS_STATE } from '../../../store/users/consts'
 import { useConfirmAction } from '../../core/compositions/confirm-action'
-
-function dispatch (action, payload) {
-  return store.dispatch(USERS_MODULE_NAME + '/' + action, payload)
-}
-
-function fromState (prop) {
-  return store.state[USERS_MODULE_NAME][prop]
-}
+import usersService from '../../../services/users-service'
+import { useDispatcher } from '../../core/compositions/dispatcher'
+import { useSubmitting } from '../../core/compositions/submitting'
 
 export function useEditUsers (userId) {
-  dispatch(USERS_ACTIONS.FETCH_USER, userId)
-
+  const { result: user } = useDispatcher(() => usersService.getOne(userId))
+  const { submit, submitting } = useSubmitting((payload) => usersService.update(userId, payload), {
+    success: 'User updated successfully',
+    error: 'Failed to update user'
+  })
   return {
-    user: computed(() => fromState(USERS_STATE.CURRENT_USER)),
-    updateUser: (payload) => dispatch(USERS_ACTIONS.UPDATE_CURRENT_USER, payload)
+    user,
+    updateUser: submit,
+    submitting
   }
 }
 
 export function useCreateUser () {
+  const { submit, submitting } = useSubmitting(usersService.create, {
+    success: 'User created successfully',
+    error: 'Failed to create user'
+  })
   return {
-    createUser: (payload) => dispatch(USERS_ACTIONS.CREATE_USER, payload)
+    createUser: submit,
+    submitting
   }
 }
 
-export function useUsersList () {
-  dispatch(USERS_ACTIONS.FETCH_USERS)
+export function useRemoveUser (onSuccess) {
+  const { submit, submitting: removing } = useSubmitting(
+    (id) => usersService.remove(id).then(() => onSuccess(id)),
+    {
+      success: 'User removed successfully',
+      error: 'Failed to remove user'
+    })
 
   return {
-    users: computed(() => fromState(USERS_STATE.USERS)),
-    remove: useConfirmAction((user) => dispatch(USERS_ACTIONS.REMOVE_USER, user._id))
+    remove: useConfirmAction(user => submit(user._id)),
+    removing
   }
+}
+
+/**
+ *
+ * @returns {{users: Ref<Array<any>>}}
+ */
+export function useUsersList () {
+  const { result: users } = useDispatcher(() => usersService.getAll(), [])
+  return { users }
 }

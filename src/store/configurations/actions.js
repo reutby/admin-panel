@@ -1,4 +1,4 @@
-import api from '../../plugins/api'
+import api from '../../services/api'
 import { CONFIGURATIONS_ACTIONS, CONFIGURATIONS_MUTATIONS, CONFIGURATIONS_STATE } from './consts'
 
 export const actions = {

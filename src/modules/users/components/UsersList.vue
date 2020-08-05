@@ -17,7 +17,7 @@
 			<td>
 				<a :href="user.email">{{user.email}}</a>
 			</td>
-			<td>{{user.roles | join}}</td>
+			<td>{{join(user.roles)}}</td>
 			<td>
 				<i @click.prevent="remove(user)" class="el-icon-delete"/>
 			</td>
@@ -26,14 +26,19 @@
 	</table>
 </template>
 <script>
-  import { useUsersList } from '../compositions/users'
+  import { useUsersList, useRemoveUser } from '../compositions/users'
 
   export default {
-    filters: {
-      join: (arr) => arr.join(', ')
-    },
     setup () {
-      return useUsersList()
+      const { users } = useUsersList()
+      const { remove } = useRemoveUser((id) => {
+        users.value = users.value.filter(user => user._id !== id)
+      })
+      return {
+        users,
+        remove,
+        join: (arr) => arr.join(', ')
+      }
     }
   }
 </script>

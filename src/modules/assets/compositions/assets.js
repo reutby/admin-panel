@@ -1,4 +1,4 @@
-import api from '../../../plugins/api'
+import api from '../../../services/api'
 import { computed, ref } from '@vue/composition-api'
 
 export function getAssetInStorage (storageId, identifier) {

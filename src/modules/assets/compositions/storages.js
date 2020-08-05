@@ -1,5 +1,5 @@
 import { reactive, ref } from '@vue/composition-api'
-import api from '../../../plugins/api'
+import api from '../../../services/api'
 import { getAssetInStorage } from './assets'
 
 export function createStorage (storage) {

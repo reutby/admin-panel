@@ -1,42 +1,47 @@
-import { computed, reactive, onMounted, ref } from '@vue/composition-api'
-import store from '../../../store'
-import { CATEGORIES_ACTIONS, CATEGORIES_MODULE_NAME, CATEGORIES_STATE } from '../../../store/categories/consts'
+import { computed, reactive, onMounted } from '@vue/composition-api'
+import { addCategory, categoriesStore, fetchCategories, removeCategory } from '../store/categories'
+import { useSubmitting } from '../../core/compositions/submitting'
+import categoriesService from '../../../services/categories-service'
+import { useDispatcher } from '../../core/compositions/dispatcher'
 
-function dispatch (action, payload) {
-  return store.dispatch(CATEGORIES_MODULE_NAME + '/' + action, payload)
-}
-
-function fromState (prop) {
-  return store.state[CATEGORIES_MODULE_NAME][prop]
-}
-
-function getCategoriesRef () {
-  return fromState(CATEGORIES_STATE.CATEGORIES)
-}
-
-function fetchCategories () {
-  return dispatch(CATEGORIES_ACTIONS.FETCH_CATEGORIES)
+function useCategories () {
+  return computed(() => categoriesStore.categories)
 }
 
 export function createCategory (category) {
-  return dispatch(CATEGORIES_ACTIONS.CREATE_CATEGORY, category)
+  return categoriesService.create(category).then((category) => {
+    addCategory(category)
+    return category
+  })
 }
 
 export function useEditCategory (categoryPath) {
-  dispatch(CATEGORIES_ACTIONS.FETCH_CATEGORY, categoryPath)
+  const { result: category } = useDispatcher(() => categoriesService.getOne(categoryPath))
+
+  const { submit, submitting } = useSubmitting((payload) => categoriesService.update(categoryPath, payload), {
+    success: 'Category updated successfully',
+    error: 'Failed to update category'
+  })
 
   return {
-    category: computed(() => fromState(CATEGORIES_STATE.CURRENT_CATEGORY)),
-    updateCategory: (payload) => dispatch(CATEGORIES_ACTIONS.UPDATE_CURRENT_CATEGORY, payload)
+    category,
+    updateCategory: submit,
+    submitting
   }
 }
 
 export function useCategoriesList () {
   fetchCategories()
+  const { submit } = useSubmitting(
+    ({ path }) => categoriesService.remove(path).then(() => removeCategory(path)),
+    {
+      success: 'Category removed successfully',
+      error: 'Failed to remove category'
+    })
 
   return {
-    categories: computed(getCategoriesRef),
-    removeCategory: (category) => dispatch(CATEGORIES_ACTIONS.REMOVE_CATEGORY, category)
+    categories: useCategories(),
+    removeCategory: submit
   }
 }
 
@@ -70,10 +75,10 @@ export function useCategoryForm (props) {
 }
 
 export function useCategorySelector () {
-  const mounted = ref(false)
-  fetchCategories().then(() => mounted.value = true)
+  fetchCategories()
+
   return {
-    mounted,
-    categories: computed(getCategoriesRef),
+    mounted: computed(() => categoriesStore.loaded),
+    categories: useCategories(),
   }
 }

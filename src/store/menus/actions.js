@@ -1,5 +1,5 @@
 import { MENUS_ACTIONS, MENUS_GETTERS, MENUS_MUTATIONS, MENUS_STATE } from './consts'
-import api from '../../plugins/api'
+import api from '../../services/api'
 
 export const actions = {
   [MENUS_ACTIONS.FETCH_MENUS] ({ commit }) {

@@ -1,6 +1,6 @@
 import { ref, computed, reactive } from '@vue/composition-api'
 import { AUTH_ACTIONS, AUTH_MODULE_NAME, AUTH_STATE } from '../../../store/auth/consts'
-import api from '../../../plugins/api'
+import api from '../../../services/api'
 import store from '../../../store'
 
 function dispatch (action, payload) {

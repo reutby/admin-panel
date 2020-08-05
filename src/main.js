@@ -3,11 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './style/main.scss'
-import { EditorPlugin } from './plugins/editor'
+import './plugins/editor'
 import './plugins/element.js'
 import './plugins/composition-api'
-
-Vue.use(EditorPlugin)
 
 Vue.config.productionTip = false
 

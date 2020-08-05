@@ -1,5 +1,5 @@
 import { AUTH_ACTIONS, AUTH_MUTATIONS, AUTH_STATE } from './consts'
-import api from '../../plugins/api'
+import api from '../../services/api'
 import router from '../../router'
 
 function setPayload (payload) {

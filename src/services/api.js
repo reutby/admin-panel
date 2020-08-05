@@ -10,6 +10,9 @@ api.withData = new Proxy(api, {
   get (api, prop) {
     return function () {
       return api[prop](...arguments)
+        .then(res => {
+          return res.statusCode >= 300 ? Promise.reject(res) : res
+        })
         .then(res => res ? res.data : Promise.reject(new Error('failed to call url')))
     }
   }
