@@ -10,9 +10,12 @@ export function useAssetsUpload (storage, location) {
   return {
     headers: computed(() => api.defaults.headers.common),
     setUploadUrl (file) {
+      const fileName = file.name.split('.')
       const url = new URL(`/api/assets/${storage}`, api.defaults.baseURL)
       const locationPath = location.value + (location.value.endsWith('/') ? '' : '/')
-      url.searchParams.append('identifier', locationPath + file.name)
+      url.searchParams.append('identifier', locationPath)
+      url.searchParams.append('prefix', fileName[0].replace(/ /g, ''))
+      url.searchParams.append('extension', fileName[fileName.length - 1])
 
       uploadUrl.value = url.toString()
     },
