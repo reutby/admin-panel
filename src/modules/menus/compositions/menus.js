@@ -1,50 +1,40 @@
-import { computed } from '@vue/composition-api'
-import store from '../../../store'
-import { MENUS_ACTIONS, MENUS_GETTERS, MENUS_MODULE_NAME, MENUS_STATE } from '../../../store/menus/consts'
+import { computed, reactive } from '@vue/composition-api'
+import menusService from '../../../services/menus-service'
+
 import { useSubmitting } from '../../core/compositions/submitting'
-
-function dispatch (action, payload) {
-  return store.dispatch(MENUS_MODULE_NAME + '/' + action, payload)
-}
-
-function getter (getter) {
-  return store.getters[MENUS_MODULE_NAME + '/' + getter]
-}
+import { useDispatcher } from '@/modules/core/compositions/dispatcher'
 
 export function useMenuOperations (menuName) {
-  dispatch(MENUS_ACTIONS.FETCH_MENU, menuName)
+  const { result: menu } = useDispatcher(() => menusService.getOne(menuName), {})
 
-  const links = computed(() => getter(MENUS_GETTERS.CURRENT_MENU_LINKS))
+  const updatedMenu = reactive({
+    links: [],
+    dirty: false
+  })
+  const links = computed(() => updatedMenu.dirty ? updatedMenu.links : (menu.value.links || []))
 
   return {
     links,
     updateLink: (link) => {
-      dispatch(
-        MENUS_ACTIONS.UPDATE_MENU_LINKS,
-        links.value.map(l => l._id === link._id ? link : l)
-      )
+      updatedMenu.links = [...links.value.map(l => l._id === link._id ? link : l)]
+      updatedMenu.dirty = true
     },
     removeLink: (link) => {
-      dispatch(
-        MENUS_ACTIONS.UPDATE_MENU_LINKS,
-        links.value.filter(l => l !== link)
-      )
+      updatedMenu.links = [...links.value.filter(l => l !== link)]
+      updatedMenu.dirty = true
     },
-    addLink: (link) => {
-      dispatch(
-        MENUS_ACTIONS.UPDATE_MENU_LINKS,
-        [...links.value, { kind: 'category' }]
-      )
+    addLink: () => {
+      updatedMenu.links = [...links.value, { kind: 'category' }]
+      updatedMenu.dirty = true
     },
     updateMenu: useSubmitting(
-      () => dispatch(MENUS_ACTIONS.UPDATE_CURRENT_MENU),
+      () => menusService.update(menuName, { ...menu.value, links: links.value }),
       { success: 'Menu updated successfully', error: 'Failed to update menu' }).submit
   }
 }
 
 export function useMenusList () {
-  dispatch(MENUS_ACTIONS.FETCH_MENUS)
-  return {
-    menus: computed(() => store.state[MENUS_MODULE_NAME][MENUS_STATE.MENUS])
-  }
+  const { result } = useDispatcher(() => menusService.getAll(), [])
+
+  return { menus: result }
 }

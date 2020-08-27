@@ -2,9 +2,9 @@
 	<div class="menu-link-input">
 		<MenuKindInput :value="value.kind" @change="changeKind"/>
 		<div>
-			<CategorySelector v-if="value.kind === 'category'" prop="_id" :value="value.value" @change="changeValue"/>
+			<CategorySelector v-if="value.kind === 'category'" prop="_id" :value="categoryValue" @change="changeValue"/>
 			<PostSelector v-else-if="value.kind === 'post'"
-			              :value="value.value"
+			              :value="value.value || value.post"
 			              :title="value.post ? value.post.title : null"
 			              @change="changeValue"/>
 			<MenuHttpInput v-else-if="value.kind === 'http'"
@@ -19,6 +19,7 @@
   import PostSelector from './PostSelector'
   import MenuHttpInput from './MenuHttpInput'
   import CategorySelector from '../../categories/components/CategorySelector'
+  import { computed } from '@vue/composition-api'
 
   export default {
     components: { CategorySelector, MenuHttpInput, PostSelector, MenuKindInput },
@@ -34,6 +35,9 @@
       }
 
       return {
+        categoryValue: computed(() => {
+          return props.value.value || props.value.category._id || props.value.category
+        }),
         changeKind (kind) {
           let value
           switch (kind) {

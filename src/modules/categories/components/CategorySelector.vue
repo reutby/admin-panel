@@ -16,19 +16,18 @@
       prop: { type: String, default: 'path' },
     },
     setup (props, { emit }) {
+      const { mounted, categories } = useCategorySelector()
+
       const model = computed({
         get () {
           const value = props.value
-          const categories = this.categories || []
 
-          return value || (categories.length ? categories[0][props.prop] : null)
+          return value || (categories.value.length ? categories.value[0][props.prop] : null)
         },
         set (value) {
           emit('change', value)
         }
       })
-
-      const { mounted, categories } = useCategorySelector()
 
       watch(
         mounted,
