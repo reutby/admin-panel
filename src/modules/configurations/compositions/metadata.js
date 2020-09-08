@@ -1,6 +1,10 @@
 import { reactive } from '@vue/composition-api'
 import { useEditedInputModels } from '../../core/compositions/edited-inputs'
 
+const configurationKeysTypes = {
+	logoUrl: ['text', 'upload']
+}
+
 export function useEditMetadata (metadata) {
   const keys = Object.keys(metadata)
   const editedValues = reactive(keys.reduce((values, key) => {
@@ -8,10 +12,14 @@ export function useEditMetadata (metadata) {
     return values
   }, {}))
   const updated = reactive(useEditedInputModels(editedValues, metadata, keys))
-  const valuesTypes = keys.reduce((types, key) => {
-    types[key] = typeof updated[key] === 'number' ? 'number' : 'text'
-    return types
-  }, {})
+  const valuesTypes = reactive(keys.reduce((types, key) => {
+	  const options = configurationKeysTypes[key] || [(typeof updated[key] === 'number' ? 'number' : 'text')]
+	  types[key] = {
+		  options,
+		  selected: options[0]
+	  }
+	  return types
+  }, {}))
 
   return {
     keys,

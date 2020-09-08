@@ -8,16 +8,8 @@
 
 		<el-form-item label="Thumbnail">
 			<a @click="toggleUpload">Upload</a>
-			<template v-if="uploadThumbnailOpen">
-				<div>
-					<label>Storage </label>
-					<AssetsStorageSelector @change="uploadStorage = $event._id"/>
-				</div>
-				<BasicFileUploader v-if="uploadStorage" :storage="uploadStorage" @upload="uploadComplete"/>
-			</template>
-			<FormInput v-else :value="thumbnail" placeholder="https://"
-			           @input="thumbnail = $event">
-			</FormInput>
+			<AssetUploader v-if="uploadThumbnailOpen" @change="uploadComplete"/>
+			<FormInput v-else :value="thumbnail" placeholder="https://" @input="thumbnail = $event"/>
 			<div>
 				<img v-if="!uploadThumbnailOpen" class="thumbnail-image" :src="editedPost.thumbnail || post.thumbnail">
 			</div>
@@ -69,13 +61,12 @@
   import { usePostContents } from '../compositions/post-contents'
   import { useNewPost } from '../compositions/posts'
   import { useEditedInputs } from '../../core/compositions/edited-inputs'
-  import BasicFileUploader from '../../assets/components/BasicFileUploader'
   import { usePostThumbnail } from '../compositions/post-thumbnail'
-  import AssetsStorageSelector from '../../assets/components/AssetsStorageSelector'
   import { useUnsavedChanges } from '../compositions/unsaved-changes'
+  import AssetUploader from '@/modules/assets/components/AssetUploader'
 
   export default {
-    components: { AssetsStorageSelector, BasicFileUploader, PostContentEditor, CategorySelector, FormInput },
+    components: { AssetUploader, PostContentEditor, CategorySelector, FormInput },
     props: {
       post: Object,
       submitting: Boolean

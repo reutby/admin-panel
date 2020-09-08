@@ -1,10 +1,21 @@
 <template>
 	<el-form @submit.native.prevent="save">
-		<FormInput v-for="key in keys"
-		           :key="key"
-		           :title="key"
-		           v-model="updated[key]"
-		           :type="valuesTypes[key]"/>
+    <template v-for="key in keys">
+      <el-switch
+          v-if="valuesTypes[key].options.length === 2"
+          :key="key + 'switch'"
+          v-model="valuesTypes[key].selected"
+          :inactive-value="valuesTypes[key].options[0]"
+          :active-value="valuesTypes[key].options[1]"
+          :inactive-text="valuesTypes[key].options[0]"
+          :active-text="valuesTypes[key].options[1]"/>
+      <FormInput
+          :key="key"
+          :title="key"
+          v-model="updated[key]"
+          :type="valuesTypes[key].selected"/>
+    </template>
+
 		<el-button native-type="submit" :loading="submitting">SAVE</el-button>
 	</el-form>
 </template>

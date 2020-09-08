@@ -2,7 +2,6 @@ import { computed, ref } from '@vue/composition-api'
 
 export function usePostThumbnail (editedPost, originalPost) {
   const uploadThumbnailOpen = ref(false)
-  const uploadStorage = ref(null)
 
   const thumbnail = computed({
     get: () => editedPost.thumbnail || originalPost.thumbnail,
@@ -10,14 +9,13 @@ export function usePostThumbnail (editedPost, originalPost) {
   })
 
   return {
-    uploadStorage,
     thumbnail,
     uploadThumbnailOpen,
     toggleUpload () {
       uploadThumbnailOpen.value = !uploadThumbnailOpen.value
     },
-    uploadComplete (res) {
-      thumbnail.value = res.publicUrl
+    uploadComplete (publicUrl) {
+      thumbnail.value = publicUrl
       uploadThumbnailOpen.value = false
     }
   }

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Button, Input, Select, Option, Checkbox, FormItem, Form, Upload, CheckboxGroup, InputNumber } from 'element-ui'
+import { Button, Input, Select, Option, Checkbox, FormItem, Form, Upload, CheckboxGroup, InputNumber, Switch } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
 
@@ -15,3 +15,4 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Upload)
 Vue.use(CheckboxGroup)
+Vue.use(Switch)
