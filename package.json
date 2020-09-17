@@ -1,6 +1,6 @@
 {
   "name": "@greenpress/admin",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "license": "MIT",
   "author": "David Meir-Levy <davidmeirlevy@gmail.com>",
   "scripts": {
@@ -33,6 +33,9 @@
     "element-ui": "^2.4.5",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
     "lodash.debounce": "^4.0.8",
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.1",
