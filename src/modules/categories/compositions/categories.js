@@ -1,13 +1,13 @@
-import { computed, reactive, onMounted } from "@vue/composition-api"
+import { computed, reactive, onMounted } from '@vue/composition-api'
 import {
   addCategory,
   categoriesStore,
   fetchCategories,
   removeCategory
-} from "../store/categories"
-import { useSubmitting } from "../../core/compositions/submitting"
-import categoriesService from "../../../services/categories-service"
-import { useDispatcher } from "../../core/compositions/dispatcher"
+} from '../store/categories'
+import { useSubmitting } from '../../core/compositions/submitting'
+import categoriesService from '../../../services/categories-service'
+import { useDispatcher } from '../../core/compositions/dispatcher'
 
 function useCategories() {
   return computed(() => categoriesStore.categories)
@@ -28,8 +28,8 @@ export function useEditCategory(categoryPath) {
   const { submit, submitting } = useSubmitting(
     (payload) => categoriesService.update(categoryPath, payload),
     {
-      success: "Category updated successfully",
-      error: "Failed to update category"
+      success: 'Category updated successfully',
+      error: 'Failed to update category'
     }
   )
 
@@ -46,8 +46,8 @@ export function useCategoriesList() {
     ({ path }) =>
       categoriesService.remove(path).then(() => removeCategory(path)),
     {
-      success: "Category removed successfully",
-      error: "Failed to remove category"
+      success: 'Category removed successfully',
+      error: 'Failed to remove category'
     }
   )
 

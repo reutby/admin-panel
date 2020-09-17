@@ -28,25 +28,25 @@
   </el-form>
 </template>
 <script>
-import FormInput from "../../core/components/forms/FormInput"
-import { clearNulls } from "../../core/utils/clear-nulls"
-import { useCategoryForm } from "../compositions/categories"
+  import FormInput from '../../core/components/forms/FormInput'
+  import { clearNulls } from '../../core/utils/clear-nulls'
+  import { useCategoryForm } from '../compositions/categories'
 
-export default {
-  name: "CategoryForm",
-  components: { FormInput },
-  props: {
-    category: Object,
-    submitting: Boolean
-  },
-  setup(props, { emit }) {
-    const data = useCategoryForm(props)
+  export default {
+    name: 'CategoryForm',
+    components: { FormInput },
+    props: {
+      category: Object,
+      submitting: Boolean
+    },
+    setup(props, { emit }) {
+      const data = useCategoryForm(props)
 
-    return {
-      ...data,
-      submit: () => emit("submit", clearNulls(data.editedCategory))
+      return {
+        ...data,
+        submit: () => emit('submit', clearNulls(data.editedCategory))
+      }
     }
   }
-}
 </script>
 <style scoped></style>
