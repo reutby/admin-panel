@@ -1,9 +1,12 @@
 <template>
-	<el-select @change="change" :value="selected">
-		<el-option v-for="item in items"
-		           :key="item._id"
-		           :value="item" :label="item.name"/>
-	</el-select>
+  <el-select @change="change" :value="selected">
+    <el-option
+      v-for="item in items"
+      :key="item._id"
+      :value="item"
+      :label="item.name"
+    />
+  </el-select>
 </template>
 <script>
   import { useStorageList } from '../compositions/storages'
@@ -14,7 +17,7 @@
     props: {
       value: String
     },
-    setup (props, { emit }) {
+    setup(props, { emit }) {
       const { items } = useStorageList()
       const { selected, change } = useModelChange(props.value, items, emit)
       return {

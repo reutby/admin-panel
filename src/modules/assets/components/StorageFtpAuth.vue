@@ -1,9 +1,9 @@
 <template>
-	<div>
-		<FormInput title="FTP Host" v-model="form.host"/>
-		<FormInput title="Username" v-model="form.username"/>
-		<FormInput title="Password" type="password" v-model="form.password"/>
-	</div>
+  <div>
+    <FormInput title="FTP Host" v-model="form.host" />
+    <FormInput title="Username" v-model="form.username" />
+    <FormInput title="Password" type="password" v-model="form.password" />
+  </div>
 </template>
 <script>
   import { watchEffect, reactive } from '@vue/composition-api'
@@ -15,7 +15,7 @@
       value: Object
     },
     components: { FormInput },
-    setup (props, { emit }) {
+    setup(props, { emit }) {
       const form = reactive({
         host: '',
         username: '',

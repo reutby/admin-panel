@@ -1,8 +1,8 @@
 <template>
-	<div class="add-storage-page">
-		<PageTitle title="Add new Storage"/>
-		<StorageForm @submit="submit" :submitting="submitting"/>
-	</div>
+  <div class="add-storage-page">
+    <PageTitle title="Add new Storage" />
+    <StorageForm @submit="submit" :submitting="submitting" />
+  </div>
 </template>
 <script>
   import StorageForm from './components/StorageForm'
@@ -13,14 +13,20 @@
   export default {
     name: 'AddStorage',
     components: { PageTitle, StorageForm },
-    setup (_, { root: { $router } }) {
-      const { submitting, submit } = useSubmitting(async function onCreate (data) {
-        const storage = await createStorage(data)
-        $router.push({
-          name: 'editStorage',
-          params: { storageId: storage._id }
-        })
-      }, { success: 'Storage created successfully', error: 'Failed to create storage' })
+    setup(_, { root: { $router } }) {
+      const { submitting, submit } = useSubmitting(
+        async function onCreate(data) {
+          const storage = await createStorage(data)
+          $router.push({
+            name: 'editStorage',
+            params: { storageId: storage._id }
+          })
+        },
+        {
+          success: 'Storage created successfully',
+          error: 'Failed to create storage'
+        }
+      )
 
       return {
         submitting,

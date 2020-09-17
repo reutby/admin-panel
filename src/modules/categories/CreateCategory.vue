@@ -1,8 +1,8 @@
 <template>
-	<div class="category-page">
-		<PageTitle title="Create Category"/>
-		<CategoryForm :category="{}" @submit="submit"/>
-	</div>
+  <div class="category-page">
+    <PageTitle title="Create Category" />
+    <CategoryForm :category="{}" @submit="submit" />
+  </div>
 </template>
 <script>
   import CategoryForm from './components/CategoryForm'
@@ -12,8 +12,8 @@
   export default {
     name: 'CreateCategory',
     components: { PageTitle, CategoryForm },
-    setup (_, { root: { $router } }) {
-      async function submit (data) {
+    setup(_, { root: { $router } }) {
+      async function submit(data) {
         const { path } = await createCategory(data)
         $router.push({
           name: 'editCategory',

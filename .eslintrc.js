@@ -23,7 +23,7 @@ module.exports = {
 		'no-mixed-spaces-and-tabs': 'off',
 		'vue/script-indent': ['warn', 2, { 'baseIndent': 1 }],
 		'space-before-function-paren': ['error', {
-			'anonymous': 'always',
+			'anonymous': 'never',
 			'named': 'never',
 			'asyncArrow': 'always'
 		}],
