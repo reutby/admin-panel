@@ -19,7 +19,7 @@
 
   export default {
     name: 'LoginForm',
-    setup (_, { root: { $router } }) {
+    setup(_, { root: { $router } }) {
       const { login, form, isLoggedIn } = useLogin()
       const { submit, submitting } = useSubmitting(login, { error: 'Login failed' })
 

@@ -13,7 +13,7 @@
   export default {
     name: 'CreatePost',
     components: { PageTitle, PostForm },
-    setup (_, { root: { $router } }) {
+    setup(_, { root: { $router } }) {
       const { submitting, submit } = useCreatePost()
       return {
         submitting,

@@ -17,7 +17,7 @@
     props: {
       menu: String
     },
-    setup (props) {
+    setup(props) {
       return useMenuOperations(props.menu)
     }
   }

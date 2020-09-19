@@ -17,7 +17,7 @@
       value: String,
       title: String,
     },
-    setup (props, { emit }) {
+    setup(props, { emit }) {
       const { searchPostsList, selectedPost, search } = usePostsSearch()
 
       return {
@@ -29,14 +29,14 @@
             selectedPost.title = value
           }
         }),
-        onInput (value) {
+        onInput(value) {
           if (value.length > 2) {
             // do API search for posts, and show autocomplete
             search(value)
           }
         },
         searchPostsList,
-        select (post) {
+        select(post) {
           selectedPost.title = post.title
           selectedPost.value = post._id
           searchPostsList.value = []

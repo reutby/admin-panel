@@ -1,6 +1,6 @@
 import { computed } from '@vue/composition-api'
 
-export function usePostContents (editedPost, originalPost) {
+export function usePostContents(editedPost, originalPost) {
   const editorContentsStates = computed(() => {
     if (editedPost.editorContentsStates === null) {
       return originalPost.editorContentsStates || ['editor']
@@ -8,7 +8,7 @@ export function usePostContents (editedPost, originalPost) {
     return editedPost.editorContentsStates
   })
 
-  function getCurrent () {
+  function getCurrent() {
     const contents = editedPost.contents || originalPost.contents
     return { contents, editorContentsStates: editorContentsStates.value }
   }
@@ -25,17 +25,17 @@ export function usePostContents (editedPost, originalPost) {
     })
   })
 
-  function setContent (index, html) {
+  function setContent(index, html) {
     editedPost.contents = editedPost.contents !== null ? [...editedPost.contents] : [...(originalPost.contents || [])]
     editedPost.contents[index] = html
   }
 
-  function setContentsStates (index, type) {
+  function setContentsStates(index, type) {
     editedPost.editorContentsStates = [].concat(editedPost.editorContentsStates || originalPost.editorContentsStates || [])
     editedPost.editorContentsStates[index] = type
   }
 
-  function removeContent (index) {
+  function removeContent(index) {
     const { contents, editorContentsStates } = getCurrent()
 
     contents.splice(index, 1)
@@ -45,7 +45,7 @@ export function usePostContents (editedPost, originalPost) {
     editedPost.editorContentsStates = editorContentsStates
   }
 
-  function addContent () {
+  function addContent() {
     const { contents, editorContentsStates } = getCurrent()
 
     contents.push('')

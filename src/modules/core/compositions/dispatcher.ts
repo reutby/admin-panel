@@ -1,6 +1,6 @@
 import { ref } from '@vue/composition-api'
 
-export function useDispatcher (callback, defaultValue = null) {
+export function useDispatcher(callback, defaultValue = null) {
   const result = ref(defaultValue)
   const loading = ref(true)
   const error = ref(null)

@@ -12,7 +12,7 @@
   export default {
     name: 'CreateUser',
     components: { PageTitle, UserForm },
-    setup (_, { root: { $router } }) {
+    setup(_, { root: { $router } }) {
       const { createUser } = useCreateUser()
       return {
         save: async user => {

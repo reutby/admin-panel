@@ -1,18 +1,18 @@
 import { ref, computed, reactive } from '@vue/composition-api'
-import { AUTH_ACTIONS, AUTH_MODULE_NAME, AUTH_STATE } from '../../../store/auth/consts'
-import api from '../../../services/api'
-import store from '../../../store'
+import { AUTH_ACTIONS, AUTH_MODULE_NAME, AUTH_STATE } from '@/store/auth/consts'
+import { api } from '@/services/api'
+import store from '@/store'
 
-function dispatch (action, payload) {
+function dispatch(action: string, payload?: any) {
   return store.dispatch(AUTH_MODULE_NAME + '/' + action, payload)
 }
 
-function fromState (prop) {
+function fromState(prop: string) {
   return store.state[AUTH_MODULE_NAME][prop]
 }
 
-function interceptAuthenticatedRequests () {
-  api.interceptors.response.use(null, err => {
+function interceptAuthenticatedRequests() {
+  api.interceptors.response.use(null as any, err => {
     if (err.response.status === 401) {
       if (err.config.url.includes('api/token/refresh')) {
         return
@@ -28,7 +28,7 @@ function interceptAuthenticatedRequests () {
   })
 }
 
-export function useAuthenticatedIntercept () {
+export function useAuthenticatedIntercept() {
   interceptAuthenticatedRequests()
   const isLoaded = ref(false)
 
@@ -40,7 +40,7 @@ export function useAuthenticatedIntercept () {
   }
 }
 
-export function useLogin () {
+export function useLogin() {
   const form = reactive({ email: '', password: '' })
   return {
     form,
@@ -53,7 +53,7 @@ export function useLogin () {
   }
 }
 
-export function useAuth () {
+export function useAuth() {
   return {
     logout: () => {
       return dispatch(AUTH_ACTIONS.LOGOUT)

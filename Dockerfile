@@ -1,14 +1,19 @@
 
-FROM node:13.3.0 AS nodeNpm
-COPY package.json package-lock.json ./
+FROM node:14.11 AS nodeNpm
 ENV NODE_ENV=development
+COPY package.json package-lock.json ./
 RUN npm install
-FROM node:alpine
-RUN mkdir /app
+COPY ./public ./public
+COPY babel.config.js tsconfig.json postcss.config.js vue.config.js .eslintrc.js ./
+COPY ./src ./src
+RUN npm run build
+FROM node:14.11-alpine
 WORKDIR /app
 ENV PORT=3001
-COPY --from=nodeNpm node_modules node_modules 
-COPY . .
-EXPOSE $PORT
 ENV NODE_ENV=production
+EXPOSE $PORT
+COPY --from=nodeNpm package.json package-lock.json ./
+COPY server.js ./
+COPY --from=nodeNpm /dist ./dist
+RUN npm install
 CMD npm start

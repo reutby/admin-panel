@@ -26,7 +26,7 @@
 
   export default {
     name: 'ConfigurationsList',
-    setup () {
+    setup() {
       return useConfigurationsList()
     }
   }

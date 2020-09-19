@@ -1,6 +1,6 @@
 import { computed, ref } from '@vue/composition-api'
 
-export function usePostTags (editedPost, originalPost) {
+export function usePostTags(editedPost, originalPost) {
   const currentTagText = ref('')
 
   const tags = computed(() => {
@@ -9,7 +9,7 @@ export function usePostTags (editedPost, originalPost) {
     return editedTags || tags || []
   })
 
-  function addTag (event) {
+  function addTag(event) {
     event.preventDefault()
     if (tags.value.includes(event.target.value)) {
       return
@@ -18,7 +18,7 @@ export function usePostTags (editedPost, originalPost) {
     currentTagText.value = ''
   }
 
-  function removeTag (tag) {
+  function removeTag(tag) {
     editedPost.tags = tags.value.filter(t => t !== tag)
   }
 

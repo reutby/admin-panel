@@ -14,7 +14,7 @@
   export default {
     name: 'EditConfiguration',
     components: { ConfigurationForm, PageTitle },
-    setup () {
+    setup() {
       const { $route } = getCurrentInstance()
       const { config, updateConfiguration } = useEditConfiguration($route.params.key)
 

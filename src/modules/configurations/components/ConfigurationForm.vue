@@ -32,7 +32,7 @@
       metadata: Object,
       submitting: Boolean
     },
-    setup ({ metadata }, { emit }) {
+    setup({ metadata }, { emit }) {
       const { updated, edited, keys, valuesTypes } = useEditMetadata(metadata)
 
       return {
@@ -40,7 +40,7 @@
         valuesTypes,
         updated,
         edited,
-        save () {
+        save() {
           emit('save', clearNulls(edited))
         }
       }

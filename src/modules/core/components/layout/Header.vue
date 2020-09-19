@@ -12,7 +12,7 @@
 
   export default {
     name: 'Header',
-    setup (_, { root: { $router }, emit }) {
+    setup(_, { root: { $router }, emit }) {
       const { user, logout } = useAuth()
 
       return {

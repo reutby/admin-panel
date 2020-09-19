@@ -2,7 +2,7 @@ import { MessageBox } from 'element-ui'
 import { getItem, removeItem, setItem } from '../../core/utils/storage'
 import { watchEffect } from '@vue/composition-api'
 
-export function useUnsavedChanges (postId = 'new', editedPost) {
+export function useUnsavedChanges(postId = 'new', editedPost) {
   const storageKey = `unsaved-post:${postId}`
   const unsavedPostData = getItem(storageKey)
 
@@ -25,7 +25,7 @@ export function useUnsavedChanges (postId = 'new', editedPost) {
   }
 }
 
-export function removeUnsavedChanges (postId = 'new') {
+export function removeUnsavedChanges(postId = 'new') {
   const storageKey = `unsaved-post:${postId}`
   removeItem(storageKey)
 }

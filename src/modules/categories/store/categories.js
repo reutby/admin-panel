@@ -7,7 +7,7 @@ export const categoriesStore = Vue.observable({
   categories: []
 })
 
-export async function fetchCategories () {
+export async function fetchCategories() {
   if (categoriesStore.loaded || categoriesStore.loading) {
     return
   }
@@ -23,10 +23,10 @@ export async function fetchCategories () {
   }
 }
 
-export function removeCategory (path) {
+export function removeCategory(path) {
   categoriesStore.categories = categoriesStore.categories.filter(category => category.path !== path)
 }
 
-export function addCategory (category) {
+export function addCategory(category) {
   categoriesStore.categories.push(category)
 }

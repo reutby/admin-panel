@@ -22,9 +22,9 @@
         type: Object, default: () => ({})
       }
     },
-    setup (props, { emit }) {
+    setup(props, { emit }) {
       return {
-        emitChange (key, value) {
+        emitChange(key, value) {
           emit('change', {
             ...props.value,
             [key]: value

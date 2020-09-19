@@ -29,7 +29,7 @@
       value: String,
       state: String
     },
-    setup (props, { emit }) {
+    setup(props, { emit }) {
       return {
         iFrameSrc: computed(() => 'data:text/html, ' + props.value),
         changeType: ($event) => emit('typeChange', $event),

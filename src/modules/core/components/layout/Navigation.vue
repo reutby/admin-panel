@@ -37,7 +37,7 @@
     props: {
       opened: Boolean
     },
-    setup (_, { emit }) {
+    setup(_, { emit }) {
       return {
         close: () => emit('close')
       }

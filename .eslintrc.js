@@ -6,7 +6,8 @@ module.exports = {
   },
   'extends': [
     'plugin:vue/essential',
-    '@vue/standard'
+    '@vue/standard',
+    '@vue/typescript'
   ],
   plugins: [
     'prettier'
@@ -29,7 +30,7 @@ module.exports = {
     }],
   },
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
     ecmaFeatures: {
       legacyDecorators: true
     }

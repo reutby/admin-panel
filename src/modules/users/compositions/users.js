@@ -3,7 +3,7 @@ import usersService from '../../../services/users-service'
 import { useDispatcher } from '../../core/compositions/dispatcher'
 import { useSubmitting } from '../../core/compositions/submitting'
 
-export function useEditUsers (userId) {
+export function useEditUsers(userId) {
   const { result: user } = useDispatcher(() => usersService.getOne(userId))
   const { submit, submitting } = useSubmitting((payload) => usersService.update(userId, payload), {
     success: 'User updated successfully',
@@ -16,7 +16,7 @@ export function useEditUsers (userId) {
   }
 }
 
-export function useCreateUser () {
+export function useCreateUser() {
   const { submit, submitting } = useSubmitting(usersService.create, {
     success: 'User created successfully',
     error: 'Failed to create user'
@@ -27,7 +27,7 @@ export function useCreateUser () {
   }
 }
 
-export function useRemoveUser (onSuccess) {
+export function useRemoveUser(onSuccess) {
   const { submit, submitting: removing } = useSubmitting(
     (id) => usersService.remove(id).then(() => onSuccess(id)),
     {
@@ -45,7 +45,7 @@ export function useRemoveUser (onSuccess) {
  *
  * @returns {{users: Ref<Array<any>>}}
  */
-export function useUsersList () {
+export function useUsersList() {
   const { result: users } = useDispatcher(() => usersService.getAll(), [])
   return { users }
 }

@@ -4,7 +4,7 @@
 		<div>
 			<CategorySelector v-if="value.kind === 'category'" prop="_id" :value="categoryValue" @change="changeValue"/>
 			<PostSelector v-else-if="value.kind === 'post'"
-			              :value="value.value || value.post"
+			              :value="value.value || (value.post && value.post._id)"
 			              :title="value.post ? value.post.title : null"
 			              @change="changeValue"/>
 			<MenuHttpInput v-else-if="value.kind === 'http'"
@@ -26,8 +26,8 @@
     props: {
       value: Object
     },
-    setup (props, { emit }) {
-      function emitUpdate (changes) {
+    setup(props, { emit }) {
+      function emitUpdate(changes) {
         emit('change', {
           ...props.value,
           ...changes
@@ -36,9 +36,9 @@
 
       return {
         categoryValue: computed(() => {
-          return props.value.value || props.value.category._id || props.value.category
+          return props.value.value || props.value.category?._id || props.value.category
         }),
-        changeKind (kind) {
+        changeKind(kind) {
           let value
           switch (kind) {
           case 'category':

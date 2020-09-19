@@ -1,10 +1,10 @@
-import api from '../../../services/api'
+import { api, getCallData } from '@/services/api'
 import { computed, ref } from '@vue/composition-api'
 
 export function getAssetInStorage(storageId, identifier) {
-  return api.withData.get('/api/assets/' + storageId, {
+  return api.get('/api/assets/' + storageId, {
     params: { identifier }
-  })
+  }).then(getCallData)
 }
 
 export function useAssetsUpload(storage, location) {
@@ -27,19 +27,19 @@ export function useAssetsUpload(storage, location) {
 }
 
 export function uploadAssetToStorage(storageId, identifier = '/', file) {
-  return api.withData.post('/api/assets/' + storageId, file, {
+  return api.post('/api/assets/' + storageId, file, {
     params: { identifier }
-  })
+  }).then(getCallData)
 }
 
 export function removeAssetFromStorage(storageId, identifier) {
-  return api.withData.delete('/api/assets/' + storageId, {
+  return api.delete('/api/assets/' + storageId, {
     params: { identifier }
-  })
+  }).then(getCallData)
 }
 
 export function updateAssetFromStorage(storageId, identifier, metadata = {}) {
-  return api.withData.put('/api/assets/' + storageId, metadata, {
+  return api.put('/api/assets/' + storageId, metadata, {
     params: { identifier }
-  })
+  }).then(getCallData)
 }

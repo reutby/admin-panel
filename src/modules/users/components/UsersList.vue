@@ -29,7 +29,7 @@
   import { useUsersList, useRemoveUser } from '../compositions/users'
 
   export default {
-    setup () {
+    setup() {
       const { users } = useUsersList()
       const { remove } = useRemoveUser((id) => {
         users.value = users.value.filter(user => user._id !== id)

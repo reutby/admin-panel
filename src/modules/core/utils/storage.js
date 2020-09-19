@@ -1,4 +1,4 @@
-export function getItem (key, defaults = null) {
+export function getItem(key, defaults = null) {
   const value = localStorage.getItem(key)
   try {
     return typeof value === 'undefined' ? defaults : (JSON.parse(value))
@@ -7,10 +7,10 @@ export function getItem (key, defaults = null) {
   }
 }
 
-export function setItem (key, value) {
+export function setItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value))
 }
 
-export function removeItem (key) {
+export function removeItem(key) {
   localStorage.removeItem(key)
 }

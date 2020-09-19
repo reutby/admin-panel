@@ -1,14 +1,14 @@
 import { AUTH_ACTIONS, AUTH_MUTATIONS, AUTH_STATE } from './consts'
-import api from '../../services/api'
-import router from '../../router'
+import { api } from '@/services/api'
+import router from '@/router'
 
-function setPayload (payload) {
+function setPayload(payload) {
   localStorage.setItem('refresh_token', payload.refreshToken)
   api.defaults.headers.common['authorization'] = 'Bearer ' + payload.token
 }
 
 export const actions = {
-  [AUTH_ACTIONS.FETCH_USER] ({ commit, dispatch, state }) {
+  [AUTH_ACTIONS.FETCH_USER]({ commit, dispatch, state }) {
     if (state[AUTH_STATE.USER]) return
     return api.get('/api/me').then(res => {
       const user = res.data || {}
@@ -20,7 +20,7 @@ export const actions = {
       }
     })
   },
-  [AUTH_ACTIONS.LOGIN] ({ commit }, { email, password }) {
+  [AUTH_ACTIONS.LOGIN]({ commit }, { email, password }) {
     return api.post('/api/signin', {
       email,
       password,
@@ -32,7 +32,7 @@ export const actions = {
         return commit(AUTH_MUTATIONS.SET_USER, payload.user)
       })
   },
-  [AUTH_ACTIONS.REFRESH_TOKEN] ({ commit, state }) {
+  [AUTH_ACTIONS.REFRESH_TOKEN]({ commit, state }) {
     if (!state[AUTH_STATE.REFRESH_TOKEN_CALL]) {
       commit(AUTH_MUTATIONS.SET_REFRESH_TOKEN_CALL,
         api.post('/api/token/refresh',
@@ -52,7 +52,7 @@ export const actions = {
     }
     return state[AUTH_STATE.REFRESH_TOKEN_CALL]
   },
-  [AUTH_ACTIONS.LOGOUT] ({ commit }) {
+  [AUTH_ACTIONS.LOGOUT]({ commit }) {
     localStorage.removeItem('refresh_token')
     api.defaults.headers.common['authorization'] = null
     commit(AUTH_MUTATIONS.SET_USER, null)

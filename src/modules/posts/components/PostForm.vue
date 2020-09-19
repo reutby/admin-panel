@@ -71,7 +71,7 @@
       post: Object,
       submitting: Boolean
     },
-    setup (props, { emit }) {
+    setup(props, { emit }) {
       const editedPost = useNewPost().post
       const tagsContext = usePostTags(editedPost, props.post)
       const contentsContext = usePostContents(editedPost, props.post)
@@ -95,12 +95,12 @@
           const isBool = typeof editedPost.isPublic === 'boolean'
           return isBool ? editedPost.isPublic : props.post.isPublic
         }),
-        mountCategory (path) {
+        mountCategory(path) {
           if (!props.post._id) {
             editedPost.category = path
           }
         },
-        submit () {
+        submit() {
           const submittedPost = clearNulls(editedPost)
           saveChanges(submittedPost)
           emit('submit', submittedPost)
@@ -114,15 +114,6 @@
 	.post-form {
 		padding: 0 10px;
 		margin-bottom: 20px;
-	}
-
-	.form-item-flex {
-		display: flex;
-		flex-direction: column;
-
-		/deep/ .el-form-item__label {
-			text-align: left;
-		}
 	}
 
 	.thumbnail-image {

@@ -1,6 +1,6 @@
-import Configurations from './Configurations'
-import EditConfiguration from './EditConfiguration'
-import EmptyRoute from '../core/components/layout/EmptyRoute'
+import Configurations from './Configurations.vue'
+import EditConfiguration from './EditConfiguration.vue'
+import EmptyRoute from '../core/components/layout/EmptyRoute.vue'
 
 const configurationsRoutes = {
   path: '/configurations',

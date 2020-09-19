@@ -35,7 +35,7 @@
   import { useConfirmAction } from '../../core/compositions/confirm-action'
 
   export default {
-    setup () {
+    setup() {
       const { posts, remove } = usePostsList()
       return { posts, remove: useConfirmAction(remove) }
     }

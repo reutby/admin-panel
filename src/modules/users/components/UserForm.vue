@@ -30,7 +30,7 @@
     props: {
       user: Object
     },
-    setup (props, { emit }) {
+    setup(props, { emit }) {
       const editedData = reactive({
         name: null,
         email: null,
@@ -45,7 +45,7 @@
           get: () => editedData.roles || props.user.roles || [],
           set: (roles) => editedData.roles = roles
         }),
-        submit () {
+        submit() {
           emit('submit', clearNulls(editedData))
         }
       }

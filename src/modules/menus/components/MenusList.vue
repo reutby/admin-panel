@@ -12,7 +12,7 @@
 
   export default {
     name: 'MenusList',
-    setup () {
+    setup() {
       return useMenusList()
     }
   }

@@ -8,7 +8,7 @@ const configuration = Vue.observable({
   loaded: false,
 })
 
-function initEditor () {
+function initEditor() {
   const { config } = useConfiguration()
 
   watch(config, (config) => {
@@ -23,7 +23,7 @@ function initEditor () {
   })
 }
 
-export function useEditor () {
+export function useEditor() {
   if (!configuration.initialized) {
     initEditor()
   }

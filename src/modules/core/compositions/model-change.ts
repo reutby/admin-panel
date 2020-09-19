@@ -1,6 +1,6 @@
 import { ref, watch } from '@vue/composition-api'
 
-export function useModelChange (modelValue, list, emit) {
+export function useModelChange(modelValue, list, emit) {
   const selected = ref(null)
   watch(
     () => modelValue,

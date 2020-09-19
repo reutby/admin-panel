@@ -4,7 +4,7 @@
     <CategoryForm
       :category="category"
       :submitting="submitting"
-      @submit="submit"
+      @submit="updateCategory"
     />
   </div>
 </template>
@@ -13,36 +13,17 @@
   import CategoryForm from './components/CategoryForm'
   import { useEditCategory } from './compositions/categories'
   import PageTitle from '../core/components/semantics/PageTitle'
-  import { useSubmitting } from '../core/compositions/submitting'
 
   export default {
     name: 'EditCategory',
     components: { PageTitle, CategoryForm },
     setup() {
-      const { $router, $route } = getCurrentInstance()
-      const { category, updateCategory } = useEditCategory(
-        $route.params.categoryPath
-      )
-
-      const { submitting, submit } = useSubmitting(
-        async function(data) {
-          const { path } = await updateCategory(data)
-          if (path !== $route.params.categoryPath) {
-            $router.push({
-              name: 'editCategory',
-              params: { categoryPath: path }
-            })
-          }
-        },
-        {
-          success: 'Category saved successfully',
-          error: 'Failed to save category'
-        }
-      )
+      const { $route } = getCurrentInstance()
+      const { category, updateCategory, submitting } = useEditCategory($route.params.categoryPath)
 
       return {
         category,
-        submit,
+        updateCategory,
         submitting
       }
     }

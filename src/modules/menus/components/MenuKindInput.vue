@@ -14,9 +14,9 @@
     props: {
       value: String
     },
-    setup (_, { emit }) {
+    setup(_, { emit }) {
       return {
-        emitChange (event) {
+        emitChange(event) {
           emit('change', event)
         }
       }

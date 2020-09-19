@@ -12,7 +12,7 @@
   export default {
     name: 'EditPost',
     components: { PageTitle, PostForm },
-    setup (_, { root: { $route: { params } } }) {
+    setup(_, { root: { $route: { params } } }) {
       return useEditPost(params.postId)
     }
   }

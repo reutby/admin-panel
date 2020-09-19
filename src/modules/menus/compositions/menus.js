@@ -2,9 +2,9 @@ import { computed, reactive } from '@vue/composition-api'
 import menusService from '../../../services/menus-service'
 
 import { useSubmitting } from '../../core/compositions/submitting'
-import { useDispatcher } from '@/modules/core/compositions/dispatcher'
+import { useDispatcher } from '@/modules/core/compositions/dispatcher.ts'
 
-export function useMenuOperations (menuName) {
+export function useMenuOperations(menuName) {
   const { result: menu } = useDispatcher(() => menusService.getOne(menuName), {})
 
   const updatedMenu = reactive({
@@ -33,7 +33,7 @@ export function useMenuOperations (menuName) {
   }
 }
 
-export function useMenusList () {
+export function useMenusList() {
   const { result } = useDispatcher(() => menusService.getAll(), [])
 
   return { menus: result }

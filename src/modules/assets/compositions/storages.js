@@ -1,23 +1,23 @@
 import { reactive, ref } from '@vue/composition-api'
-import api from '../../../services/api'
+import { api, getCallData } from '@/services/api'
 import { getAssetInStorage } from './assets'
 
 export function createStorage(storage) {
-  return api.withData.post('/api/storage', storage)
+  return api.post('/api/storage', storage).then(getCallData)
 }
 
 export function updateStorage(storage) {
-  return api.withData.put('/api/storage/' + storage._id, storage)
+  return api.put('/api/storage/' + storage._id, storage).then(getCallData)
 }
 
 export function removeStorage(storageId) {
-  return api.withData.delete('/api/storage/' + storageId)
+  return api.delete('/api/storage/' + storageId).then(getCallData)
 }
 
 export function useStorageList() {
   const items = ref([])
 
-  api.withData.get('/api/storage').then((data) => (items.value = data))
+  api.get('/api/storage').then(getCallData).then((data) => (items.value = data))
 
   return {
     items,
@@ -55,7 +55,7 @@ export function useStorage(storageId) {
     storage: {}
   })
 
-  api.withData.get('/api/storage/' + storageId).then((storage) => {
+  api.get('/api/storage/' + storageId).then(getCallData).then((storage) => {
     data.storage = storage
     data.loading = false
   })

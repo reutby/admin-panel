@@ -17,7 +17,7 @@
   export default {
     name: 'Authenticated',
     components: { Header, Navigation },
-    setup (_, { root: { $router } }) {
+    setup(_, { root: { $router } }) {
       const navigationOpened = ref(false)
 
       $router.afterEach(() => navigationOpened.value = false)

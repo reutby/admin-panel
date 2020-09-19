@@ -12,7 +12,7 @@
   export default {
     name: 'EditUser',
     components: { PageTitle, UserForm },
-    setup (_, { root: { $route: { params } } }) {
+    setup(_, { root: { $route: { params } } }) {
       return useEditUsers(params.userId)
     }
   }

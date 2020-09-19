@@ -30,7 +30,7 @@
 
   export default {
     name: 'CategoriesList',
-    setup () {
+    setup() {
       const { categories, removeCategory } = useCategoriesList()
 
       return {

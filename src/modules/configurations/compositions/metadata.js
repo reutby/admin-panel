@@ -5,7 +5,7 @@ const configurationKeysTypes = {
 	logoUrl: ['text', 'upload']
 }
 
-export function useEditMetadata (metadata) {
+export function useEditMetadata(metadata) {
   const keys = Object.keys(metadata)
   const editedValues = reactive(keys.reduce((values, key) => {
     values[key] = null
