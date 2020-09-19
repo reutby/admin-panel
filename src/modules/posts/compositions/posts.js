@@ -1,6 +1,6 @@
 import { reactive, ref } from '@vue/composition-api'
 import debounce from 'lodash.debounce'
-import {api, getCallData } from '@/services/api'
+import { api, getCallData } from '@/services/api'
 import { useSubmitting } from '../../core/compositions/submitting'
 import { removeUnsavedChanges } from './unsaved-changes'
 
