@@ -1,19 +1,19 @@
 import { api, getCallData } from '@/services/api'
-import { computed, ref } from '@vue/composition-api'
+import { computed, Ref, ref } from '@vue/composition-api'
 
-export function getAssetInStorage(storageId, identifier) {
+export function getAssetInStorage(storageId: string, identifier?: string) {
   return api.get('/api/assets/' + storageId, {
     params: { identifier }
   }).then(getCallData)
 }
 
-export function useAssetsUpload(storage, location) {
+export function useAssetsUpload(storageId: string, location: Ref<string>) {
   const uploadUrl = ref('')
   return {
     headers: computed(() => api.defaults.headers.common),
     setUploadUrl(file) {
       const fileName = file.name.split('.')
-      const url = new URL(`/api/assets/${storage}`, api.defaults.baseURL)
+      const url = new URL(`/api/assets/${storageId}`, api.defaults.baseURL)
       const locationPath =
         location.value + (location.value.endsWith('/') ? '' : '/')
       url.searchParams.append('identifier', locationPath)
@@ -26,19 +26,19 @@ export function useAssetsUpload(storage, location) {
   }
 }
 
-export function uploadAssetToStorage(storageId, identifier = '/', file) {
+export function uploadAssetToStorage(storageId: string, identifier: string = '/', file: File) {
   return api.post('/api/assets/' + storageId, file, {
     params: { identifier }
   }).then(getCallData)
 }
 
-export function removeAssetFromStorage(storageId, identifier) {
+export function removeAssetFromStorage(storageId: string, identifier: string) {
   return api.delete('/api/assets/' + storageId, {
     params: { identifier }
   }).then(getCallData)
 }
 
-export function updateAssetFromStorage(storageId, identifier, metadata = {}) {
+export function updateAssetFromStorage(storageId: string, identifier: string, metadata = {}) {
   return api.put('/api/assets/' + storageId, metadata, {
     params: { identifier }
   }).then(getCallData)

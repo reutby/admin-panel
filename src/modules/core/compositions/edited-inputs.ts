@@ -7,7 +7,7 @@ export function useEditedInputs(editedObj, originalObj, propsMap = []) {
   }, {} as any)
 }
 
-export function useEditedInputModels(editedObj, originalObj, propsMap = []) {
+export function useEditedInputModels(editedObj, originalObj, propsMap: string[] = []) {
   return propsMap.reduce((comps, prop) => {
     comps[prop] = computed({
       get: () => editedObj[prop] === null ? originalObj[prop] : editedObj[prop],

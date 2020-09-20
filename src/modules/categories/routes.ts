@@ -2,8 +2,9 @@ import Categories from './Categories.vue'
 import EditCategory from './EditCategory.vue'
 import CreateCategory from './CreateCategory.vue'
 import EmptyRoute from '../core/components/layout/EmptyRoute.vue'
+import { RouteConfig } from 'vue-router'
 
-const categoriesRoutes = {
+const categoriesRoutes: RouteConfig = {
   path: 'categories',
   redirect: { name: 'categories' },
   component: EmptyRoute,

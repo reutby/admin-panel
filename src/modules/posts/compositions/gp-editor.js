@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { computed, watch } from '@vue/composition-api'
-import { useConfiguration } from '../../configurations/compositions/configurations'
+import { useAppConfiguration } from '@/modules/configurations/store/app-configuration.ts'
 
 const configuration = Vue.observable({
   initialized: false,
-  loaded: false,
+  loaded: false
 })
 
 function initEditor() {
-  const { config } = useConfiguration()
+  const config = useAppConfiguration()
 
   watch(config, (config) => {
     if (config && config.metadata) {

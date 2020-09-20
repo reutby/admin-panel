@@ -1,5 +1,5 @@
-export function getItem(key, defaults = null) {
-  const value = localStorage.getItem(key)
+export function getItem(key: string, defaults = null) {
+  const value: string = localStorage.getItem(key) || ''
   try {
     return typeof value === 'undefined' ? defaults : (JSON.parse(value))
   } catch (e) {

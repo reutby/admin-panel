@@ -6,7 +6,7 @@ const configurationKeysTypes = {
 }
 
 export function useEditMetadata(metadata) {
-  const keys = Object.keys(metadata)
+  const keys: string[] = Object.keys(metadata)
   const editedValues = reactive(keys.reduce((values, key) => {
     values[key] = null
     return values

@@ -1,7 +1,13 @@
 import Vue from 'vue'
 import categoriesService from '../../../services/categories-service'
 
-export const categoriesStore = Vue.observable({
+export interface ICategoriesStore {
+  loaded: boolean,
+  loading: boolean,
+  categories: any[]
+}
+
+export const categoriesStore = Vue.observable<ICategoriesStore>({
   loaded: false,
   loading: false,
   categories: []

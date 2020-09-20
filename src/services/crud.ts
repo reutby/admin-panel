@@ -3,8 +3,8 @@ import { api, getCallData } from './api'
 
 export function getCrud<T = any>(path: string) {
   return {
-    getAll(): Promise<T[]> {
-      return api.get(path).then(getCallData)
+    getAll(queryParams?): Promise<T[]> {
+      return api.get(path, { params: queryParams }).then(getCallData)
     },
     getOne(id: string | number): Promise<T> {
       return api.get<T>(`${path}/${id}`).then(getCallData)

@@ -4,14 +4,14 @@ import menusService from '../../../services/menus-service'
 import { useSubmitting } from '../../core/compositions/submitting'
 import { useDispatcher } from '@/modules/core/compositions/dispatcher.ts'
 
-export function useMenuOperations(menuName) {
-  const { result: menu } = useDispatcher(() => menusService.getOne(menuName), {})
+export function useMenuOperations(menuName: string) {
+  const { result: menu } = useDispatcher<{_id: string, name: string, links: any[]} | any>(() => menusService.getOne(menuName), {})
 
-  const updatedMenu = reactive({
+  const updatedMenu = reactive<{links: any[], dirty: boolean}>({
     links: [],
     dirty: false
   })
-  const links = computed(() => updatedMenu.dirty ? updatedMenu.links : (menu.value.links || []))
+  const links = computed<any[]>(() => updatedMenu.dirty ? updatedMenu.links : (menu.value.links || []))
 
   return {
     links,

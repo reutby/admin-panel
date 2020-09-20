@@ -1,43 +1,36 @@
 import { reactive, ref } from '@vue/composition-api'
 import debounce from 'lodash.debounce'
-import { api, getCallData } from '@/services/api'
 import { useSubmitting } from '../../core/compositions/submitting'
 import { removeUnsavedChanges } from './unsaved-changes'
+import postsService from '@/services/posts-service.ts'
 
 export function useCreatePost() {
   return useSubmitting((post) => {
-    return api
-      .post('/api/posts', post)
-      .then(post => {
-        return post
-      })
-      .then(getCallData)
+    return postsService.create(post)
   }, { success: 'Post created successfully', error: 'Failed to create post' })
 }
 
 function fetchPosts() {
-  return api.get('/api/posts', { params: { populate: ['category'] } }).then(getCallData)
+  return postsService.getAll({ populate: ['category'] })
 }
 
-function fetchPost(postId) {
-  return api.get('/api/posts/' + postId).then(getCallData)
+function fetchPost(postId: string) {
+  return postsService.getOne(postId)
 }
 
 export function useEditPost(postId) {
-  const post = ref(null)
+  const post = ref<any>(null)
   fetchPost(postId).then(data => post.value = data)
 
   return {
     ...useSubmitting((updatedPost) => {
-      return api
-        .put('/api/posts/' + post.value._id, updatedPost)
-        .then(getCallData)
+      return postsService.update(post.value._id, updatedPost)
         .then(post => {
           post.value = post
           removeUnsavedChanges(post._id)
         })
     }, { success: 'Post updated successfully', error: 'Failed to update post' }),
-    post,
+    post
   }
 }
 
@@ -53,34 +46,32 @@ export function useNewPost() {
       path: null,
       tags: null,
       category: null,
-      isPublic: null,
+      isPublic: null
     })
   }
 }
 
 export function usePostsList() {
-  const posts = ref([])
+  const posts = ref<any[]>([])
 
   fetchPosts().then(list => posts.value = list)
 
   return {
     posts,
-    remove: (postId) => api
-      .delete('/api/posts/' + postId)
+    remove: (postId) => postsService.remove(postId)
       .then(() => posts.value = posts.value.filter(({ _id }) => _id !== postId))
   }
 }
 
 export function usePostsSearch() {
-  const searchPostsList = ref([])
-  const selectedPost = reactive({
+  const searchPostsList = ref<any[]>([])
+  const selectedPost = reactive<any>({
     title: '',
     value: ''
   })
 
   function search() {
-    return api.get('/api/posts', { params: { populate: ['category'], lean: true, q: selectedPost.title } })
-      .then(getCallData)
+    return postsService.getAll({ populate: ['category'], lean: true, q: selectedPost.title })
       .then(list => searchPostsList.value = list)
   }
 

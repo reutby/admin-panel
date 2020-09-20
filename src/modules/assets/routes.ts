@@ -2,8 +2,9 @@ import EmptyRoute from '../core/components/layout/EmptyRoute.vue'
 import StorageList from './StorageList.vue'
 import AddStorage from './AddStorage.vue'
 import EditStorage from './EditStorage.vue'
+import { RouteConfig } from 'vue-router'
 
-const assetsRoutes = {
+const assetsRoutes: RouteConfig = {
   path: 'assets',
   redirect: { name: 'storageList' },
   component: EmptyRoute,

@@ -20,7 +20,7 @@ export function createCategory(category) {
   })
 }
 
-export function useEditCategory(categoryPath) {
+export function useEditCategory(categoryPath: string) {
   const { result: category } = useDispatcher(() =>
     categoriesService.getOne(categoryPath)
   )
@@ -58,7 +58,7 @@ export function useCategoriesList() {
 }
 
 export function useCategoryForm(props) {
-  const editedCategory = reactive({
+  const editedCategory = reactive<{[key: string]: any | null}>({
     name: null,
     path: null,
     content: null,
