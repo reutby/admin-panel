@@ -1,6 +1,6 @@
 {
   "name": "@greenpress/admin",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "author": "David Meir-Levy <davidmeirlevy@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
