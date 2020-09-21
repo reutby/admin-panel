@@ -32,9 +32,3 @@ export function useMenuOperations(menuName: string) {
       { success: 'Menu updated successfully', error: 'Failed to update menu' }).submit
   }
 }
-
-export function useMenusList() {
-  const { result } = useDispatcher(() => menusService.getAll(), [])
-
-  return { menus: result }
-}

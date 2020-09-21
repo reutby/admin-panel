@@ -1,14 +1,15 @@
 <template>
 	<div class="menus-page">
-		<h1>Menus</h1>
+    <ListPageTitle title="Menus" create-route="createMenu"/>
 		<MenusList/>
 	</div>
 </template>
 <script>
   import MenusList from './components/MenusList'
+  import ListPageTitle from '@/modules/core/components/semantics/ListPageTitle'
 
   export default {
     name: 'Menus',
-    components: { MenusList }
+    components: { ListPageTitle, MenusList }
   }
 </script>

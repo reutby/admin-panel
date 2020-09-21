@@ -1,8 +1,9 @@
 import Menus from './Menus.vue'
 import EditMenu from './EditMenu.vue'
 import EmptyRoute from '../core/components/layout/EmptyRoute.vue'
+import { RouteConfig } from 'vue-router'
 
-const menusRoutes = {
+const menusRoutes: RouteConfig = {
   path: 'menus',
   redirect: { name: 'menus' },
   component: EmptyRoute,
@@ -11,6 +12,11 @@ const menusRoutes = {
       path: '',
       name: 'menus',
       component: Menus
+    },
+    {
+      path: 'new',
+      name: 'createMenu',
+      component: EditMenu
     },
     {
       path: ':menuName',

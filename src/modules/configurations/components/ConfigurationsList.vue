@@ -5,7 +5,7 @@
 			<tr>
 				<th>Name</th>
 				<th>Public</th>
-				<th>Path</th>
+				<th>Description</th>
 			</tr>
 			</thead>
 			<tbody>
