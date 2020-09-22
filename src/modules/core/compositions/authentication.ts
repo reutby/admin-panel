@@ -1,15 +1,6 @@
-import { ref, computed, reactive } from '@vue/composition-api'
-import { AUTH_ACTIONS, AUTH_MODULE_NAME, AUTH_STATE } from '@/store/auth/consts'
+import { computed, reactive } from '@vue/composition-api'
 import { api } from '@/services/api'
-import store from '@/store'
-
-function dispatch(action: string, payload?: any) {
-  return store.dispatch(AUTH_MODULE_NAME + '/' + action, payload)
-}
-
-function fromState(prop: string) {
-  return store.state[AUTH_MODULE_NAME][prop]
-}
+import { authStore, fetchAuthUser, login, logout, refreshToken } from '@/modules/core/store/auth'
 
 function interceptAuthenticatedRequests() {
   api.interceptors.response.use(null as any, err => {
@@ -17,23 +8,22 @@ function interceptAuthenticatedRequests() {
       if (err.config.url.includes('api/token/refresh')) {
         return
       }
-      return dispatch(AUTH_ACTIONS.REFRESH_TOKEN)
+      return refreshToken()
         .then(
           () => api.request({
             ...err.config,
             headers: undefined
           }),
-          () => dispatch(AUTH_ACTIONS.LOGOUT))
+          () => logout())
     }
   })
 }
 
 export function useAuthenticatedIntercept() {
   interceptAuthenticatedRequests()
-  const isLoaded = ref(false)
+  const isLoaded = computed(() => authStore.isLoaded)
 
-  dispatch(AUTH_ACTIONS.FETCH_USER)
-    .then(() => isLoaded.value = true)
+  fetchAuthUser()
 
   return {
     isLoaded
@@ -45,19 +35,15 @@ export function useLogin() {
   return {
     form,
     login: () => {
-      return dispatch(AUTH_ACTIONS.LOGIN, { email: form.email, password: form.password })
+      return login({ email: form.email, password: form.password })
     },
-    isLoggedIn: computed(() => {
-      return !!fromState(AUTH_STATE.USER)
-    })
+    isLoggedIn: computed(() => !!authStore.user)
   }
 }
 
 export function useAuth() {
   return {
-    logout: () => {
-      return dispatch(AUTH_ACTIONS.LOGOUT)
-    },
-    user: computed(() => fromState(AUTH_STATE.USER))
+    logout,
+    user: computed(() => authStore.user)
   }
 }

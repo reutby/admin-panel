@@ -1,6 +1,6 @@
 {
   "name": "@greenpress/admin",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "author": "David Meir-Levy <davidmeirlevy@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -44,8 +44,7 @@
     "vue": "^2.6.11",
     "vue-cli-plugin-element": "^1.0.1",
     "vue-router": "^3.1.6",
-    "vue-template-compiler": "^2.6.11",
-    "vuex": "^3.1.2"
+    "vue-template-compiler": "^2.6.11"
   },
   "bin": {
     "greenpress-admin": "server.js"
