@@ -1,26 +1,7 @@
 import { computed, reactive } from '@vue/composition-api'
-import { api } from '@/services/api'
-import { authStore, fetchAuthUser, login, logout, refreshToken } from '@/modules/core/store/auth'
-
-function interceptAuthenticatedRequests() {
-  api.interceptors.response.use(null as any, err => {
-    if (err.response.status === 401) {
-      if (err.config.url.includes('api/token/refresh')) {
-        return
-      }
-      return refreshToken()
-        .then(
-          () => api.request({
-            ...err.config,
-            headers: undefined
-          }),
-          () => logout())
-    }
-  })
-}
+import { authStore, fetchAuthUser, login, logout } from '@/modules/core/store/auth'
 
 export function useAuthenticatedIntercept() {
-  interceptAuthenticatedRequests()
   const isLoaded = computed(() => authStore.isLoaded)
 
   fetchAuthUser()
