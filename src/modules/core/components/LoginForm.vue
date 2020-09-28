@@ -12,7 +12,7 @@
 	</el-form>
 </template>
 
-<script>
+<script lang="ts">
   import { watch } from '@vue/composition-api'
   import { useLogin } from '../compositions/authentication'
   import { useSubmitting } from '../compositions/submitting'

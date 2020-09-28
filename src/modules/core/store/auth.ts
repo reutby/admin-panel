@@ -59,6 +59,7 @@ export const login = async ({ email, password }: { email: string, password: stri
   })
   setPayload(payload)
   authStore.user = payload.user
+  authStore.isLoaded = true
 }
 
 export const refreshToken = () => {
