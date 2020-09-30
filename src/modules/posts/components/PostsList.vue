@@ -6,6 +6,7 @@
 			<th>Category</th>
 			<th>Public</th>
 			<th>Path</th>
+			<th>Pinned</th>
 			<th></th>
 		</tr>
 		</thead>
@@ -23,6 +24,7 @@
 			</td>
 			<td><i v-if="post.isPublic" class="el-icon-check"/></td>
 			<td>{{post.path}}</td>
+			<td>{{post.isPinned}}</td>
 			<td>
 				<i @click.prevent="remove(post._id)" class="el-icon-delete"/>
 			</td>
