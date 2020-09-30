@@ -46,7 +46,8 @@ export function useNewPost() {
       path: null,
       tags: null,
       category: null,
-      isPublic: null
+	  isPublic: null,
+	  isPinned: null
     })
   }
 }
