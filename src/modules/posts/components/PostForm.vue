@@ -1,7 +1,7 @@
 <template>
 	<el-form class="post-form" @submit.native.prevent="submit">
 		<el-checkbox :checked="isPublic" @change="editedPost.isPublic = $event">Public Post</el-checkbox>
-		<el-checkbox :checked="isPinned" @change="editedPost.isPinned = $event">Public Post</el-checkbox>
+		<el-checkbox :checked="isPinned" @change="editedPost.isPinned = $event">Pinned Post</el-checkbox>
 
 		<FormInput title="Title" :value="title" @input="editedPost.title = $event"/>
 		<FormInput title="Path" label="leave empty to auto-generate"
