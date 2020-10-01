@@ -4,8 +4,8 @@
 		<tr>
 			<th>Title</th>
 			<th>Category</th>
-			<th>Public</th>
 			<th>Path</th>
+			<th>Public</th>
 			<th>Pinned</th>
 			<th></th>
 		</tr>
@@ -22,9 +22,9 @@
 					{{post.category.name}}
 				</router-link>
 			</td>
-			<td><i v-if="post.isPublic" class="el-icon-check"/></td>
 			<td>{{post.path}}</td>
-			<td>{{post.isPinned}}</td>
+			<td><i v-if="post.isPublic" class="el-icon-check"/></td>
+			<td><i v-if="post.isPinned" class="el-icon-check"/></td>
 			<td>
 				<i @click.prevent="remove(post._id)" class="el-icon-delete"/>
 			</td>
