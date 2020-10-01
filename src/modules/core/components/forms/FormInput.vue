@@ -3,7 +3,7 @@
 		<el-form-item :label="title">
 			<small v-if="label"> ({{label}})</small>
 			<el-input-number v-if="type === 'number'" v-on="$listeners" :value="value"/>
-			<AssetUploader v-if="type === 'upload'" v-on="$listeners" :value="value" class="asset-upload"/>
+			<AssetUploader v-else-if="type === 'upload'" v-on="$listeners" :value="value" class="asset-upload"/>
 			<el-input v-else v-on="$listeners" :value="value" :native-type="type"/>
 		</el-form-item>
 		<slot/>
