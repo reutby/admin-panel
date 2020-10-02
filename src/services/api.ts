@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-const baseURL = process.env.VUE_APP_MAIN_APP_URL || location.origin
+const baseURL = location.origin
 
 export const api = axios.create({ baseURL })
 
