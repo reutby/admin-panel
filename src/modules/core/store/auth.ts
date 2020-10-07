@@ -54,4 +54,5 @@ export const login = async ({ email, password }: { email: string, password: stri
   })
   authStore.user = payload.user
   authStore.isLoaded = true
+  authStore.userPromise = Promise.resolve(payload.user)
 }

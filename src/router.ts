@@ -9,6 +9,7 @@ import assetsRoutes from './modules/assets/routes'
 import postsRoutes from './modules/posts/routes'
 import usersRoutes from './modules/users/routes'
 import configurationsRoutes from './modules/configurations/routes'
+import { authStore, fetchAuthUser } from '@/modules/core/store/auth'
 
 Vue.use(Router)
 
@@ -46,7 +47,11 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.guest || localStorage.refresh_token || to.name === 'login') {
+  if (to.name === 'login' || to.meta.guest || localStorage.refresh_token) {
+    return next()
+  }
+  fetchAuthUser()
+  if (authStore.userPromise || authStore.user) {
     return next()
   }
   next({
