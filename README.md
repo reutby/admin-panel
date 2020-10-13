@@ -3,7 +3,7 @@
 Admin panel service for the greenpress open-source platform.<br>
 Written in Vue.js.
 
-[![Codefresh build status]( https://g.codefresh.io/api/badges/pipeline/greenpress/admin-panel%2Fmaster?type=cf-1)]( https%3A%2F%2Fg.codefresh.io%2Fpublic%2Faccounts%2Fgreenpress%2Fpipelines%2Fnew%2F5df22be825b910790c3882e6)
+[![Codefresh build status]( https://g.codefresh.io/api/badges/pipeline/greenpress/admin-panel%2Fadmin-panel-main?type=cf-1)]( https://g.codefresh.io/public/accounts/greenpress/pipelines/new/5df22be825b910790c3882e6)
 [![npm version](https://badge.fury.io/js/%40greenpress%2Fadmin.svg)](https://badge.fury.io/js/%40greenpress%2Fadmin)
 ## Usage
 ### As a Docker container
