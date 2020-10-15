@@ -1,56 +1,56 @@
 <template>
-	<el-form class="post-form" @submit.native.prevent="submit">
-		<el-checkbox :checked="isPublic" @change="editedPost.isPublic = $event">Public Post</el-checkbox>
-		<el-checkbox :checked="isPinned" @change="editedPost.isPinned = $event">Pinned Post</el-checkbox>
+  <el-form class="post-form" @submit.native.prevent="submit">
+    <el-checkbox :value="isPublic" @change="editedPost.isPublic = $event">Public Post</el-checkbox>
+    <el-checkbox :value="isPinned" @change="editedPost.isPinned = $event">Pinned Post</el-checkbox>
 
-		<FormInput title="Title" :value="title" @input="editedPost.title = $event"/>
-		<FormInput title="Path" label="leave empty to auto-generate"
-		           :value="path" @input="editedPost.path = $event"/>
+    <FormInput title="Title" :value="title" @input="editedPost.title = $event" />
+    <FormInput title="Path" label="leave empty to auto-generate"
+               :value="path" @input="editedPost.path = $event" />
 
-		<el-form-item label="Thumbnail">
-			<a @click="toggleUpload">Upload</a>
-			<AssetUploader v-if="uploadThumbnailOpen" @change="uploadComplete"/>
-			<FormInput v-else :value="thumbnail" placeholder="https://" @input="thumbnail = $event"/>
-			<div>
-				<img v-if="!uploadThumbnailOpen" class="thumbnail-image" :src="editedPost.thumbnail || post.thumbnail">
-			</div>
-		</el-form-item>
+    <el-form-item label="Thumbnail">
+      <a @click="toggleUpload">Upload</a>
+      <AssetUploader v-if="uploadThumbnailOpen" @change="uploadComplete" />
+      <FormInput v-else :value="thumbnail" placeholder="https://" @input="thumbnail = $event" />
+      <div>
+        <img v-if="!uploadThumbnailOpen" class="thumbnail-image" :src="editedPost.thumbnail || post.thumbnail">
+      </div>
+    </el-form-item>
 
-		<el-form-item label="Category">
-			<CategorySelector :value="categoryPath" @change="editedPost.category = $event"
-			                  @mounted="mountCategory"/>
-		</el-form-item>
+    <el-form-item label="Category">
+      <CategorySelector :value="categoryPath" @change="editedPost.category = $event"
+                        @mounted="mountCategory" />
+    </el-form-item>
 
-		<FormInput title="Tags" v-model="currentTagText" @keypress.native.enter="addTag" placeholder="ADD NEW TAG">
-			<ul>
-				<li v-for="tag in tags" :key="tag">
-					{{tag}}
-					<i @click="removeTag(tag)" class="el-icon-delete"/>
-				</li>
-			</ul>
-		</FormInput>
+    <FormInput title="Tags" v-model="currentTagText" @keypress.native.enter="addTag" placeholder="ADD NEW TAG">
+      <ul>
+        <li v-for="tag in tags" :key="tag">
+          {{ tag }}
+          <i @click="removeTag(tag)" class="el-icon-delete" />
+        </li>
+      </ul>
+    </FormInput>
 
-		<el-form-item label="Short" class="form-item-flex">
-			<div>
-				<gp-editor :value="post.short || editedPost.short" @input="editedPost.short = $event"/>
-			</div>
-		</el-form-item>
+    <el-form-item label="Short" class="form-item-flex">
+      <div>
+        <gp-editor :value="post.short || editedPost.short" @input="editedPost.short = $event" />
+      </div>
+    </el-form-item>
 
-		<el-form-item label="Content" class="form-item-flex">
-			<div class="post-contents">
-				<PostContentEditor v-for="item in contents"
-				                   :key="item.index"
-				                   :value="item.content"
-				                   :state="item.state"
-				                   @remove="removeContent(item.index)"
-				                   @contentChange="setContent(item.index, $event)"
-				                   @typeChange="setContentsStates(item.index, $event)"/>
-				<el-button native-type="button" type="text" icon="el-icon-plus" @click="addContent"/>
-			</div>
-		</el-form-item>
+    <el-form-item label="Content" class="form-item-flex">
+      <div class="post-contents">
+        <PostContentEditor v-for="item in contents"
+                           :key="item.index"
+                           :value="item.content"
+                           :state="item.state"
+                           @remove="removeContent(item.index)"
+                           @contentChange="setContent(item.index, $event)"
+                           @typeChange="setContentsStates(item.index, $event)" />
+        <el-button native-type="button" type="text" icon="el-icon-plus" @click="addContent" />
+      </div>
+    </el-form-item>
 
-		<el-button native-type="submit" :loading="submitting">SAVE</el-button>
-	</el-form>
+    <el-button native-type="submit" :loading="submitting">SAVE</el-button>
+  </el-form>
 </template>
 <script>
   import FormInput from '../../core/components/forms/FormInput'
@@ -77,7 +77,7 @@
       const tagsContext = usePostTags(editedPost, props.post)
       const contentsContext = usePostContents(editedPost, props.post)
 
-      const { saveChanges } = useUnsavedChanges(props.post._id, editedPost, contentsContext)
+      const { saveChanges } = useUnsavedChanges(props.post._id, editedPost)
 
       onBeforeMount(() => {
         if (!props.post._id) {
@@ -96,7 +96,7 @@
           const isBool = typeof editedPost.isPublic === 'boolean'
           return isBool ? editedPost.isPublic : props.post.isPublic
         }),
-		isPinned: computed(() => {
+        isPinned: computed(() => {
           const isBool = typeof editedPost.isPinned === 'boolean'
           return isBool ? editedPost.isPinned : props.post.isPinned
         }),
@@ -116,23 +116,23 @@
 </script>
 <style scoped lang="scss">
 
-	.post-form {
-		padding: 0 10px;
-		margin-bottom: 20px;
-	}
+  .post-form {
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
 
-	.thumbnail-image {
-		max-width: 100px;
-	}
+  .thumbnail-image {
+    max-width: 100px;
+  }
 
-	.post-contents {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+  .post-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-		.content-editor {
-			width: 100%;
-			margin-bottom: 5px;
-		}
-	}
+    .content-editor {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+  }
 </style>

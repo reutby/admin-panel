@@ -1,37 +1,41 @@
 import { MessageBox } from 'element-ui'
-import { Ref, watchEffect } from '@vue/composition-api'
+import debounce from 'lodash.debounce'
+import { watch } from '@vue/composition-api'
 import { deleteDraft, getDraft, setDraft } from '@/services/drafts'
-import { debounce } from 'lodash.debounce'
+import { UnwrapRef } from '@vue/composition-api/dist/reactivity'
 
-async function restoreDraft(postId: string|null, editedPost: object) {
+async function restoreDraft(postId: string | null, editedPost: UnwrapRef<any>) {
+  let draft
   try {
-    const draft = await getDraft('post', postId)
-    if (draft?.contextData) {
-      await MessageBox.confirm('Would you like to restore unsaved changes?', 'You have unsaved changes', { type: 'info' })
-      Object.assign(editedPost, draft.contextData)
-    }
+    draft = await getDraft('post', postId)
+  } catch (e) {
+    return
+  }
+  if (!draft?.contextData) {
+    return
+  }
+  try {
+    await MessageBox.confirm('Would you like to restore unsaved changes?', 'You have unsaved changes', { type: 'info' })
+    Object.assign(editedPost, draft.contextData)
   } catch (err) {
-    if (err.message !== 'failed to call url') removeUnsavedChanges(postId)
+    removeUnsavedChanges(postId)
   }
 }
 
-export function useUnsavedChanges(postId: string|null = null, editedPost: Ref<any>) {
+const savePostDraft = debounce(function(postId: string | null, changes: UnwrapRef<any>) {
+  setDraft({
+    contextType: 'post',
+    contextId: postId,
+    contextData: changes
+  })
+}, 3000)
+
+export function useUnsavedChanges(postId: string | null = null, editedPost: UnwrapRef<any>) {
   restoreDraft(postId, editedPost)
 
-  const savePostDraft = debounce(
-    function(postId: string|null, changes: any) {
-      setDraft({
-        contextType: 'post',
-        contextId: postId,
-        contextData: changes
-      })
-    }, 
-    3000
-  )
-
-  watchEffect(() => {
+  watch(() => Object.values(editedPost), () => {
     savePostDraft(postId, editedPost)
-  })
+  }, { lazy: true })
 
   return {
     saveChanges: (data: any) => {
@@ -40,6 +44,6 @@ export function useUnsavedChanges(postId: string|null = null, editedPost: Ref<an
   }
 }
 
-export function removeUnsavedChanges(postId: string|null = null) {
+export function removeUnsavedChanges(postId: string | null = null) {
   deleteDraft('post', postId)
 }

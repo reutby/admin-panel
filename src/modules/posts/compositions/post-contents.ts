@@ -1,9 +1,10 @@
-import { computed } from '@vue/composition-api'
+import { computed, Ref } from '@vue/composition-api'
+import { PostContent, PostContents, PostContentState } from '@/modules/posts/compositions/types/post-contents.ts'
 
 export function usePostContents(editedPost, originalPost) {
   const editorContentsStates = computed(() => {
     if (editedPost.editorContentsStates === null) {
-      return originalPost.editorContentsStates || ['editor']
+      return originalPost.editorContentsStates || [PostContentState.EDITOR]
     }
     return editedPost.editorContentsStates
   })
@@ -13,14 +14,14 @@ export function usePostContents(editedPost, originalPost) {
     return { contents, editorContentsStates: editorContentsStates.value }
   }
 
-  const contents = computed(() => {
+  const contents: Readonly<Ref<Readonly<PostContents>>> = computed(() => {
     const states = editorContentsStates.value
-    const contents = (editedPost.contents === null ? originalPost.contents : editedPost.contents) || [null]
-    return contents.map((content, index) => {
+    const contents: string[] = (editedPost.contents === null ? originalPost.contents : editedPost.contents) || [null]
+    return contents.map((content, index): PostContent => {
       return {
         content,
         index,
-        state: states[index] || 'editor',
+        state: states[index] || PostContentState.EDITOR,
       }
     })
   })
@@ -49,7 +50,7 @@ export function usePostContents(editedPost, originalPost) {
     const { contents, editorContentsStates } = getCurrent()
 
     contents.push('')
-    editorContentsStates.push('editor')
+    editorContentsStates.push(PostContentState.EDITOR)
 
     editedPost.contents = contents
     editedPost.editorContentsStates = editorContentsStates

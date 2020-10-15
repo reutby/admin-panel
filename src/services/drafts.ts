@@ -6,7 +6,7 @@ export function getDraft<T = any>(contextType: string, contextId: string|null): 
 }
 
 export function setDraft<T = any>(draftData: any): Promise<Draft<T>> {
-  return api.put('/api/drafts', { data: draftData }).then(getCallData)
+  return api.put('/api/drafts', draftData).then(getCallData)
 }
 
 export function deleteDraft<T = any>(contextData: string, contextId: string|null): Promise<Draft<T>> {

@@ -20,7 +20,9 @@ function fetchPost(postId: string) {
 
 export function useEditPost(postId) {
   const post = ref<any>(null)
-  fetchPost(postId).then(data => post.value = data)
+  fetchPost(postId).then(data => {
+    post.value = data
+  })
 
   return {
     ...useSubmitting((updatedPost) => {
@@ -46,8 +48,8 @@ export function useNewPost() {
       path: null,
       tags: null,
       category: null,
-	  isPublic: null,
-	  isPinned: null
+      isPublic: null,
+      isPinned: null
     })
   }
 }
