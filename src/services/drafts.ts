@@ -9,6 +9,6 @@ export function setDraft<T = any>(draftData: any): Promise<Draft<T>> {
   return api.put('/api/drafts', draftData).then(getCallData)
 }
 
-export function deleteDraft<T = any>(contextData: string, contextId: string|null): Promise<Draft<T>> {
-  return api.delete('/api/drafts', { params: { contextData, contextId } })
+export function deleteDraft<T = any>(contextType: string, contextId: string|null): Promise<Draft<T>> {
+  return api.delete('/api/drafts', { params: { contextType, contextId } })
 }
