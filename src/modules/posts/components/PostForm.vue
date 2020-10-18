@@ -32,7 +32,7 @@
 
     <el-form-item label="Short" class="form-item-flex">
       <div>
-        <gp-editor :value="post.short || editedPost.short" @input="editedPost.short = $event" />
+        <gp-editor :value="post.short || editedPost.short" @input="editedPost.short = $event" :config="editorConfig"/>
       </div>
     </el-form-item>
 
@@ -65,6 +65,7 @@
   import { usePostThumbnail } from '../compositions/post-thumbnail'
   import { useUnsavedChanges } from '../compositions/unsaved-changes'
   import AssetUploader from '@/modules/assets/components/AssetUploader'
+  import { useEditorConfig } from '@/modules/posts/compositions/gp-editor'
 
   export default {
     components: { AssetUploader, PostContentEditor, CategorySelector, FormInput },
@@ -88,6 +89,7 @@
       return {
         ...tagsContext,
         ...contentsContext,
+        ...useEditorConfig(),
         ...usePostThumbnail(editedPost, props.post),
         ...useEditedInputs(editedPost, props.post, ['title', 'path']),
         editedPost,

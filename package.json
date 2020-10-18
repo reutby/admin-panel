@@ -14,9 +14,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^16.0.0",
-    "@ckeditor/ckeditor5-font": "^18.0.0",
-    "@ckeditor/ckeditor5-vue": "^1.0.1",
+    "@greenpress/gp-editor": "^1.0.1",
     "@types/axios": "^0.14.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",

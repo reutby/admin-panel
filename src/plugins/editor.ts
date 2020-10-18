@@ -1,11 +1,4 @@
-import GpEditor from './GpEditor.vue'
 import Vue from 'vue'
-import { VueConstructor } from 'vue/types/umd'
+import GpEditorPlugin from '@greenpress/gp-editor/index.umd'
 
-export const EditorPlugin = {
-  install(Vue: VueConstructor) {
-    Vue.component('gp-editor', GpEditor)
-  }
-}
-
-Vue.use(EditorPlugin)
+Vue.use(GpEditorPlugin)

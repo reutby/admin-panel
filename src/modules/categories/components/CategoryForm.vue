@@ -21,7 +21,7 @@
     />
     <el-form-item label="Content" class="form-item-flex">
       <div>
-        <gp-editor :value="content" @input="editedCategory.content = $event" />
+        <gp-editor :value="content" @input="editedCategory.content = $event" :config="editorConfig"/>
       </div>
     </el-form-item>
     <el-button native-type="submit" :loading="submitting">SAVE</el-button>
@@ -31,6 +31,7 @@
   import FormInput from '../../core/components/forms/FormInput'
   import { clearNulls } from '../../core/utils/clear-nulls'
   import { useCategoryForm } from '../compositions/categories'
+  import { useEditorConfig } from '@/modules/posts/compositions/gp-editor'
 
   export default {
     name: 'CategoryForm',
@@ -44,6 +45,7 @@
 
       return {
         ...data,
+        ...useEditorConfig(),
         submit: () => emit('submit', clearNulls(data.editedCategory))
       }
     }

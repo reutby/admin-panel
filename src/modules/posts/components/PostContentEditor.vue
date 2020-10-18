@@ -14,7 +14,7 @@
 			/>
 		</div>
 		<template>
-			<gp-editor v-if="state === 'editor'" :value="value" @input="changeContent"/>
+			<gp-editor v-if="state === 'editor'" :value="value" @input="changeContent" :config="editorConfig"/>
 			<textarea v-else-if="state === 'html'" :value="value" @input="changeContent($event.target.value)"/>
 			<iframe v-else-if="state === 'view'" :src="iFrameSrc"/>
 		</template>
@@ -22,6 +22,7 @@
 </template>
 <script>
   import { computed } from '@vue/composition-api'
+  import { useEditorConfig } from '@/modules/posts/compositions/gp-editor'
 
   export default {
     name: 'PostContentEditor',
@@ -31,6 +32,7 @@
     },
     setup(props, { emit }) {
       return {
+        ...useEditorConfig(),
         iFrameSrc: computed(() => 'data:text/html, ' + props.value),
         changeType: ($event) => emit('typeChange', $event),
         changeContent: ($event) => emit('contentChange', $event),
