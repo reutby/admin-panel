@@ -63,7 +63,7 @@
   import { useNewPost } from '../compositions/posts'
   import { useEditedInputs } from '../../core/compositions/edited-inputs'
   import { usePostThumbnail } from '../compositions/post-thumbnail'
-  import { useUnsavedChanges } from '../compositions/unsaved-changes'
+  import { useUnsavedChanges } from '../../core/compositions/unsaved-changes'
   import AssetUploader from '@/modules/assets/components/AssetUploader'
   import { useEditorConfig } from '@/modules/posts/compositions/gp-editor'
 
@@ -78,7 +78,7 @@
       const tagsContext = usePostTags(editedPost, props.post)
       const contentsContext = usePostContents(editedPost, props.post)
 
-      const { saveChanges } = useUnsavedChanges(props.post._id, editedPost)
+      useUnsavedChanges('post', props.post._id, editedPost)
 
       onBeforeMount(() => {
         if (!props.post._id) {
@@ -109,7 +109,6 @@
         },
         submit() {
           const submittedPost = clearNulls(editedPost)
-          saveChanges(submittedPost)
           emit('submit', submittedPost)
         }
       }

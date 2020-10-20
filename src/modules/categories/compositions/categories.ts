@@ -8,6 +8,8 @@ import {
 import { useSubmitting } from '../../core/compositions/submitting'
 import categoriesService from '../../../services/categories-service'
 import { useDispatcher } from '../../core/compositions/dispatcher'
+import { removeUnsavedChanges } from '@/modules/core/compositions/unsaved-changes'
+import { ICategory } from '@/services/types/category'
 
 function useCategories() {
   return computed(() => categoriesStore.categories)
@@ -21,12 +23,17 @@ export function createCategory(category) {
 }
 
 export function useEditCategory(categoryPath: string) {
-  const { result: category } = useDispatcher(() =>
+  const { result: category } = useDispatcher<ICategory>(() =>
     categoriesService.getOne(categoryPath)
   )
 
   const { submit, submitting } = useSubmitting(
-    (payload) => categoriesService.update(categoryPath, payload),
+    (payload) => {
+      return categoriesService.update(categoryPath, payload)
+        .then(() => {
+          removeUnsavedChanges('category', category.value._id)
+        })
+    },
     {
       success: 'Category updated successfully',
       error: 'Failed to update category'
@@ -58,7 +65,7 @@ export function useCategoriesList() {
 }
 
 export function useCategoryForm(props) {
-  const editedCategory = reactive<{[key: string]: any | null}>({
+  const editedCategory = reactive<{ [key: string]: any | null }>({
     name: null,
     path: null,
     content: null,

@@ -32,6 +32,7 @@
   import { clearNulls } from '../../core/utils/clear-nulls'
   import { useCategoryForm } from '../compositions/categories'
   import { useEditorConfig } from '@/modules/posts/compositions/gp-editor'
+  import { useUnsavedChanges } from '@/modules/core/compositions/unsaved-changes.ts'
 
   export default {
     name: 'CategoryForm',
@@ -42,6 +43,8 @@
     },
     setup(props, { emit }) {
       const data = useCategoryForm(props)
+
+      useUnsavedChanges('category', props.category._id, data.editedCategory)
 
       return {
         ...data,
