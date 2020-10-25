@@ -26,7 +26,7 @@ export const logout = () => {
 }
 
 export const fetchAuthUser = async () => {
-  if (authStore.user) {
+  if (authStore.user || authStore.userPromise) {
     return authStore.userPromise
   }
 
