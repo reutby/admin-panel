@@ -2,7 +2,7 @@ import { MessageBox } from 'element-ui'
 import debounce from 'lodash.debounce'
 import { watch } from '@vue/composition-api'
 import { UnwrapRef } from '@vue/composition-api/dist/reactivity'
-import { deleteDraft, getDraft, setDraft } from '@/services/drafts'
+import { deleteDraft, getDraft, setDraft } from '@/services/drafts-service'
 
 async function restoreDraft(contextType: string, contextId: string | null, contextData: UnwrapRef<any>) {
   let draft
