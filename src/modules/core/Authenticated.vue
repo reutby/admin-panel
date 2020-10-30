@@ -4,21 +4,22 @@
     <div class="admin-content">
       <Header class="header" @open="navigationOpened = true" />
       <router-view class="main" />
+      <AssetsDetailsPanel />
     </div>
   </div>
 </template>
 
-<script>
-  import { ref, getCurrentInstance } from '@vue/composition-api'
-  import Header from './components/layout/Header'
-  import Navigation from './components/layout/Navigation'
+<script lang="ts">
+  import { ref, defineComponent } from '@vue/composition-api'
   import { useAuthenticatedIntercept } from './compositions/authentication'
+  import Header from './components/layout/Header.vue'
+  import Navigation from './components/layout/Navigation.vue'
+  import AssetsDetailsPanel from '@/modules/assets/components/AssetsDetailsPanel/AssetsDetailsPanel.vue'
 
-  export default {
+  export default defineComponent({
     name: 'Authenticated',
-    components: { Header, Navigation },
-    setup() {
-      const { $router } = getCurrentInstance()
+    components: { AssetsDetailsPanel, Header, Navigation },
+    setup(_, { root: { $router } }) {
       const navigationOpened = ref(false)
 
       $router.afterEach(() => navigationOpened.value = false)
@@ -28,7 +29,7 @@
         navigationOpened
       }
     }
-  }
+  })
 </script>
 <style scoped lang="scss">
   .admin-panel {

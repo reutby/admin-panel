@@ -9,11 +9,13 @@
   import { createCategory } from './compositions/categories'
   import PageTitle from '../core/components/semantics/PageTitle'
   import { removeUnsavedChanges } from '@/modules/core/compositions/unsaved-changes.ts'
+  import { defineComponent, getCurrentInstance } from '@vue/composition-api'
 
-  export default {
+  export default defineComponent({
     name: 'CreateCategory',
     components: { PageTitle, CategoryForm },
-    setup(_, { root: { $router } }) {
+    setup() {
+      const { $router } = getCurrentInstance()
       async function submit(data) {
         const { path } = await createCategory(data)
         removeUnsavedChanges('category')
@@ -27,5 +29,5 @@
         submit
       }
     }
-  }
+  })
 </script>

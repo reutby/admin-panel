@@ -1,31 +1,23 @@
-import { reactive, ref } from '@vue/composition-api'
-import { getAssetInStorage } from './assets'
-import storagesService from '@/services/storages-service.ts'
-
-export function createStorage(storage) {
-  return storagesService.create(storage)
-}
-
-export function updateStorage(storage) {
-  return storagesService.update(storage._id, storage)
-}
-
-export function removeStorage(storageId: string) {
-  return storagesService.remove(storageId)
-}
+import { computed, reactive, ref } from '@vue/composition-api'
+import storagesService from '@/services/storages-service'
+import { fetchStorages, removeStorage, storagesStore } from '@/modules/assets/store/storages'
+import { useSubmitting } from '@/modules/core/compositions/submitting'
+import { IStorage } from '@/services/types/storage'
 
 export function useStorageList() {
-  const items = ref<any[]>([])
+  fetchStorages()
 
-  storagesService.getAll()
-    .then((data) => items.value = data)
+  const { submit: remove } = useSubmitting(
+    ({ _id }) => removeStorage(_id),
+    {
+      success: 'Storage removed successfully',
+      error: 'Failed to remove storage'
+    }
+  )
 
   return {
-    items,
-    remove: async (storage) => {
-      await removeStorage(storage._id)
-      items.value = items.value.filter((s) => s !== storage)
-    }
+    items: computed(() => storagesStore.storages),
+    remove
   }
 }
 
@@ -51,7 +43,7 @@ export function useStorageForm(props) {
 }
 
 export function useStorage(storageId: string) {
-  const data = reactive({
+  const data = reactive<{loading: boolean, storage: IStorage & any}>({
     loading: true,
     storage: {}
   })
@@ -60,8 +52,5 @@ export function useStorage(storageId: string) {
     data.storage = storage
     data.loading = false
   })
-
-  getAssetInStorage(storageId)
-
   return { data }
 }

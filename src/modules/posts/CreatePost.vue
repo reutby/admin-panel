@@ -4,13 +4,14 @@
 		<PostForm :post="{}" :submitting="submitting" @submit="submit"/>
 	</div>
 </template>
-<script>
-  import PostForm from './components/PostForm'
+<script lang="ts">
   import { useCreatePost } from './compositions/posts'
-  import PageTitle from '../core/components/semantics/PageTitle'
   import { removeUnsavedChanges } from '../core/compositions/unsaved-changes'
+  import { defineComponent } from '@vue/composition-api'
+  import PostForm from './components/PostForm.vue'
+  import PageTitle from '../core/components/semantics/PageTitle.vue'
 
-  export default {
+  export default defineComponent({
     name: 'CreatePost',
     components: { PageTitle, PostForm },
     setup(_, { root: { $router } }) {
@@ -31,5 +32,5 @@
         }
       }
     }
-  }
+  })
 </script>

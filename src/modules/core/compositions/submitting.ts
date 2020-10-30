@@ -12,9 +12,9 @@ export function useSubmitting(submitFn, messages: IErrorMessages = {}) {
   const errorMessage = typeof messages.error === 'function' ? messages.error : (err) => messages.error || err.message || err
   const successMessage = typeof messages.success === 'function' ? messages.success : () => messages.success
 
-  function wrappedSubmit() {
+  function wrappedSubmit(...args) {
     submitting.value = true
-    return submitFn(...arguments)
+    return submitFn(...args)
       .then(data => {
         const msg = successMessage(data)
         if (msg) {

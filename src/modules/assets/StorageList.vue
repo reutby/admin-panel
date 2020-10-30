@@ -4,9 +4,9 @@
 		<AssetsStorageList/>
 	</div>
 </template>
-<script>
-  import AssetsStorageList from './components/AssetsStorageList'
-  import ListPageTitle from '../core/components/semantics/ListPageTitle'
+<script lang="ts">
+  import AssetsStorageList from './components/AssetsStorageList.vue'
+  import ListPageTitle from '../core/components/semantics/ListPageTitle.vue'
 
   export default {
     name: 'StorageList',

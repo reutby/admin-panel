@@ -4,7 +4,7 @@
 		<el-button type="primary" icon="el-icon-edit" @click="$router.push({name: createRoute})"/>
 	</h1>
 </template>
-<script>
+<script lang="ts">
   export default {
     name: 'ListPageTitle',
     props: {

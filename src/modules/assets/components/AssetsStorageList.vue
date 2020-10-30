@@ -5,6 +5,7 @@
         <tr>
           <th>Name</th>
           <th>Kind</th>
+          <th/>
         </tr>
       </thead>
       <tbody>
@@ -24,7 +25,7 @@
     </table>
   </div>
 </template>
-<script>
+<script lang="ts">
   import { useStorageList } from '../compositions/storages'
   import { useConfirmAction } from '../../core/compositions/confirm-action'
 

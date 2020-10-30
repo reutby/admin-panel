@@ -4,11 +4,11 @@
     <StorageForm @submit="submit" :submitting="submitting" />
   </div>
 </template>
-<script>
-  import StorageForm from './components/StorageForm'
-  import { createStorage } from './compositions/storages'
-  import PageTitle from '../core/components/semantics/PageTitle'
+<script lang="ts">
+  import StorageForm from './components/StorageForm.vue'
+  import PageTitle from '../core/components/semantics/PageTitle.vue'
   import { useSubmitting } from '../core/compositions/submitting'
+  import { addStorage } from '@/modules/assets/store/storages'
 
   export default {
     name: 'AddStorage',
@@ -16,7 +16,7 @@
     setup(_, { root: { $router } }) {
       const { submitting, submit } = useSubmitting(
         async function onCreate(data) {
-          const storage = await createStorage(data)
+          const storage = await addStorage(data)
           $router.push({
             name: 'editStorage',
             params: { storageId: storage._id }

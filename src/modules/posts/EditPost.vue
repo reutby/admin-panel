@@ -4,16 +4,17 @@
 		<PostForm :post="post" :submitting="submitting" @submit="submit"/>
 	</div>
 </template>
-<script>
-  import PostForm from './components/PostForm'
+<script lang="ts">
+  import { defineComponent } from '@vue/composition-api'
   import { useEditPost } from './compositions/posts'
-  import PageTitle from '../core/components/semantics/PageTitle'
+  import PostForm from './components/PostForm.vue'
+  import PageTitle from '../core/components/semantics/PageTitle.vue'
 
-  export default {
+  export default defineComponent({
     name: 'EditPost',
     components: { PageTitle, PostForm },
     setup(_, { root: { $route: { params } } }) {
       return useEditPost(params.postId)
     }
-  }
+  })
 </script>

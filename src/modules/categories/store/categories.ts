@@ -29,7 +29,7 @@ export async function fetchCategories() {
   }
 }
 
-export function removeCategory(path) {
+export async function removeCategory(path) {
   categoriesStore.categories = categoriesStore.categories.filter(category => category.path !== path)
 }
 

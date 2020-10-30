@@ -11,12 +11,13 @@
     <BasicFileUploader :storage="$route.params.storageId" />
   </div>
 </template>
-<script>
-  import StorageForm from './components/StorageForm'
-  import { updateStorage, useStorage } from './compositions/storages'
-  import PageTitle from '../core/components/semantics/PageTitle'
+<script lang="ts">
+  import StorageForm from './components/StorageForm.vue'
+  import PageTitle from '../core/components/semantics/PageTitle.vue'
+  import BasicFileUploader from './components/BasicFileUploader.vue'
+  import { useStorage } from './compositions/storages'
   import { useSubmitting } from '../core/compositions/submitting'
-  import BasicFileUploader from './components/BasicFileUploader'
+  import { updateStorage } from '@/modules/assets/store/storages'
 
   export default {
     name: 'EditStorage',
