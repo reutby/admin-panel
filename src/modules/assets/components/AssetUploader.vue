@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>
-      <label>Storage </label>
-      <AssetsStorageSelector @change="selectedStorage = $event._id" />
-    </div>
+    <AssetsStorageSelector @change="selectedStorage = $event._id" />
     <BasicFileUploader
       v-if="selectedStorage"
       :storage="selectedStorage"

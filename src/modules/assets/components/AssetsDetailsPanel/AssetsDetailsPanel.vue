@@ -4,13 +4,10 @@
       <i :class="isOpen ? 'el-icon-arrow-right' : 'el-icon-arrow-left'" />
     </a>
     <div class="content">
-      <div class="select-storage">
-        <label>Storage </label>
-        <AssetsStorageSelector @change="selectedStorage = $event._id" />
-      </div>
+      <AssetsStorageSelector @change="selectedStorage = $event._id" />
       <template v-if="selectedStorage">
-        <BasicFileUploader :storage="selectedStorage"/>
-        <BasicAssetsList :storage="selectedStorage"/>
+        <BasicFileUploader :storage="selectedStorage" />
+        <BasicAssetsList :storage="selectedStorage" />
       </template>
     </div>
   </div>
@@ -38,6 +35,7 @@
 <style scoped>
   .panel {
     position: absolute;
+    z-index: 1;
     top: 100px;
     right: -380px;
     width: 400px;
@@ -60,9 +58,15 @@
     height: 50px;
     display: flex;
     align-items: center;
+    justify-content: center;
     border-radius: 8px 0 0 8px;
     text-decoration: none;
-    background-color: #eee;
+    background-color: #ddd;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .toggle:hover {
+    background-color: #ccc;
   }
 
   .content {
@@ -71,8 +75,15 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    border: 1px solid #ddd;
+    width: 100%;
   }
+
   .content > * {
     margin: 10px;
+  }
+
+  .assets-list {
+    flex: 1;
   }
 </style>

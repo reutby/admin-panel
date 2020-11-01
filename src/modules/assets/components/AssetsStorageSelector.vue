@@ -1,12 +1,15 @@
 <template>
-  <el-select @change="change" :value="selected">
-    <el-option
-      v-for="item in items"
-      :key="item._id"
-      :value="item"
-      :label="item.name"
-    />
-  </el-select>
+  <div class="select-storage">
+    <label>Storage:</label>
+    <el-select @change="change" :value="selected" class="storage-selection">
+      <el-option
+        v-for="item in items"
+        :key="item._id"
+        :value="item"
+        :label="item.name"
+      />
+    </el-select>
+  </div>
 </template>
 <script>
   import { useStorageList } from '../compositions/storages'
@@ -28,3 +31,16 @@
     }
   }
 </script>
+<style scoped>
+  .select-storage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .storage-selection {
+    padding-left: 10px;
+    flex: 1;
+  }
+</style>
