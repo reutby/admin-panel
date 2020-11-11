@@ -78,7 +78,7 @@
       const tagsContext = usePostTags(editedPost, props.post)
       const contentsContext = usePostContents(editedPost, props.post)
 
-      useUnsavedChanges('post', props.post._id, editedPost)
+      useUnsavedChanges('post', props.post._id, computed(() => props.post.title), editedPost)
 
       onBeforeMount(() => {
         if (!props.post._id) {

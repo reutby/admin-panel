@@ -1,8 +1,10 @@
 import { MessageBox } from 'element-ui'
 import debounce from 'lodash.debounce'
-import { watch } from '@vue/composition-api'
+import { getCurrentInstance, Ref, watch } from '@vue/composition-api'
 import { UnwrapRef } from '@vue/composition-api/dist/reactivity'
 import { deleteDraft, getDraft, setDraft } from '@/services/drafts-service'
+import { IDraftContexts } from '@/services/types/draft'
+import { Route } from 'vue-router'
 
 async function restoreDraft(contextType: string, contextId: string | null, contextData: UnwrapRef<any>) {
   let draft
@@ -22,19 +24,28 @@ async function restoreDraft(contextType: string, contextId: string | null, conte
   }
 }
 
-const savePostDraft = debounce(function(contextType: string, contextId: string | null, contextData: UnwrapRef<any>) {
+const savePostDraft = debounce(function({ contextType, contextId, contextData, contextDisplayName, contextRouteParams }: IDraftContexts<any>) {
   setDraft({
     contextType,
     contextId,
-    contextData
+    contextData,
+    contextDisplayName,
+    contextRouteParams
   })
 }, 3000)
 
-export function useUnsavedChanges(contextType: string, contextId: string | null = null, contextData: UnwrapRef<any>) {
+export function useUnsavedChanges(contextType: string, contextId: string | null = null, displayName: Ref<string>, contextData: UnwrapRef<any>) {
+  const $route = (getCurrentInstance() as any).$route as Route
   restoreDraft(contextType, contextId, contextData)
 
-  watch(() => Object.values(contextData), () => {
-    savePostDraft(contextType, contextId, contextData)
+  watch(() => [...Object.values(contextData), displayName.value], () => {
+    savePostDraft({
+      contextType,
+      contextId,
+      contextData,
+      contextDisplayName: displayName.value,
+      contextRouteParams: $route.params
+    })
   }, { lazy: true })
 
   return {
