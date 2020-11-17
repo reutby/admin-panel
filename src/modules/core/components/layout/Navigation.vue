@@ -28,6 +28,10 @@
 			<i class="el-icon-user"/>
 			<span>Users</span>
 		</router-link>
+    <router-link to="/drafts">
+      <i class="el-icon-document-copy"/>
+      <span>Drafts</span>
+    </router-link>
 	</nav>
 </template>
 

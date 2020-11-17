@@ -1,7 +1,7 @@
 import { reactive, ref } from '@vue/composition-api'
 import debounce from 'lodash.debounce'
 import { useSubmitting } from '../../core/compositions/submitting'
-import { removeUnsavedChanges } from '../../core/compositions/unsaved-changes'
+import { removeUnsavedChanges } from '../../drafts/compositions/unsaved-changes'
 import postsService from '@/services/posts-service.ts'
 
 export function useCreatePost() {

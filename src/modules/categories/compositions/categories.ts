@@ -8,7 +8,7 @@ import {
 import { useSubmitting } from '../../core/compositions/submitting'
 import categoriesService from '../../../services/categories-service'
 import { useDispatcher } from '../../core/compositions/dispatcher'
-import { removeUnsavedChanges } from '@/modules/core/compositions/unsaved-changes'
+import { removeUnsavedChanges } from '@/modules/drafts/compositions/unsaved-changes'
 import { ICategory } from '@/services/types/category'
 
 function useCategories() {

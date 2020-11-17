@@ -10,6 +10,7 @@ import postsRoutes from './modules/posts/routes'
 import usersRoutes from './modules/users/routes'
 import configurationsRoutes from './modules/configurations/routes'
 import { authStore, fetchAuthUser } from '@/modules/core/store/auth'
+import draftsRoutes from '@/modules/drafts/routes'
 
 Vue.use(Router)
 
@@ -32,7 +33,8 @@ const router = new Router({
         categoriesRoutes,
         assetsRoutes,
         postsRoutes,
-        usersRoutes
+        usersRoutes,
+        draftsRoutes
       ]
     },
     {

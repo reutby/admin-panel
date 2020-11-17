@@ -8,7 +8,7 @@
   import CategoryForm from './components/CategoryForm'
   import { createCategory } from './compositions/categories'
   import PageTitle from '../core/components/semantics/PageTitle'
-  import { removeUnsavedChanges } from '@/modules/core/compositions/unsaved-changes.ts'
+  import { removeUnsavedChanges } from '@/modules/drafts/compositions/unsaved-changes.ts'
   import { defineComponent, getCurrentInstance } from '@vue/composition-api'
 
   export default defineComponent({

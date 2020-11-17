@@ -32,7 +32,7 @@
   import { clearNulls } from '../../core/utils/clear-nulls'
   import { useCategoryForm } from '../compositions/categories'
   import { useEditorConfig } from '@/modules/posts/compositions/gp-editor'
-  import { useUnsavedChanges } from '@/modules/core/compositions/unsaved-changes.ts'
+  import { useUnsavedChanges } from '@/modules/drafts/compositions/unsaved-changes.ts'
   import { computed } from '@vue/composition-api'
 
   export default {

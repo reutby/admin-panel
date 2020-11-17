@@ -63,7 +63,7 @@
   import { useNewPost } from '../compositions/posts'
   import { useEditedInputs } from '../../core/compositions/edited-inputs'
   import { usePostThumbnail } from '../compositions/post-thumbnail'
-  import { useUnsavedChanges } from '../../core/compositions/unsaved-changes'
+  import { useUnsavedChanges } from '../../drafts/compositions/unsaved-changes'
   import AssetUploader from '@/modules/assets/components/AssetUploader'
   import { useEditorConfig } from '@/modules/posts/compositions/gp-editor'
 

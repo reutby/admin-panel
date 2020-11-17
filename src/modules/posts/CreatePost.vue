@@ -6,7 +6,7 @@
 </template>
 <script lang="ts">
   import { useCreatePost } from './compositions/posts'
-  import { removeUnsavedChanges } from '../core/compositions/unsaved-changes'
+  import { removeUnsavedChanges } from '../drafts/compositions/unsaved-changes'
   import { defineComponent } from '@vue/composition-api'
   import PostForm from './components/PostForm.vue'
   import PageTitle from '../core/components/semantics/PageTitle.vue'
