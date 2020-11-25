@@ -4,22 +4,16 @@
 			<tr>
 				<th>Name</th>
 				<th>Description</th>
-				<th>Related posts</th>
-				<th>Related categories</th>
-				<th>Related layouts</th>
 			</tr>
 		</thead>
 		<body>
 			<tr v-for="block in blocks" :key="block._id">
 				<td>
 					<router-link :to="{name: 'editBlock', params: {blockId: block._id}}">
-						{{block.namee}}
+						{{block.name}}
 					</router-link>
 				</td>
 				<td>{{block.description}}</td>
-				<td>{{block.relatedPosts}}</td>
-				<td>{{block.relatedCategories}}</td>
-				<td>{{block.relatedLayouts}}</td>
 				<td>
 					<i @click.prevent="remove(post._id)" class="el-icon-delete"/>
 				</td>
@@ -33,7 +27,7 @@
 
   export default {
     setup() {
-      const { blocks, remove } = usePostsList()
+      const { blocks, remove } = useBlocksList()
       return { blocks, remove: useConfirmAction(remove) }
     }
   }

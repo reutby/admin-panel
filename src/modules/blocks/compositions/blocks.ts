@@ -5,7 +5,7 @@ function fetchBlocks() {
 	return blocksService.getAll()
 }
 
-export function usePostsList() {
+export function useBlocksList() {
 	const blocks = ref<any[]>([])
   
 	fetchBlocks().then(list => blocks.value = list)

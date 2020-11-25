@@ -11,6 +11,7 @@ import usersRoutes from './modules/users/routes'
 import configurationsRoutes from './modules/configurations/routes'
 import { authStore, fetchAuthUser } from '@/modules/core/store/auth'
 import draftsRoutes from '@/modules/drafts/routes'
+import blocksRoutes from './modules/blocks/routes'
 
 Vue.use(Router)
 
@@ -34,7 +35,8 @@ const router = new Router({
         assetsRoutes,
         postsRoutes,
         usersRoutes,
-        draftsRoutes
+		draftsRoutes,
+		blocksRoutes
       ]
     },
     {
