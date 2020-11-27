@@ -1,5 +1,13 @@
 import Vue from 'vue'
-import categoriesService from '../../../services/categories-service'
+import categoriesService from '@/services/categories-service'
+
+export function enrichHomeCategory(category) {
+  return {
+    ...category,
+    homePage: true,
+    name: 'Home Page'
+  }
+}
 
 export interface ICategoriesStore {
   loaded: boolean,
@@ -20,7 +28,9 @@ export async function fetchCategories() {
   categoriesStore.loading = true
   categoriesStore.loaded = false
   try {
-    categoriesStore.categories = await categoriesService.getAll()
+    let categories = await categoriesService.getAll()
+    const homeCategory = categories.find(cat => cat.path === '-')
+    categoriesStore.categories = [enrichHomeCategory(homeCategory), ...categories.filter(cat => cat !== homeCategory)]
     categoriesStore.loaded = true
   } catch (e) {
     categoriesStore.loaded = false
@@ -34,5 +44,9 @@ export async function removeCategory(path) {
 }
 
 export function addCategory(category) {
-  categoriesStore.categories.push(category)
+  if (category.path === '-') {
+    categoriesStore.categories.unshift(enrichHomeCategory(category))
+  } else {
+    categoriesStore.categories.push(category)
+  }
 }

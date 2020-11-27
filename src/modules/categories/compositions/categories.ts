@@ -1,7 +1,7 @@
 import { computed, reactive, onMounted } from '@vue/composition-api'
 import {
   addCategory,
-  categoriesStore,
+  categoriesStore, enrichHomeCategory,
   fetchCategories,
   removeCategory
 } from '../store/categories'
@@ -24,7 +24,7 @@ export function createCategory(category) {
 
 export function useEditCategory(categoryPath: string) {
   const { result: category } = useDispatcher<ICategory>(() =>
-    categoriesService.getOne(categoryPath)
+    categoriesService.getOne(categoryPath).then(category => categoryPath === '-' ? enrichHomeCategory(category) : category)
   )
 
   const { submit, submitting } = useSubmitting(
@@ -51,7 +51,7 @@ export function useCategoriesList() {
   fetchCategories()
   const { submit } = useSubmitting(
     ({ path }) =>
-      categoriesService.remove(path).then(() => removeCategory(path)),
+      categoriesService.remove(encodeURIComponent(path)).then(() => removeCategory(path)),
     {
       success: 'Category removed successfully',
       error: 'Failed to remove category'
