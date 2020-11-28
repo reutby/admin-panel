@@ -1,15 +1,15 @@
 <template>
 	<div class="categories-page">
-		<PageTitle title="Blocks"/>
+		<ListPageTitle title="Blocks" create-route="createBlock"/>
     <BlocksList/>
 	</div>
 </template>
 <script lang="ts">
-  import PageTitle from '@/modules/core/components/semantics/PageTitle.vue'
+  import ListPageTitle from '@/modules/core/components/semantics/ListPageTitle.vue'
   import BlocksList from '@/modules/blocks/components/BlocksList.vue'
 
   export default {
     name: 'Blocks',
-    components: { BlocksList, PageTitle }
+    components: { BlocksList, ListPageTitle }
   }
 </script>
