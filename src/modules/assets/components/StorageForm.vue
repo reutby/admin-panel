@@ -39,6 +39,11 @@
           :value="editedStorage.authentication"
           @change="editedStorage.authentication = $event"
         />
+		<StorageGcsAuth
+		  v-if="editedStorage.kind === 'gcs'"
+		  :value="editedStorage.authentication"
+		  @change="editedStorage.authentication = $event"
+		/>
       </template>
     </div>
     <el-button native-type="submit" :loading="submitting">SAVE</el-button>
@@ -46,12 +51,13 @@
 </template>
 <script>
   import StorageFtpAuth from './StorageFtpAuth'
+  import StorageGcsAuth from './StorageGcsAuth'
   import FormInput from '../../core/components/forms/FormInput'
   import { useStorageForm } from '../compositions/storages'
 
   export default {
     name: 'StorageForm',
-    components: { FormInput, StorageFtpAuth },
+    components: { FormInput, StorageFtpAuth, StorageGcsAuth },
     props: {
       value: Object,
       submitting: Boolean

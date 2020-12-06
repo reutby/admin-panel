@@ -30,7 +30,8 @@ export function useStorageForm(props) {
     authentication: null,
     metadata: {
       publicUrl: '',
-      basePath: '/',
+	  basePath: '/',
+	  bucketName: '',
       ...(props.value ? props.value.metadata : {})
     }
   })
