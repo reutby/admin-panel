@@ -23,11 +23,17 @@
           @change="editedStorage.kind = $event"
         >
           <el-option value="s3" label="Amazon S3" />
-          <el-option value="gcloud" label="Google Cloud" />
+          <el-option value="gcs" label="Google Cloud" />
           <el-option value="ftp" label="FTP" />
         </el-select>
       </label>
     </p>
+    <FormInput
+      v-if="editedStorage.kind !== 'ftp'"
+      title="Bucket Name"
+      :value="editedStorage.metadata.bucketName"
+      @input="editedStorage.metadata.bucketName = $event"
+    />
     <div class="authentication">
       <h3 @click="showAuth = !showAuth">
         <i :class="showAuth ? 'el-icon-arrow-down' : 'el-icon-arrow-right'" />
