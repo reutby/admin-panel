@@ -45,11 +45,11 @@
           :value="editedStorage.authentication"
           @change="editedStorage.authentication = $event"
         />
-		<StorageGcsAuth
-		  v-if="editedStorage.kind === 'gcs'"
-		  :value="editedStorage.authentication"
-		  @change="editedStorage.authentication = $event"
-		/>
+        <StorageGcsAuth
+          v-else-if="editedStorage.kind === 'gcs'"
+          :value="editedStorage.authentication"
+          @change="editedStorage.authentication = $event"
+        />
       </template>
     </div>
     <el-button native-type="submit" :loading="submitting">SAVE</el-button>

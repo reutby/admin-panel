@@ -30,8 +30,8 @@ export function useStorageForm(props) {
     authentication: null,
     metadata: {
       publicUrl: '',
-	  basePath: '/',
-	  bucketName: '',
+      basePath: '/',
+      bucketName: '',
       ...(props.value ? props.value.metadata : {})
     }
   })
@@ -44,7 +44,7 @@ export function useStorageForm(props) {
 }
 
 export function useStorage(storageId: string) {
-  const data = reactive<{loading: boolean, storage: IStorage & any}>({
+  const data = reactive<{ loading: boolean, storage: IStorage & any }>({
     loading: true,
     storage: {}
   })
