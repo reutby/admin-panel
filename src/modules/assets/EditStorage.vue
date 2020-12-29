@@ -7,7 +7,7 @@
       :value="data.storage"
       @submit="submit"
     />
-    <h3>Upload Files to Storage:</h3>
+    <h3>{{$t('Upload Files to Storage')}}:</h3>
     <BasicFileUploader :storage="$route.params.storageId" />
   </div>
 </template>

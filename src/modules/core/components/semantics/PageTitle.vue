@@ -1,5 +1,5 @@
 <template>
-	<h1>{{title}}<template v-if="itemName">: <i>{{itemName}}</i></template></h1>
+	<h1>{{$t(title)}}<template v-if="itemName">: <i>{{itemName}}</i></template></h1>
 </template>
 <script>
   export default {

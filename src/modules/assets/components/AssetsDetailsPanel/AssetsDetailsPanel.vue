@@ -1,5 +1,5 @@
 <template>
-  <div class="panel" :class="isOpen ? 'panel open' : 'panel'">
+  <div class="panel" :class="isOpen ? 'panel open' : 'panel'" :dir="$t('appDirection')">
     <a @click="togglePanel" class="toggle">
       <i :class="isOpen ? 'el-icon-arrow-right' : 'el-icon-arrow-left'" />
     </a>
@@ -32,7 +32,7 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="scss">
   .panel {
     position: absolute;
     z-index: 1;
@@ -45,24 +45,39 @@
     flex-direction: row;
     justify-content: flex-start;
     transition: right 0.3s ease-in-out;
-  }
 
-  .panel.open {
-    right: 0;
-  }
+    &[dir="rtl"] {
+      left: -380px;
+      right: auto;
+      transition: left 0.3s ease-in-out;
 
-  .toggle {
-    cursor: pointer;
-    margin-top: 20px;
-    width: 20px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px 0 0 8px;
-    text-decoration: none;
-    background-color: #ddd;
-    transition: background-color 0.2s ease-in-out;
+      .toggle {
+        border-radius: 0 8px 8px 0;
+      }
+    }
+
+    &.open {
+      right: 0;
+
+      &[dir="rtl"] {
+        right: auto;
+        left: 0;
+      }
+    }
+
+    .toggle {
+      cursor: pointer;
+      margin-top: 20px;
+      width: 20px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px 0 0 8px;
+      text-decoration: none;
+      background-color: #ddd;
+      transition: background-color 0.2s ease-in-out;
+    }
   }
 
   .toggle:hover {

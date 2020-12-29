@@ -1,53 +1,71 @@
 <template>
-	<div id="app">
-		<router-view/>
-	</div>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
+<script>
+  import { useAppConfiguration } from '@/modules/configurations/store/app-configuration'
+  import { watch } from '@vue/composition-api'
+  import { i18n } from '@/plugins/i18n'
 
+  export default {
+    name: 'App',
+    setup() {
+      const config = useAppConfiguration()
+
+      watch(() => config.value.metadata && config.value.metadata.language, (language) => {
+        i18n.locale = language || 'en'
+        document.dir = i18n.t('appDirection')
+      })
+
+      return {}
+    }
+  }
+</script>
 <style lang="scss">
-	#app {
-		font-family: 'Avenir', Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		color: #2c3e50;
-		height: 100%;
-	}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+    height: 100%;
+  }
 
-	html {
-		font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-		'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-		font-size: 16px;
-		word-spacing: 1px;
-		-ms-text-size-adjust: 100%;
-		-webkit-text-size-adjust: 100%;
-		-moz-osx-font-smoothing: grayscale;
-		-webkit-font-smoothing: antialiased;
-		box-sizing: border-box;
-		height: 100%;
-	}
+  html {
+    font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    word-spacing: 1px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    height: 100%;
+  }
 
-	body {
-		height: 100%;
-	}
+  body {
+    height: 100%;
+  }
 
-	.main h1, .main h2, .main form {
-		padding: 10px;
-		margin: 0;
-	}
+  .main h1, .main h2, .main form {
+    padding: 10px;
+    margin: 0;
+  }
 
-	*,
-	*:before,
-	*:after {
-		box-sizing: border-box;
-		margin: 0;
-	}
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+    margin: 0;
+  }
 
-	a {
-		color: #03414c;
-		text-decoration: none;
+  a {
+    color: #03414c;
+    text-decoration: none;
 
-		&:hover {
-			text-decoration: underline;
-		}
-	}
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 </style>

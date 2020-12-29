@@ -1,5 +1,5 @@
 <template>
-	<header>
+	<header :dir="$t('appDirection')">
 		<el-button type="default" icon="el-icon-menu" class="btn" circle @click="open"/>
 		<span class="user-welcome" v-if="user">Hello <strong>{{user.name}}</strong></span>
 		<div class="actions">
@@ -68,6 +68,16 @@
 		margin-right: 10px;
 		margin-left: auto;
 	}
+
+  [dir="rtl"] {
+    .user-welcome {
+      padding-right: 10px;
+    }
+    .actions {
+      margin-left: 10px;
+      margin-right: auto;
+    }
+  }
 
 	@media (max-width: 600px) {
 		.btn {

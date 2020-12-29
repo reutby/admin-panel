@@ -6,7 +6,7 @@
 		</router-link>
 		<router-link to="/configurations">
 			<i class="el-icon-setting"/>
-			<span>Configurations</span>
+			<span>{{$t('Configurations')}}</span>
 		</router-link>
 		<router-link to="/assets">
 			<i class="el-icon-files"/>

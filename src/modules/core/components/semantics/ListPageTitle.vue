@@ -1,6 +1,6 @@
 <template>
 	<h1>
-		<span>{{title}}</span>
+		<span>{{$t(title)}}</span>
 		<el-button type="primary" icon="el-icon-edit" @click="$router.push({name: createRoute})"/>
 	</h1>
 </template>
