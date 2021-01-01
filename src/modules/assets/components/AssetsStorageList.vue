@@ -3,8 +3,8 @@
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Kind</th>
+          <th>{{$t('Name')}}</th>
+          <th>{{$t('Kind')}}</th>
           <th/>
         </tr>
       </thead>

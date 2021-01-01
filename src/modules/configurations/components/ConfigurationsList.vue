@@ -3,9 +3,9 @@
 		<table>
 			<thead>
 			<tr>
-				<th>Name</th>
-				<th>Public</th>
-				<th>Description</th>
+				<th>{{$t('Name')}}</th>
+				<th>{{$t('Public')}}</th>
+				<th>{{$t('Description')}}</th>
 			</tr>
 			</thead>
 			<tbody>

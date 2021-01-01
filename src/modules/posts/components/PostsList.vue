@@ -2,11 +2,11 @@
 	<table>
 		<thead>
 		<tr>
-			<th>Title</th>
-			<th>Category</th>
-			<th>Path</th>
-			<th>Public</th>
-			<th>Pinned</th>
+			<th>{{$t('Title')}}</th>
+			<th>{{$t('Category')}}</th>
+			<th>{{$t('Path')}}</th>
+			<th>{{$t('Public')}}</th>
+			<th>{{$t('Pinned')}}</th>
 			<th></th>
 		</tr>
 		</thead>

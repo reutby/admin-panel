@@ -2,9 +2,9 @@
 	<table>
 		<thead>
 		<tr>
-			<th>Name</th>
-			<th>Email</th>
-			<th>Roles</th>
+			<th>{{$t('Name')}}</th>
+			<th>{{$t('Email')}}</th>
+			<th>{{$t('Roles')}}</th>
 		</tr>
 		</thead>
 		<tbody>

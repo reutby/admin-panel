@@ -13,5 +13,17 @@
   "Categories": "Categories",
   "Posts":"Posts",
   "Users":"Users",
-  "Drafts":"Drafts"
+  "Drafts":"Drafts",
+
+  "Name":"Name",
+  "Public":"Public",
+  "Description":"Description",
+  "Kind":"Kind",
+  "Path":"Path",
+  "Title":"Title",
+  "Category":"Category",
+  "Pinned":"Pinned",
+  "Email":"Email",
+  "Roles":"Roles",
+  "Context":"Context"
  }

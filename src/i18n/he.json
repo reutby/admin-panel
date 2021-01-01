@@ -13,5 +13,18 @@
   "Categories": "קטגוריות",
   "Posts":"פוסטים",
   "Users":"משתמשים",
-  "Drafts":"טיוטות"
+  "Drafts":"טיוטות",
+
+  "Name":"שם",
+  "Public":"ציבורי",
+  "Description":"תיאור",
+  "Kind":"סוג",
+  "Path":"נתיב",
+  "Title":"כותרת",
+  "Category":"קטגוריה",
+  "Pinned":"נעוץ",
+  "Email":"אי-מייל",
+  "Roles":"תפקידים",
+  "Context":"הקשר"
+  
 }
