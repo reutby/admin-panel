@@ -4,5 +4,14 @@
   "Edit Storage": "Edit Storage",
   "Upload Files to Storage": "Upload Files to Storage",
   "Storage": "Storage",
-  "Configurations": "Configurations"
-}
+  "Configurations": "Configurations",
+
+  "Hello":"Hello",
+  "Logout":"Logout",
+  "Storage & Assets": "Storage & Assets",
+  "Menus":"Menus",
+  "Categories": "Categories",
+  "Posts":"Posts",
+  "Users":"Users",
+  "Drafts":"Drafts"
+ }

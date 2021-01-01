@@ -4,5 +4,14 @@
   "Edit Storage": "ערוך מקור אחסון",
   "Upload Files to Storage": "העלה קובץ למקור אחסון",
   "Storage": "מקורות אחסון",
-  "Configurations": "הגדרות"
+  "Configurations": "הגדרות",
+
+  "Hello":"שלום",
+  "Logout":"התנתק",
+  "Storage & Assets": "מקורות אחסון",
+  "Menus":"תפריטים",
+  "Categories": "קטגוריות",
+  "Posts":"פוסטים",
+  "Users":"משתמשים",
+  "Drafts":"טיוטות"
 }

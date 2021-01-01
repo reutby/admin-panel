@@ -10,27 +10,27 @@
 		</router-link>
 		<router-link to="/assets">
 			<i class="el-icon-files"/>
-			<span>Storage & Assets</span>
+			<span>{{$t('Storage & Assets')}}</span>
 		</router-link>
 		<router-link to="/menus">
 			<i class="el-icon-menu"/>
-			<span>Menus</span>
+			<span>{{$t('Menus')}}</span>
 		</router-link>
 		<router-link to="/categories">
 			<i class="el-icon-folder-opened"/>
-			<span>Categories</span>
+			<span>{{$t('Categories')}}</span>
 		</router-link>
 		<router-link to="/posts">
 			<i class="el-icon-document"/>
-			<span>Posts</span>
+			<span>{{$t('Posts')}}</span>
 		</router-link>
 		<router-link to="/users">
 			<i class="el-icon-user"/>
-			<span>Users</span>
+			<span>{{$t('Users')}}</span>
 		</router-link>
     <router-link to="/drafts">
       <i class="el-icon-document-copy"/>
-      <span>Drafts</span>
+      <span>{{$t('Drafts')}}</span>
     </router-link>
 	</nav>
 </template>
