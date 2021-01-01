@@ -16,7 +16,7 @@
 				<el-checkbox label="user"></el-checkbox>
 			</el-checkbox-group>
 		</el-form-item>
-		<el-button native-type="submit">SAVE</el-button>
+		<el-button native-type="submit">{{$t('SAVE')}}</el-button>
 	</el-form>
 </template>
 <script>

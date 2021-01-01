@@ -42,5 +42,11 @@
   "slogan":"slogan",
   "keywords":"keywords",
   "theme":"theme",
-  "SAVE":"SAVE"
+  "SAVE":"SAVE",
+  "Edit Menu":"Edit Menu",
+  "ADD":"AdD",
+  "Create Category":"Create Category",
+  "Create Post":"Create Post",
+  "Create User":"Create User",
+  "Login":"Login"
  }

@@ -7,7 +7,7 @@
 			<el-input name="password" v-model="form.password" type="password" required @focus="onFocus"/>
 		</el-form-item>
 		<div>
-			<el-button native-type="submit" :loading="submitting">Login</el-button>
+			<el-button native-type="submit" :loading="submitting">{{$t(Login)}}</el-button>
 		</div>
 	</el-form>
 </template>

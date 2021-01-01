@@ -1,8 +1,8 @@
 {
   "appDirection": "rtl",
-  "Add new Storage": "הוסף מקור אחסון חדש",
+  "Add new Storage": "הוספת מקור אחסון חדש",
   "Edit Storage": "ערוך מקור אחסון",
-  "Upload Files to Storage": "העלה קובץ למקור אחסון",
+  "Upload Files to Storage": "העלאת קובץ למקור אחסון",
   "Storage": "מקורות אחסון",
   "Configurations": "הגדרות",
 
@@ -27,7 +27,7 @@
   "Roles":"תפקידים",
   "Context":"הקשר",
 
-  "Edit Configuration":"ערוך הגדרות",
+  "Edit Configuration":"עריכת הגדרות",
   "app-configuration":"הגדרות אפליקציה",
   "migration":"ניוד",
   "versions":"גרסאות",
@@ -42,6 +42,12 @@
   "slogan":"סלוגן",
   "keywords":"מילות מפתח",
   "theme":"theme",
-  "SAVE":"שמור"
+  "SAVE":"שמירה",
+  "Edit Menu":"עריכת תפריט",
+  "ADD":"הוספה",
+  "Create Category":"יצירת קטגוריה",
+  "Create Post":"יצירת פוסט",
+  "Create User":"יצירת משתמש/ת",
+  "Login":"התחברות"
   
 }
