@@ -7,16 +7,16 @@
           v-model="valuesTypes[key].selected"
           :inactive-value="valuesTypes[key].options[0]"
           :active-value="valuesTypes[key].options[1]"
-          :inactive-text="valuesTypes[key].options[0]"
-          :active-text="valuesTypes[key].options[1]"/>
+          :inactive-text="$t(valuesTypes[key].options[0])"
+          :active-text="$t(valuesTypes[key].options[1])"/>
       <FormInput
           :key="key"
-          :title="key"
+          :title="$t(key)"
           v-model="updated[key]"
           :type="valuesTypes[key].selected"/>
     </template>
 
-		<el-button native-type="submit" :loading="submitting">SAVE</el-button>
+		<el-button native-type="submit" :loading="submitting">{{$t(SAVE)}}</el-button>
 	</el-form>
 </template>
 

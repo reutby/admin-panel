@@ -25,6 +25,23 @@
   "Pinned":"נעוץ",
   "Email":"אי-מייל",
   "Roles":"תפקידים",
-  "Context":"הקשר"
+  "Context":"הקשר",
+
+  "Edit Configuration":"ערוך הגדרות",
+  "app-configuration":"הגדרות אפליקציה",
+  "migration":"ניוד",
+  "versions":"גרסאות",
+
+  "name":"שם",
+  "language":"שפה",
+  "direction":"כיוון שפה",
+  "logoUrl":"logoUrl",
+  "upload":"העלה קובץ",
+  "text":"טקסט",
+  "description":"תיאור",
+  "slogan":"סלוגן",
+  "keywords":"מילות מפתח",
+  "theme":"theme",
+  "SAVE":"שמור"
   
 }

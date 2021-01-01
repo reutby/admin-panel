@@ -11,7 +11,7 @@
 			<tbody>
 			<tr v-for="config in list" :key="config.key">
 				<td>
-					<router-link :to="{name: 'editConfiguration', params: {key: config.key}}">{{config.key}}
+					<router-link :to="{name: 'editConfiguration', params: {key: config.key}}">{{$t(config.key)}}
 					</router-link>
 				</td>
 				<td><i v-if="config.public" class="el-icon-check"/></td>

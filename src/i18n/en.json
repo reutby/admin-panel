@@ -25,5 +25,22 @@
   "Pinned":"Pinned",
   "Email":"Email",
   "Roles":"Roles",
-  "Context":"Context"
+  "Context":"Context",
+
+  "Edit Configuration":"Edit Configuration",
+  "app-configuration":"app-configuration",
+  "migration":"migration",
+  "versions":"versions",
+
+  "name":"name",
+  "language":"language",
+  "direction":"direction",
+  "logoUrl":"logoUrl",
+  "upload":"upload",
+  "text":"text",
+  "description":"description",
+  "slogan":"slogan",
+  "keywords":"keywords",
+  "theme":"theme",
+  "SAVE":"SAVE"
  }
