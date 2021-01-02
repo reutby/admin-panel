@@ -1,23 +1,23 @@
 <template>
   <el-form class="storage-form" @submit.native.prevent="submit">
     <FormInput
-      title="Name"
+      :title="$t('Name')"
       :value="editedStorage.name"
       @input="editedStorage.name = $event"
     />
     <FormInput
-      title="Public URL"
+      :title="$t('Public URL')"
       :value="editedStorage.metadata.publicUrl"
       @input="editedStorage.metadata.publicUrl = $event"
     />
     <FormInput
-      title="Base Storage Path"
+      :title="$t('Base Storage Path')"
       :value="editedStorage.metadata.basePath"
       @input="editedStorage.metadata.basePath = $event"
     />
     <p>
       <label>
-        Kind:
+        {{$t('Kind')}}:
         <el-select
           :value="editedStorage.kind"
           @change="editedStorage.kind = $event"
@@ -30,14 +30,14 @@
     </p>
     <FormInput
       v-if="editedStorage.kind !== 'ftp'"
-      title="Bucket Name"
+      :title="$t('Bucket Name')"
       :value="editedStorage.metadata.bucketName"
       @input="editedStorage.metadata.bucketName = $event"
     />
     <div class="authentication">
       <h3 @click="showAuth = !showAuth">
         <i :class="showAuth ? 'el-icon-arrow-down' : 'el-icon-arrow-right'" />
-        Authentication Secrets
+        {{$t('Authentication Secrets')}}
       </h3>
       <template v-if="showAuth">
         <StorageFtpAuth

@@ -16,7 +16,7 @@
           :type="valuesTypes[key].selected"/>
     </template>
 
-		<el-button native-type="submit" :loading="submitting">{{$t(SAVE)}}</el-button>
+		<el-button native-type="submit" :loading="submitting">{{$t('SAVE')}}</el-button>
 	</el-form>
 </template>
 

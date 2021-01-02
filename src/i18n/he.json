@@ -54,6 +54,14 @@
   "Edit Post":"עריכת פוסט",
   "Edit User":"עריכת משתמש/ת",
   "Please login":"פרטי התחברות",
-  "Password":"ססמא"
+  "Password":"ססמא",
+
+  "Public URL":"כתובת URL ציבורית",
+  "Base Storage Path":"נתיב בסיס מקור אחסון",
+  "Authentication Secrets":"ססמאות אימות",
+  "Username":"שם משתמש/ת",
+  "FTP Host":"מארח FTP",
+  "Bucket Name":"שם Bucket",
+  "Select GCS JSON Key":"בחר GCS JSON Key"
   
 }
