@@ -48,6 +48,10 @@
   "Create Category":"יצירת קטגוריה",
   "Create Post":"יצירת פוסט",
   "Create User":"יצירת משתמש/ת",
-  "Login":"התחברות"
+  "Login":"התחברות",
+  "Edit":"עריכה",
+  "Edit category":"עריכת קטגוריה",
+  "Edit Post":"עריכת פוסט",
+  "Edit User":"עריכת משתמש/ת"
   
 }

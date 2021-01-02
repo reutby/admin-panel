@@ -1,6 +1,6 @@
 <template>
   <div class="select-storage">
-    <label>Storage:</label>
+    <label>{{$t('Storage')}}:</label>
     <el-select @change="change" :value="selected" class="storage-selection">
       <el-option
         v-for="item in items"

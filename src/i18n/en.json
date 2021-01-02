@@ -48,5 +48,9 @@
   "Create Category":"Create Category",
   "Create Post":"Create Post",
   "Create User":"Create User",
-  "Login":"Login"
+  "Login":"Login",
+  "Edit":"Edit",
+  "Edit category":"Edit category",
+  "Edit Post":"Edit Post",
+  "Edit User":"Edit User"
  }
