@@ -1,10 +1,14 @@
 <template>
 	<el-form class="login-form" @submit.native.prevent="submit">
 		<el-form-item :label="$t('Email')">
-			<el-input name="email" v-model="form.email" type="email" required @focus="onFocus"/>
+			<div dir="ltr">
+				<el-input name="email" v-model="form.email" type="email" required @focus="onFocus"/>
+			</div>
 		</el-form-item>
 		<el-form-item :label="$t('Password')">
-			<el-input name="password" v-model="form.password" type="password" required @focus="onFocus"/>
+			<div dir='ltr'>
+				<el-input name="password" v-model="form.password" type="password" required @focus="onFocus"/>
+			</div>
 		</el-form-item>
 		<div>
 			<el-button native-type="submit" :loading="submitting">{{$t('Login')}}</el-button>
