@@ -11,7 +11,7 @@
           :active-text="$t(valuesTypes[key].options[1])"/>
       <FormInput
           :key="key"
-          :title="$t(key)"
+          title="key"
           v-model="updated[key]"
           :type="valuesTypes[key].selected"/>
     </template>

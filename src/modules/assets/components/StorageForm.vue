@@ -1,17 +1,17 @@
 <template>
   <el-form class="storage-form" @submit.native.prevent="submit">
     <FormInput
-      :title="$t('Name')"
+      title="Name"
       :value="editedStorage.name"
       @input="editedStorage.name = $event"
     />
     <FormInput
-      :title="$t('Public URL')"
+      title="Public URL"
       :value="editedStorage.metadata.publicUrl"
       @input="editedStorage.metadata.publicUrl = $event"
     />
     <FormInput
-      :title="$t('Base Storage Path')"
+      title="Base Storage Path"
       :value="editedStorage.metadata.basePath"
       @input="editedStorage.metadata.basePath = $event"
     />
@@ -30,7 +30,7 @@
     </p>
     <FormInput
       v-if="editedStorage.kind !== 'ftp'"
-      :title="$t('Bucket Name')"
+      title="Bucket Name"
       :value="editedStorage.metadata.bucketName"
       @input="editedStorage.metadata.bucketName = $event"
     />

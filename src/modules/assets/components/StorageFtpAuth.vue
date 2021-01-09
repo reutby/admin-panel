@@ -1,8 +1,8 @@
 <template>
   <div>
-    <FormInput :title="$t('FTP Host')" v-model="form.host" />
-    <FormInput :title="$t('Username')" v-model="form.username" />
-    <FormInput :title="$t('Password')" type="password" v-model="form.password" />
+    <FormInput title="FTP Host" v-model="form.host" />
+    <FormInput title="Username" v-model="form.username" />
+    <FormInput title="Password" type="password" v-model="form.password" />
   </div>
 </template>
 <script>

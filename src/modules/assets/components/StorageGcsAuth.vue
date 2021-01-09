@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormInput :title="$t('Select GCS JSON Key')" type="file" v-model="file" @change.native="setFileData" />
+    <FormInput title="Select GCS JSON Key" type="file" v-model="file" @change.native="setFileData" />
   </div>
 </template>
 <script lang="ts">

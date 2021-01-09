@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-form-item :label="title">
+		<el-form-item :label="$t(title)">
 			<small v-if="label"> ({{label}})</small>
 			<el-input-number v-if="type === 'number'" v-on="$listeners" :value="value"/>
 			<AssetUploader v-else-if="type === 'upload'" v-on="$listeners" :value="value" class="asset-upload"/>
