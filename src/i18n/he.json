@@ -6,6 +6,7 @@
   "Storage": "מקורות אחסון",
   "Configurations": "הגדרות",
 
+  "welcome user message": "שלום <strong>{userName}</strong>",
   "Hello":"שלום",
   "Logout":"התנתק",
   "Storage & Assets": "מקורות אחסון",

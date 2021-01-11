@@ -1,7 +1,7 @@
 <template>
 	<header :dir="$t('appDirection')">
 		<el-button type="default" icon="el-icon-menu" class="btn" circle @click="open"/>
-		<span class="user-welcome" v-if="user">{{$t('Hello')}} <strong>{{user.name}}</strong></span>
+		<span class="user-welcome" v-if="user" v-html="$t('welcome user message',{userName:user.name})"></span>
 		<div class="actions">
 			<a @click="logout">{{$t('Logout')}}</a>
 		</div>

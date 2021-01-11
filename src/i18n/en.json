@@ -6,6 +6,7 @@
   "Storage": "Storage",
   "Configurations": "Configurations",
 
+  "welcome user message": "Hello <strong>{userName}</strong>",
   "Hello":"Hello",
   "Logout":"Logout",
   "Storage & Assets": "Storage & Assets",
