@@ -1,5 +1,6 @@
 <template>
   <div class="panel" :class="isOpen ? 'panel open' : 'panel'" :dir="$t('appDirection')">
+
     <a @click="togglePanel" class="toggle">
       <i :class="isOpen ? 'el-icon-arrow-right' : 'el-icon-arrow-left'" />
     </a>
@@ -37,7 +38,7 @@
     position: absolute;
     z-index: 1;
     top: 100px;
-    right: -380px;
+    right: -400px;
     width: 400px;
     height: 70%;
     max-width: 50%;
@@ -51,6 +52,7 @@
       right: auto;
       transition: left 0.3s ease-in-out;
 
+<<<<<<< HEAD
       .toggle {
         border-radius: 0 8px 8px 0;
       }
@@ -78,6 +80,21 @@
       background-color: #ddd;
       transition: background-color 0.2s ease-in-out;
     }
+=======
+  .toggle {
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: -20px;
+    width: 20px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 0 0 8px;
+    text-decoration: none;
+    background-color: #ddd;
+    transition: background-color 0.2s ease-in-out;
+>>>>>>> bf024f852371b0ce6313d0189722ed370a2f0619
   }
 
   .toggle:hover {
