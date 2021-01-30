@@ -51,8 +51,7 @@
       left: -380px;
       right: auto;
       transition: left 0.3s ease-in-out;
-
-<<<<<<< HEAD
+      
       .toggle {
         border-radius: 0 8px 8px 0;
       }
@@ -80,21 +79,6 @@
       background-color: #ddd;
       transition: background-color 0.2s ease-in-out;
     }
-=======
-  .toggle {
-    cursor: pointer;
-    margin-top: 20px;
-    margin-left: -20px;
-    width: 20px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px 0 0 8px;
-    text-decoration: none;
-    background-color: #ddd;
-    transition: background-color 0.2s ease-in-out;
->>>>>>> bf024f852371b0ce6313d0189722ed370a2f0619
   }
 
   .toggle:hover {
