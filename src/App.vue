@@ -6,15 +6,16 @@
 <script>
   import { useAppConfiguration } from '@/modules/configurations/store/app-configuration'
   import { watch } from '@vue/composition-api'
-  import { i18n } from '@/plugins/i18n'
+  import { i18n, loadLanguageAsync } from '@/plugins/i18n'
 
   export default {
     name: 'App',
     setup() {
       const config = useAppConfiguration()
 
-      watch(() => config.value.metadata && config.value.metadata.language, (language) => {
-        i18n.locale = language || 'en'
+      watch(() => config.value?.metadata && config.value.metadata.language, (language) => {
+        console.log(language)
+        loadLanguageAsync(language)
         document.dir = i18n.t('appDirection')
       })
 
