@@ -13,9 +13,8 @@
     setup() {
       const config = useAppConfiguration()
 
-      watch(() => config.value?.metadata && config.value.metadata.language, (language) => {
-        console.log(language)
-        loadLanguageAsync(language)
+      watch(() => config.value?.metadata && config.value.metadata.language, async (language) => {
+        await loadLanguageAsync(language)
         document.dir = i18n.t('appDirection')
       })
 
